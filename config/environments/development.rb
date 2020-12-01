@@ -1,4 +1,8 @@
 Rails.application.configure do
+
+  # For test on localhost
+  config.hosts << "udev"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

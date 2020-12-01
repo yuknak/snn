@@ -1,0 +1,1596 @@
+
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>2NN 2ちゃんねるニュース速報＋ナビ - 2ch News Navigator</title>
+	<meta name="description" CONTENT="5ちゃんねる(旧2ちゃんねる,5ch,2ch)のニュース速報＋系掲示板を自動解析し、人気の高いニュース及び最新のニュースをリアルタイムで計算して提供しています。">
+	<meta name="keywords" CONTENT="5ちゃんねる,2ちゃんねる,5ch,2ch,ニュース,速報,まとめ,祭り,2NN,スレッド">
+	<meta http-equiv="refresh" content="749">
+	<link rel="alternate" title="2NN 2ちゃんねるニュース速報＋ナビ" href="/rss/index.rdf" type="application/rss+xml"><meta name="robots" content="NOODP">
+	<meta name="theme-color" content="#425C98">
+	<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1.0,maximum-scale=2.0">
+	<link href="/css/common5.css?170928" rel="stylesheet" type="text/css" media="all">
+	<style type="text/css"><!-- body {} --></style>
+	<!--[if lte IE 8]><link href="/css/common5-legacy.css?111004-1239" rel="stylesheet" type="text/css" media="all"><![endif]-->
+	<!--[if lte IE 9]><script src="/js/html5shiv.js"></script><![endif]-->
+	<script src="/js/jquery.js?160928" type="text/javascript"></script>
+	<script src="/js/jquery.cookie.js" type="text/javascript"></script>
+	<script src="/js/common5.js?200610A" type="text/javascript"></script>
+	<script src="/js/ga.js" type="text/javascript"></script>
+	<script src="/js/jquery.prettyPhoto.js?150616" type="text/javascript" async defer></script>
+	<link href="/img/clip.png" rel="apple-touch-icon-precomposed">
+</head>
+<body>
+<div id="wrapper">
+	<!--[if lte IE 8]><noscript><div id="noscript">Internet Explorer 8 以下でご覧になるには JavaScript を有効にしてください。</div></noscript><![endif]-->
+	<!--Global Header-->
+	<header id="header">
+		<p id="login-info">2ちゃんねるニュース速報＋ナビ</p>
+		<h1><a href="/"><img src="/img/common/logo_2ch.png" alt="2NN 2ちゃんねる(5ちゃんねる)ニュース速報＋ナビ - 2ch(5ch) News Navigator"></a></h1>
+
+		<!--Search Form-->
+		<form method="get" action="/search/" id="search-box">
+			<input type="text" name="q" value="">
+			<select name="e" lang="ja">
+				<option value="">2NN ニュース</option>
+				<option value="google">Google WEB</option>
+				<option value="bing">Bing WEB</option>
+				<option value="twitter">Twitter</option>
+				<option value="2ch">5ch スレッド</option>
+				<option value="nikkei">日経 株価</option>
+				<option value="wikipedia">wikipedia</option>
+				<option value="alc">スペースアルク 英和・和英</option>
+				<option value="infoseek_j">infoseek 国語</option>
+				<option value="ascii">ASCII デジタル</option>
+				<option value="youtube">YouTube</option>
+				<option value="nico">ニコニコ動画</option>
+				<option value="amazon">Amazon.co.jp</option>
+				<option value="yodobashi">ヨドバシ.com</option>
+				<option value="rakuten">楽天</option>
+				<option value="yahoo_shopping">Yahoo! ショッピング</option>
+				<option value="yahoo_auction">ヤフオク！</option>
+				<option value="mercari">メルカリ</option>
+			</select>
+			<input type="submit" value="検索">
+		</form>
+
+		<menu id="global-menu"><!--
+			--><li><a href="javascript:void(0)">板一覧</a></li><!--
+			--><li><a href="javascript:void(0)">状況別</a></li><!--
+			--><li><a href="javascript:void(0)">その他</a></li><!--
+		--></menu>
+		
+		<!--Global Navigation-->
+		<nav id="global-navi">
+			<ul><!--
+				--><li><a href="/">ホーム</a></li><!--
+				--><li><a href="/newsplus/">ニュース速報</a></li><!--
+				--><li><a href="/mnewsplus/">芸スポ</a></li><!--
+				--><li><a href="/news4plus/">東アジア</a></li><!--
+				--><li><a href="/bizplus/">ビジネス</a></li><!--
+				--><li><a href="/seijinewsplus/">政治</a></li><!--
+				--><li><a href="/news5plus/">国際</a></li><!--
+				--><li><a href="/scienceplus/">科学</a></li><!--
+				--><li><a href="/femnewsplus/">ローカル</a></li><!--
+				--><li><a href="/moeplus/">萌え</a></li><!--
+				--><li><a href="/idolplus/">アイドル</a></li><!--
+				--><li><a href="/dqnplus/">痛い</a></li><!--
+			--></ul>
+		</nav>
+
+		<div>
+	
+			<nav>
+				<ul><!--
+					--><li><a href="/latest/">新着ニュース</a></li><!--
+					--><li><a href="/ranking/yesterday/">昨日のニュース</a></li><!--
+					--><li><a href="/matsuri/"><span>過去の</span>祭級ニュース</a></li><!--
+					--><li><a href="javascript:void(0)" class="login pc">ログイン</a></li><!--
+					--><li><a href="javascript:void(0)" class="toggle" title="メニュー切替">&gt;</a></li><!--
+				--></ul>
+			</nav>
+			<menu><!--
+					--><li><a href="/history/">閲覧履歴</a></li><!--					--><li><a href="/apply/">ユーザー登録</a></li><!--
+				--><li><a href="http://www.2nn.jp/test/read.cgi/temp/1432303805/l50" target="_blank">ご意見<span>はこちら</span></a></li><!--
+				--><li><a href="http://www.2nn.jp/refuge/" target="_blank"><span>2ちゃんねる</span>避難所</a></li><!--
+					--><li><a href="javascript:void(0)" class="login sp">ログイン</a></li><!--
+				--><li><a href="javascript:void(0)" class="toggle" title="メニュー切替">&lt;</a></li><!--
+			--></menu>
+
+			<p id="publish-time"><time pubdate datetime="2020-12-01T08:48:27+09:00">2020年12月1日 8時48分更新</time></p>
+		</div>
+
+	</header>
+
+
+	<div id="main">
+		<section id="top-news">
+			<article data-twitter="2nn_newsplus">
+				<header>
+					<div class="status">
+						<span class="newsplus">★</span>ニュース速報＋
+						<time pubdate datetime="2020-12-01T08:38:21+09:00">12/01 08:38</time>
+						<span class="res">115res</span>
+						<span class="avg"><span>平均投稿時速：</span>715res/h</span>
+						<span class="crt"><span>対板現在投稿率：</span>12.3%</span>
+						<a href="/newsplus/1606779501/" class="permalink">2NNのURL</a>
+					</div>
+			
+					<h1><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779501/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★29</a></h1>
+				</header>
+		
+				<figure>
+					<div><img src="data:image/jpeg;base64,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" alt="【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★29" data-src-url="/img/newsplus/1606779501.jpg"></div>
+					<figcaption><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></figcaption>
+				</figure>
+
+		
+				<blockquote>
+					<p>「<a href="/word/%e3%83%90%e3%82%a4%e3%83%87%e3%83%b3">バイデン</a>が、<a href="/word/%e5%a4%a7%e7%b5%b1%e9%a0%98">大統領</a>として<a href="/word/%e3%83%9b%e3%83%af%e3%82%a4%e3%83%88%e3%83%8f%e3%82%a6%e3%82%b9">ホワイトハウス</a>入りできるのは、彼が、バカげている8,000万の票が不正あるいは不法に獲得されなかったことを証明することができた時だけだ。<a href="/word/%e3%83%87%e3%83%88%e3%83%ad%e3%82%a4%e3%83%88">デトロイト</a>、<a href="/word/%e3%82%a2%e3%83%88%e3%83%a9%e3%83%b3%e3%82%bf">アトランタ</a>、<a href="/word/%e3%83%95%e3%82%a3%e3%83%a9%e3%83%87%e3%83%ab%e3%83%95%e3%82%a3%e3%82%a2">フィラデルフィア</a>、<a href="/word/%e3%83%9f%e3%83%ab%e3%82%a6%e3%82%a9%e3%83%bc%e3%82%ad%e3%83%bc">ミルウォーキー</a>で起きたこと、大規模な不正投票を見たら、彼は解決不能な大問題を抱えたことがわかる!」<a href="/word/%e3%83%88%e3%83%a9%e3%83%b3%e3%83%97">トランプ</a>氏が<a href="/word/%e7%b1%b3%e5%9b%bd">米国</a>時間11月27日に投稿した<a href="/word/%e3%83%84%e3%82%a4%e3%83%bc%e3%83%88">ツイート</a>だ。</p>
+				</blockquote>
+				<p class="more"><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779501/-100" target="_blank" class="thread">&gt;&gt;続きを読む</a></p>
+		
+				<footer>
+					<p class="source"><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></p>
+					<p class="poster">Posted by ばーど ★</p>
+<p class="map"><img src="/img/common/map-pin.png" style="vertical-align:-1px; margin-right:2px;"><a href="https://www.google.co.jp/maps/search/フィラデルフィア/@39.9533333333333,-75.17,13z/" target="_blank">フィラデルフィア</a><span>（β）</span></p>				</footer>
+			</article>
+
+			<aside class="ads pc">
+<div id="criteo_894765"><script>if($('.pc').css('display') != 'none' && $('#main').innerWidth() >= 738){ CriteoDisplayAd("criteo_894765", function() {  }); }</script></div>
+<div id="criteo_894756"><script>if($('.pc').css('display') != 'none' && $('#main').innerWidth() < 738){ CriteoDisplayAd("criteo_894756", function() {  }); }</script></div>
+
+			</aside>
+			<aside class="ads sp">
+				<ul>
+					<li style="margin-bottom:5px;">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087503:1000131016' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087503&U=1000131016' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087503:1000131015' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087503&U=1000131015' async><\/scr"+"ipt>");
+	}
+}
+</script>
+					</li>
+				</ul>
+
+			</aside>
+	
+			<menu class="sp"><a href="#side" class="to-middle">▼ このページの中段へ</a></menu>
+		</section>
+	
+		<section id="news-ranking">
+			<section class="newsplus">
+				<header class="board-header">
+					<h1><a href="https://asahi.5ch.net/newsplus/" title="ニュース速報＋＠5ch掲示板" target="_blank">ニュース速報＋</a></h1>
+					<div class="isp"><span>投稿時速：</span>6341res/h</div>
+					<div class="more"><a href="/newsplus/" title="ニュース速報＋＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+				<article class="image-news">
+					<div><img src="data:image/jpeg;base64,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" alt="独身が増え続ける原因を｢若者の恋愛離れ｣にしたがるメディアの大ウソ…「皆婚」を支えていたのはお見合い ★3" data-src-url="/img/newsplus/1606774818.jpg"></div>
+					<cite><a href="https://president.ismcdn.jp/mwimgs/e/0/670/img_e0f74563774ed24f64798e9ecd31f2d2300124.jpg" target="_blank">PRESIDENT</a></cite>
+					<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606774818/-100" target="_blank" class="thread">独身が増え続ける原因を｢若者の恋愛離れ｣にしたがるメディアの大ウソ…「皆婚」を支えていたのはお見合い ★3</a></h2>
+				</article>
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:38:21+09:00">12/01 08:38</time>
+									<span class="res">115res</span>
+									<span class="avg">715res/h</span>
+									<span class="crt">12.3%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779501/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★29</a> <a href="/newsplus/1606779501/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606779501/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:20:57+09:00">12/01 08:20</time>
+									<span class="res">256res</span>
+									<span class="avg">567res/h</span>
+									<span class="crt">10.8%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778457/-100" target="_blank" class="thread">【論争】ナイキCMに「感動した」「日本人を差別主義者の悪者にしてる」賛否両論 実体験ストーリーの説明伝わらず</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/shinoharashuji/20201201-00210363/" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606778457/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:21:58+09:00">12/01 08:21</time>
+									<span class="res">254res</span>
+									<span class="avg">585res/h</span>
+									<span class="crt">10.4%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778518/-100" target="_blank" class="thread">菅氏は「輝きのない首相」 独紙が批判的論評</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.jiji.com/jc/article?k=2020120100185&g=int" target="_blank">時事通信</a></cite></span>
+								<span class="poster">Posted by 蚤の市 ★</span>
+								<span><a href="/newsplus/1606778518/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:20:18+09:00">12/01 07:20</time>
+									<span class="res">532res</span>
+									<span class="avg">363res/h</span>
+									<span class="crt">6.0%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606774818/-100" target="_blank" class="thread">独身が増え続ける原因を｢若者の恋愛離れ｣にしたがるメディアの大ウソ…「皆婚」を支えていたのはお見合い ★3</a> <a href="/newsplus/1606774818/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://president.jp/articles/-/40873" target="_blank">PRESIDENT</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606774818/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:31:05+09:00">12/01 08:31</time>
+									<span class="res">91res</span>
+									<span class="avg">322res/h</span>
+									<span class="crt">5.5%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779065/-100" target="_blank" class="thread">【日経新聞】結局、社会主義が感染症に強かったのか</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.nikkei.com/article/DGXMZO66715920X21C20A1000000/" target="_blank">日本経済新聞</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606779065/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:07:25+09:00">12/01 08:07</time>
+									<span class="res">191res</span>
+									<span class="avg">282res/h</span>
+									<span class="crt">4.9%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606777645/-100" target="_blank" class="thread">【東京都】小池知事、厚労大臣に重症患者用ベッド確保を要請</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.tv-asahi.co.jp/news_society/articles/000199876.html" target="_blank">テレビ朝日</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606777645/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:28:01+09:00">12/01 08:28</time>
+									<span class="res">89res</span>
+									<span class="avg">267res/h</span>
+									<span class="crt">4.5%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778881/-100" target="_blank" class="thread">【大阪】コロナ対応で看護師不足 若年がん病棟が一時閉鎖</a> <a href="/newsplus/1606778881/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/ASNCZ7K5GNCZPTIL01K.html" target="_blank">朝日新聞デジタル</a></cite></span>
+								<span class="poster">Posted by 蚤の市 ★</span>
+								<span><a href="/newsplus/1606778881/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_newsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T05:14:57+09:00">12/01 05:14</time>
+									<span class="res">788res</span>
+									<span class="avg">221res/h</span>
+									<span class="crt">3.9%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606767297/-100" target="_blank" class="thread">【西村担当相】「無症状で知らず知らずのうちにコロナを広げる」「感染拡大続けば、皆さんの今後の就活に影響」若者に  ★4</a> <a href="/newsplus/1606767297/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/sp/articles/ASNCZ71V8NCZULFA03M.html" target="_blank">朝日新聞デジタル</a></cite></span>
+								<span class="poster">Posted by ばーど ★</span>
+								<span><a href="/newsplus/1606767297/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="mnewsplus">
+				<header class="board-header">
+					<h1><a href="https://hayabusa9.5ch.net/mnewsplus/" title="芸能･スポーツ速報＋＠5ch掲示板" target="_blank">芸能･スポーツ速報＋</a></h1>
+					<div class="isp"><span>投稿時速：</span>1227res/h</div>
+					<div class="more"><a href="/mnewsplus/" title="芸能･スポーツ速報＋＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+				<article class="image-news">
+					<div><img src="data:image/jpeg;base64,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" alt="【サッカー】&lt;エイバル・FW武藤嘉紀&gt;敵地のベティス戦で移籍後初ゴール!乾は不運にガックリ..." data-src-url="/img/mnewsplus/1606779491.jpg"></div>
+					<cite><a href="https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201201-02463360-tospoweb-000-4-view.jpg" target="_blank">amd-pctr.c.yimg.jp</a></cite>
+					<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606779491/-100" target="_blank" class="thread">【サッカー】&lt;エイバル・FW武藤嘉紀&gt;敵地のベティス戦で移籍後初ゴール!乾は不運にガックリ...</a></h2>
+				</article>
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_mnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:38:11+09:00">12/01 08:38</time>
+									<span class="res">16res</span>
+									<span class="avg">108res/h</span>
+									<span class="crt">9.0%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606779491/-100" target="_blank" class="thread">【サッカー】&lt;エイバル・FW武藤嘉紀&gt;敵地のベティス戦で移籍後初ゴール!乾は不運にガックリ...</a> <a href="/mnewsplus/1606779491/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/38bc3b60c4c977645e442e1f032ee7d34916c9a0" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by Egg ★</span>
+								<span><a href="/mnewsplus/1606779491/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_mnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T06:12:43+09:00">12/01 06:12</time>
+									<span class="res">258res</span>
+									<span class="avg">100res/h</span>
+									<span class="crt">6.8%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606770763/-100" target="_blank" class="thread">【TBS】小林麻耶の“恨みパワー”炸裂…降板騒動の『グッとラック!』が3月末で番組終了へ</a> <a href="/mnewsplus/1606770763/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://smart-flash.jp/showbiz/123663" target="_blank">smart-flash.jp</a></cite></span>
+								<span class="poster">Posted by 鉄チーズ烏 ★</span>
+								<span><a href="/mnewsplus/1606770763/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_mnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T00:10:19+09:00">12/01 00:10</time>
+									<span class="res">439res</span>
+									<span class="avg">50res/h</span>
+									<span class="crt">5.2%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606749019/-100" target="_blank" class="thread">【調査】&lt;絶世の美少女だと思う女性芸能人ランキング&gt;5位平手友梨奈、3位本田望結、2位清原果耶、1位は?</a> <a href="/mnewsplus/1606749019/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://ranking.goo.ne.jp/column/6756/ranking/52977/" target="_blank">ranking.goo.ne.jp</a></cite></span>
+								<span class="poster">Posted by Egg ★</span>
+								<span><a href="/mnewsplus/1606749019/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_mnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T23:22:24+09:00">11/30 23:22</time>
+									<span class="res">549res</span>
+									<span class="avg">58res/h</span>
+									<span class="crt">5.0%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606746144/-100" target="_blank" class="thread">【映画】鬼滅の刃vsジブリ!?  歴代興行収入ランキングを巡って議論が白熱… 熱いレスバトル? 互いにいがみ合うファンたち   #はと</a> <a href="/mnewsplus/1606746144/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://myjitsu.jp/archives/166686" target="_blank">myjitsu.jp</a></cite></span>
+								<span class="poster">Posted by jinjin ★</span>
+								<span><a href="/mnewsplus/1606746144/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_mnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T21:58:45+09:00">11/30 21:58</time>
+									<span class="res">429res</span>
+									<span class="avg">39res/h</span>
+									<span class="crt">4.2%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606741125/-100" target="_blank" class="thread">【プロ野球】&lt;野球ファンは広告価値ゼロ&gt;「プロ野球は基本的に、50代以上の男性が高い関心を持つプロスポーツというのが問題なのです」</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.livedoor.com/article/detail/19302068/" target="_blank">livedoor ニュース</a></cite></span>
+								<span class="poster">Posted by Egg ★</span>
+								<span><a href="/mnewsplus/1606741125/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+		<aside class="ads sp">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000076171:1000113907' class='fluct_async' src='https://s.sh.adingo.jp/async/?G=1000076171&U=1000113907' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000076171:1000113906' class='fluct_async' src='https://s.sh.adingo.jp/async/?G=1000076171&U=1000113906' async><\/scr"+"ipt>");
+	}
+}
+</script>
+		</aside>
+			<section class="news4plus">
+				<header class="board-header">
+					<h1><a href="https://lavender.5ch.net/news4plus/" title="東アジアニュース速報＋ ＠5ch掲示板" target="_blank">東アジアニュース速報＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>541res/h</div>
+					<div class="more"><a href="/news4plus/" title="東アジアニュース速報＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+				<article class="image-news">
+					<div><img src="data:image/jpeg;base64,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" alt="【中央日報】朝日新聞 「韓国政府、日本企業の代わりに徴用被害者賠償の可能性」★4" data-src-url="/img/news4plus/1606778052.jpg"></div>
+					<cite><a href="https://www.asahi.com/articles/DA3S14713210.html" target="_blank">朝日新聞デジタル</a></cite>
+					<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606778052/-100" target="_blank" class="thread">【中央日報】朝日新聞 「韓国政府、日本企業の代わりに徴用被害者賠償の可能性」★4</a></h2>
+				</article>
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_news4plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:14:12+09:00">12/01 08:14</time>
+									<span class="res">85res</span>
+									<span class="avg">155res/h</span>
+									<span class="crt">32.4%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606778052/-100" target="_blank" class="thread">【中央日報】朝日新聞 「韓国政府、日本企業の代わりに徴用被害者賠償の可能性」★4</a> <a href="/news4plus/1606778052/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/DA3S14713210.html" target="_blank">朝日新聞デジタル</a></cite></span>
+								<span class="poster">Posted by 昆虫図鑑 ★</span>
+								<span><a href="/news4plus/1606778052/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_news4plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T23:08:40+09:00">11/30 23:08</time>
+									<span class="res">697res</span>
+									<span class="avg">72res/h</span>
+									<span class="crt">16.6%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606745320/-100" target="_blank" class="thread">【韓国】日本産のせいで苦しい養殖業者、ソウルの路上に生きた輸入魚放り投げるデモ</a> <a href="/news4plus/1606745320/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.kbs.co.kr/news/view.do?ncd=5058839" target="_blank">KBS</a></cite></span>
+								<span class="poster">Posted by 蚯蚓φ ★</span>
+								<span><a href="/news4plus/1606745320/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_news4plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:50:27+09:00">12/01 07:50</time>
+									<span class="res">67res</span>
+									<span class="avg">71res/h</span>
+									<span class="crt">16.1%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606776627/-100" target="_blank" class="thread">【書評】中国から見た徳川慶喜の引き際</a> <a href="/news4plus/1606776627/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://citicpressjapan.com/articles/detail/5656" target="_blank">citicpressjapan.com</a></cite></span>
+								<span class="poster">Posted by 昆虫図鑑 ★</span>
+								<span><a href="/news4plus/1606776627/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_news4plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T00:27:20+09:00">12/01 00:27</time>
+									<span class="res">312res</span>
+									<span class="avg">37res/h</span>
+									<span class="crt">11.3%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606750040/-100" target="_blank" class="thread">【速報】WTO、日本が韓国に勝訴 韓国ステンレス鋼関税</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.nikkei.com/article/DGXMZO66802100Q0A131C2EE8000/" target="_blank">日本経済新聞</a></cite></span>
+								<span class="poster">Posted by 動物園φ ★</span>
+								<span><a href="/news4plus/1606750040/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_news4plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T21:41:59+09:00">11/30 21:41</time>
+									<span class="res">474res</span>
+									<span class="avg">42res/h</span>
+									<span class="crt">7.7%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606740119/-100" target="_blank" class="thread">【韓国】文大統領「韓国は正しい方向に向かっている。経済も民主主義も文化も防疫も外交も評価されている。自信持て」 非共感 77%</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://translate.googleusercontent.com/translate_c?depth=2&amp;hl=ja&amp;pto=aue&amp;rurl=translate.google.com&amp;sl=ko&amp;sp=nmt4&amp;tl=ja&amp;u=https://news.nate.com/view/20201130n26668%3Fmid%3Dn1006&amp;usg=ALkJrhixzXM3_8wZ9sqi-8t9-M72PJn0Ew" target="_blank">translate.googleusercontent.com</a></cite></span>
+								<span class="poster">Posted by 動物園φ ★</span>
+								<span><a href="/news4plus/1606740119/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="bizplus">
+				<header class="board-header">
+					<h1><a href="https://egg.5ch.net/bizplus/" title="ビジネスニュース＋ ＠5ch掲示板" target="_blank">ビジネスニュース＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>144res/h</div>
+					<div class="more"><a href="/bizplus/" title="ビジネスニュース＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+				<article class="image-news">
+					<div><img src="data:image/jpeg;base64,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" alt="【2020】今年の“新語”大賞は「ぴえん」 新型コロナ関連のワードも続々トップ10入り" data-src-url="/img/bizplus/1606778087.jpg"></div>
+					<cite><a href="https://www.oricon.co.jp/news/2177878/full/" target="_blank">ORICON STYLE</a></cite>
+					<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606778087/-100" target="_blank" class="thread">【2020】今年の“新語”大賞は「ぴえん」 新型コロナ関連のワードも続々トップ10入り</a></h2>
+				</article>
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_bizplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:14:47+09:00">12/01 08:14</time>
+									<span class="res">11res</span>
+									<span class="avg">24res/h</span>
+									<span class="crt">16.6%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606778087/-100" target="_blank" class="thread">【2020】今年の“新語”大賞は「ぴえん」 新型コロナ関連のワードも続々トップ10入り</a> <a href="/bizplus/1606778087/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.oricon.co.jp/news/2177878/full/" target="_blank">ORICON STYLE</a></cite></span>
+								<span class="poster">Posted by trick ★</span>
+								<span><a href="/bizplus/1606778087/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_bizplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T08:12:44+09:00">12/01 08:12</time>
+									<span class="res">13res</span>
+									<span class="avg">26res/h</span>
+									<span class="crt">16.6%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606777964/-100" target="_blank" class="thread">【携帯】KDDIが35年縛り!? スマホと住宅ローンのセット割を開始</a> <a href="/bizplus/1606777964/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://business.nikkei.com/atcl/gen/19/00002/113001279/" target="_blank">日本経済新聞</a></cite></span>
+								<span class="poster">Posted by trick ★</span>
+								<span><a href="/bizplus/1606777964/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_bizplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T00:05:12+09:00">12/01 00:05</time>
+									<span class="res">100res</span>
+									<span class="avg">11res/h</span>
+									<span class="crt">12.5%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606748712/-100" target="_blank" class="thread">【携帯】ドコモ、携帯料金下げへ 廉価ブランドも導入</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.nikkei.com/article/DGXMZO66833950Q0A131C2MM8000/" target="_blank">日本経済新聞</a></cite></span>
+								<span class="poster">Posted by trick ★</span>
+								<span><a href="/bizplus/1606748712/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_bizplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T03:26:35+09:00">12/01 03:26</time>
+									<span class="res">39res</span>
+									<span class="avg">7.4res/h</span>
+									<span class="crt">6.2%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606760795/-100" target="_blank" class="thread">【仮想通貨】ビットコインが過去最高値更新。まだかなりの上値余地ある、eトロのヒルシュ氏</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.bloomberg.co.jp/news/articles/2020-11-30/QKM6I4T0G1KZ01" target="_blank">Bloomberg.co.jp</a></cite></span>
+								<span class="poster">Posted by 田杉山脈 ★</span>
+								<span><a href="/bizplus/1606760795/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_bizplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T18:39:16+09:00">11/30 18:39</time>
+									<span class="res">61res</span>
+									<span class="avg">4.3res/h</span>
+									<span class="crt">6.2%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606729156/-100" target="_blank" class="thread">【経済】東証システムトラブルの責任取り 東証の宮原社長 辞任</a> <a href="/bizplus/1606729156/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www3.nhk.or.jp/news/html/20201130/k10012738261000.html" target="_blank">NHK</a></cite></span>
+								<span class="poster">Posted by 田杉山脈 ★</span>
+								<span><a href="/bizplus/1606729156/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="seijinewsplus">
+				<header class="board-header">
+					<h1><a href="https://fate.5ch.net/seijinewsplus/" title="政治ニュース＋＠5ch掲示板" target="_blank">政治ニュース＋</a></h1>
+					<div class="isp"><span>投稿時速：</span>102res/h</div>
+					<div class="more"><a href="/seijinewsplus/" title="政治ニュース＋＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+				<article class="image-news">
+					<div><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABgAJADASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAABQYCAwQBBwAI/8QANRAAAgEDAwMCBQIEBgMAAAAAAQIDAAQRBRIhBjFBE1EiYXGBkQcUMkKhsSNDUsHR8BUzYv/EABgBAAMBAQAAAAAAAAAAAAAAAAECAwAE/8QAHxEAAgIDAQEBAQEAAAAAAAAAAAECEQMSITFBEyJR/9oADAMBAAIRAxEAPwBUhGNwq23OHYe4rOrosSsBtBHapwMC+QQeKDVHM0xt6a6bS706TUWuFRs7FRvI7GhnXHTtvpj2Ftp8fqtL/CyclvlimjorRrfVtG3vqEsHoykOqHj5Vs1a2sun9Q05FnNzOFkKGXBPjzUY/ps21w6lpokn0Q7XStT0/RS5tlAeXY6ucFT8xTj05OZOm9UN3a5f0GiihTJ3NtPA+vHFXJ1t08dcn0+9hzCkSuJ2GMyDv/TH4oVedeaKuqwCwtp4bSBt7OP8xvfHy5/NNjcpPvEwvVK/ouaadHg6ekW5ts3xJwTwVI8HyKG6JqlxpupyXUL/ABopABbtmmrqXrDQuo4XjTRttxn4LlnCN98Dn6ZpMaBUV3hhdVYDIY5/BpYRbT2+g28oNr1TsiuXlLtPK4YBf4e1Z4L9r2+t7lWWOaJg5ZzkcHP3oOyKXVvFW27YvYNy93HFMsainRnNv09aOov1XfQWY02NoUjLyANt3HHv9+1LV9pkOla5JbXSIICw9K3kclVOOc1nXqqXTLuVLJBHdxriJyMge+R9KXb3Vr3VdQbUNRl9RycAD3+lRhjcuspukOPSq6Jp3V+64SE+urIBwY4/bv8ASqLnVLSx6vvJJSFszOU/w14x47eKWLa8VZGUqAz9iPFcWObUL2O2iO6WZwkaeSScVeEetS8IvrTH7QunbfXDJruoxtcR3UjJbwISFRFOAT+Kt0Ozi0vrpLO0SW30+/gctCeBvXB4+1NGmrF01oEGnyrvEMYBO0AE/wC+T/ekP91rqdSWl/rapEI9yLsUKArcZ447kCpQf9ppnS4twfDR1ZGunXxWO32RmTIkiwVcfM+DS/rLpNb2xjO2NgMIVxtO7nnzTJro9Q5PMcvwv9+x/NJD3KrstCBvSYDnv3Gf7VZwXWjkk26QMkx+yyOCGFa9OSKa9gjaX0onIDSEZ2A9zj5UKMp9ExHkE5Ga36ddW8DK9wqlVXhT2Jq1Jq38Nrtwc9Ou9MsnuLOC8kK8YltnzvPuV7kUI1GSW+lF4ZZPXU+nhj2X3HtTvZfpZo9zCt3HfS4mCyp6agAA88V3qzS7OztP/HWwX9y8ahMgDcM+TUVlpJ0UWOPenl2q3Kk+lsVpAfil/mPyoZu25Y85q+/ilhndLiN45Q5DKfFYyxA7cVSXoq8JM7N2OPYCpxzyKVw3n8VSN2M4opp+ly3mDlUB7ZGTStpLoyi3xGua2thpq3alzcljmMY2Y9xQ20uNt9HLKdqqwNaJ4prdf2znnPvWKeGSNgGxz7VoxdOwNoM6rdQTus8Lg54Zh3rBBE1xKkUCPLITwqjJP2FcNvLIqxRRMzYyxUZx9a9T/TawbSdImvZQsc1ww/jT+FAO+fnmktY0FRcnw8vuLe4s7kRz28tvIOdsiFT+DTT0BqvTumXFzPrCql6hD280gJVRjkcdjXqt9HpWuWz2t4sc8RUgFgCR/wDQPg1+fNVtTpur3emhwywzsu8/zAHii1vGgLjsab/9QLu7v5pNgaBG/wAEDPODxnPvR+XqW01zSJrObbZh4T/7OSrY4I+lIFnbejA1yTHIrcLzwPnz5q0zI/JwcexpPwg/Pg6yy+jX07dfvNAjS4k3emWTcfal3VbZotaD4C73UpntnP8AzVunTOIZSCRblhnHYN70S1C2N7opMhR5E5gCyDdn5VZkqEMjjHmrFjd0IB7cfWvrjPrOSCMknGKJWdsvpJPO4VFOQvv9adMI3aR1xruhWVrpmyO4jtVxvYHgf6Se3Hal7qXqe/1XUGuJp2EhGAVGAo9h7Cst5qJlzggCg8zF2JpFFGNlk7Fn27WeQYG4A488Z7URGhs7pcOu6JkDMBxg45/rQBJHjIZGKsOQR4pwe9e10q3lEYQyp/BnOOc/bOTUM2y7Evj1apgaZbOPAQBseCa26fftDLF6MO52baFPP/e9Y3ufUmLCMDcRlsc4zW9na30/91C6o8Z+IOAM5xtx5zwx+1BRtJMfaraGbT+ltP1KO7a8neKVnMkEYZTI4UZbABPzoddw6GYFntbCSWXOyLdKTknzt80C02/msr2PUVlYSjkNn80c6ceKfX5766cw2xjcxmNAQjHgKAe2ATVnccb+nMmnK2arDSdSt9OmuCrK2C3pk+PmKu0bqedFexvCkiyKVj34+E47c+KaLPWenf3spN7KVkXayvH8scnFefXGi3Fjqu+a1knhjuCkbYKrIQTgZ474rmgnJPcvvFO4dCa9SraTSLbBeVCtxtXOO4HjxStewi8v3u3YGWWTcVJyG/FNnXyWRtbaWzSCP0sI6xEAqcew7/Wk7To5bi+itWBBmdUUkdtxxmq45LS0JNPboxxX6GyWC2sZJoo+WMcK7Ae5HbnnNZtVs7CeOCWS1a3lkH8hC5x5wBXozahpVhp0dlaPthhGwKsLZJ85GKQeq9g1RbhGLRlfx8q58c05OlRWcXr1ge1uZdLvBZSMJLWdgVLcd+Mmq5r2zS+jeLfGqviTA9j3FV38Juog6csnOPcGh9vFPIdyoxXPfHFdi6jnfGb9R0a5s5bVpzzcx+oB5C5IyfxVF7L6iBRwg4HyrZrGpy3konmOZBEsSgdgo7YoSHDJgmnFKWyvnIrmcivmHJqJ45omOeKMWt/CNG9GUsZVYiNffzk/k0KAB4qSDack8LzWaswXtZdPnu0icTqpKKCuDycbvtnOKzarck3D2qjakb8knJY9sn6e3jmsMR45qKkNJzzzQUaDbYRQ5RRgAbeKaekNHF5b319czelFbJtVQeWYj29hSqY2MkGyTZuGDjuMGj9rfTWo3xKNrIYwhOAwwe5+uPxQndc9Akn6X6VZXE0NxfyBY7C2JDzH/MPhVHkn+lNunx6prMB1PVbiKGwiBmSBlzu2jggd+PelO0OrdQahHZ7lkklfKRL8MadyTtzgYGa9Cu7G70G2tZPR/cehGIlZWGGJHOQfp/SueeyXOj4owT/wS5dTh1m+ktr23KSwyZCFgQSPeqt1vZ3tq2xLiO2aRt05wDuHA9yARn71G56c1CEXPUtyVKzuXVZOGZmJJwPb8UCkN7cScQF/diKmsVOl4V/RuPfRhOsWpX0DHZmAsWMaxEAk+c5/2ofq11ZXdl+ztoYYHDAqwY8/LmgcjXSFl2sMHsfFZPVZ8qzdjxTrEvULu6oLNA6YjA5bjIPy4NeifpbFJNbSKY1SOBjvygO5jzxXmFtfPGQjklTx9Kef0+1qS21VtPkOYZ1MiYPYjFVi2uCNX083ncyOSaqXhvrxUz2qsng1YU664OCO3zr5VDAjyRUtwdRzjPeo5CnisArzjB9qkx4I967Mu05HY1DOcUTE44pJdwjUsQpYgDwOSfxVa0U0O6NrfEIjSPKnphVXcTkjIA+mawPbzRXBt3ikWUNt9NlIbPgY96VPrQ1csJaZJKT6cbI28bWLD4lHmjYRridY414HA44FYLXpy9tjHLc3NtZyj4limLbh9cA4+lHT+5itEcwR3AkJCvagkMfp3H3FTeSL86Fwkl1DL0dYx6XAdRnklld2ZEaNc7QMZ28YBPz/AN6Z77UGitzfX00cVtbDdHG4IkdsHk9scH2oHa31zHpGnW9rZbikKmbC8r8QyNvvjvS11vr8V5bRWkTbpFx6rhiQSMjjPywagm5MfWkANe6rutVu5AZZEgLEqhcnFBo7qSE+pFIcg1RKAxz71RkqeK6FFUTthZtYEyhZUGf9QrNMqODLH3Hce9ZBtYc96msmwECjrXhrImVSc9jR7QbuS3u7adEkkcZAEY3E/al4gFsntTF0rqTWF/FLEgdkJUKTgNnjn71mkaxf7pVYq1RwRUCKoAivwk8ZFfL5Y13FfDHnsKxi0BXjw4A44NdW3hA5kJ+WKpLFjmppG7/Ie5rGHbpjRrLR007qK41AiVy7x2wiB+EEpknPuD4onPrGkTavNqS6cn7uUgmd+SMDHGTxwPFJwvUOnWtqJTugDjPuCc/8/mvkktVBMuXJHHx+a48uKUpNl4ZIxVDPPq6P6jG3W5DdlkQH+9ENOlaLTYL2W2EcjShkghjXCr4zxnn8cik+wBLJKCr7GBKtghvOMe31re2qXUVwZpJyp85OAPlUPzceFo5E1YUvLmSw1Z/UvJbaONldCEJ3A84POOPp9qXepbu2u703FqfhdcnOclvJIJOOa0axI13HFNFN6u5cH4uAck8f98UAlyAFYYIwDXRjhTtksk7VFLNziqzzVhXJqAU5rpRAgDgVzPNSK9/lXNpzRNR0g44FErRZLZI3Ug5OePB+dZIY931rfBIkaFcZDd80EBn/2Q==" alt="【鹿児島】コロナ禍に変革求めた市民 鹿児島市長選、知事選に続き自民連敗" data-src-url="/img/seijinewsplus/1606776451.jpg"></div>
+					<cite><a href="https://www.nishinippon.co.jp/item/n/669096/" target="_blank">西日本新聞</a></cite>
+					<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606776451/-100" target="_blank" class="thread">【鹿児島】コロナ禍に変革求めた市民 鹿児島市長選、知事選に続き自民連敗</a></h2>
+				</article>
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_seijiplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:47:31+09:00">12/01 07:47</time>
+									<span class="res">14res</span>
+									<span class="avg">15res/h</span>
+									<span class="crt">19.6%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606776451/-100" target="_blank" class="thread">【鹿児島】コロナ禍に変革求めた市民 鹿児島市長選、知事選に続き自民連敗</a> <a href="/seijinewsplus/1606776451/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.nishinippon.co.jp/item/n/669096/" target="_blank">西日本新聞</a></cite></span>
+								<span class="poster">Posted by クロ ★</span>
+								<span><a href="/seijinewsplus/1606776451/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_seijiplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-28T11:42:08+09:00">11/28 11:42</time>
+									<span class="res">655res</span>
+									<span class="avg">9.4res/h</span>
+									<span class="crt">23.5%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606531328/-100" target="_blank" class="thread">【森友改ざん】「赤木ファイル」めぐり攻防 衆院委、森友問題で質疑  ★2</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.jiji.com/jc/article?k=2020112400870&g=pol" target="_blank">時事通信</a></cite></span>
+								<span class="poster">Posted by クロ ★</span>
+								<span><a href="/seijinewsplus/1606531328/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_seijiplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:54:51+09:00">12/01 07:54</time>
+									<span class="res">11res</span>
+									<span class="avg">13res/h</span>
+									<span class="crt">13.7%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606776891/-100" target="_blank" class="thread">【馬毛島】加藤官房長官が“口利き”か 「利権の島」買収価格が跳ね上がった舞台裏</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.dailyshincho.jp/article/2020/12010556/" target="_blank">デイリー新潮</a></cite></span>
+								<span class="poster">Posted by クロ ★</span>
+								<span><a href="/seijinewsplus/1606776891/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_seijiplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:20:25+09:00">12/01 07:20</time>
+									<span class="res">37res</span>
+									<span class="avg">26res/h</span>
+									<span class="crt">11.7%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606774825/-100" target="_blank" class="thread">世良公則 コロナ感染拡大報道の実情に苦言 「空港検疫では外国籍の感染者が圧倒的に多いという実情、あまり公に報道されていない」</a> <a href="/seijinewsplus/1606774825/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/67a0251246d350bce18bfb9e260dce56ee12a4c4" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by Felis silvestris catus ★</span>
+								<span><a href="/seijinewsplus/1606774825/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_seijiplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-12-01T07:39:11+09:00">12/01 07:39</time>
+									<span class="res">12res</span>
+									<span class="avg">11res/h</span>
+									<span class="crt">9.8%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606775951/-100" target="_blank" class="thread">【桜を見る会】前夜祭費用の検察捜査スクープは官邸が読売にリークか 安倍失職までの道筋は?</a> <a href="/seijinewsplus/1606775951/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://dot.asahi.com/aera/2020113000052.html" target="_blank">dot. [朝日新聞出版]</a></cite></span>
+								<span class="poster">Posted by クロ ★</span>
+								<span><a href="/seijinewsplus/1606775951/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+		<aside class="ads sp">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000076172:1000113909' class='fluct_async' src='https://s.sh.adingo.jp/async/?G=1000076172&U=1000113909' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000076172:1000113908' class='fluct_async' src='https://s.sh.adingo.jp/async/?G=1000076172&U=1000113908' async><\/scr"+"ipt>");
+	}
+}
+</script>
+		</aside>
+			<section class="scienceplus">
+				<header class="board-header">
+					<h1><a href="https://egg.5ch.net/scienceplus/" title="科学ニュース＋ ＠5ch掲示板" target="_blank">科学ニュース＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>18res/h</div>
+					<div class="more"><a href="/scienceplus/" title="科学ニュース＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_scienceplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-17T11:38:19+09:00">11/17 11:38</time>
+									<span class="res">25res</span>
+									<span class="avg">0.0res/h</span>
+									<span class="crt">33.3%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/scienceplus/1605580699/-100" target="_blank" class="thread">【スパコン】「富岳」2期連続で1位 スパコン世界ランキング 理研など 2位「サミット」(米国)の約3倍の計算速度</a> <a href="/scienceplus/1605580699/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/6ce5ad08800d6a09eb795714c2a2e8cc7a5e7a60" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by すらいむ ★</span>
+								<span><a href="/scienceplus/1605580699/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_scienceplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-29T17:12:23+09:00">11/29 17:12</time>
+									<span class="res">16res</span>
+									<span class="avg">0.4res/h</span>
+									<span class="crt">16.6%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/scienceplus/1606637543/-100" target="_blank" class="thread">【気象】春のオーストラリアに記録的熱波、シドニーで43℃</a> <a href="/scienceplus/1606637543/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/morisayaka/20201129-00210078/" target="_blank">Yahoo!ニュース</a></cite></span>
+								<span class="poster">Posted by すらいむ ★</span>
+								<span><a href="/scienceplus/1606637543/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="news5plus">
+				<header class="board-header">
+					<h1><a href="https://egg.5ch.net/news5plus/" title="国際ニュース＋ ＠5ch掲示板" target="_blank">国際ニュース＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>0res/h</div>
+					<div class="more"><a href="/news5plus/" title="国際ニュース＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_news5plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-30T15:40:08+09:00">11/30 15:40</time>
+									<span class="res">4res</span>
+									<span class="avg">0.2res/h</span>
+									<span class="crt">%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/news5plus/1606718408/-100" target="_blank" class="thread">◆ニュース国際+板 批判要望・自治議論◆ ★64</a></h2>
+							<footer class="news-source">
+
+								<span class="poster">Posted by 朝一から閉店までφ ★</span>
+								<span><a href="/news5plus/1606718408/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_news5plus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-29T09:18:10+09:00">11/29 09:18</time>
+									<span class="res">19res</span>
+									<span class="avg">0.4res/h</span>
+									<span class="crt">%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/news5plus/1606609090/-100" target="_blank" class="thread">【フィリピン】盗難スマホを元の持ち主に売ろうとして御用</a></h2>
+							<footer class="news-source">
+								<span><cite><a href="http://manila-shimbun.com/tabloid/tabloid1606489200.html" target="_blank">日刊まにら新聞</a></cite></span>
+								<span class="poster">Posted by 虎跳 ★</span>
+								<span><a href="/news5plus/1606609090/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="femnewsplus">
+				<header class="board-header">
+					<h1><a href="https://egg.5ch.net/femnewsplus/" title="ローカルニュース＋ ＠5ch掲示板" target="_blank">ローカルニュース＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>0res/h</div>
+					<div class="more"><a href="/femnewsplus/" title="ローカルニュース＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_femnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-29T22:26:13+09:00">11/29 22:26</time>
+									<span class="res">18res</span>
+									<span class="avg">0.5res/h</span>
+									<span class="crt">%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/femnewsplus/1606656373/-100" target="_blank" class="thread">【北海道】「邪神ちゃん」×「ばんえい競馬」がコラボ…ふるさと納税でアニメ制作を 返礼品に特製&quot;ビーフカレー&quot;も</a> <a href="/femnewsplus/1606656373/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.uhb.jp/news/single.html?id=16471" target="_blank">uhb.jp</a></cite></span>
+								<span class="poster">Posted by 朝一から閉店までφ ★</span>
+								<span><a href="/femnewsplus/1606656373/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_femnewsplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-26T08:27:39+09:00">11/26 08:27</time>
+									<span class="res">56res</span>
+									<span class="avg">0.4res/h</span>
+									<span class="crt">%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/femnewsplus/1606346859/-100" target="_blank" class="thread">【岐阜】味方が敵に、岐阜政界の変</a> <a href="/femnewsplus/1606346859/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.nhk.or.jp/politics/articles/feature/48916.html" target="_blank">NHK</a></cite></span>
+								<span class="poster">Posted by 朝一から閉店までφ ★</span>
+								<span><a href="/femnewsplus/1606346859/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+			<section class="moeplus">
+				<header class="board-header">
+					<h1><a href="https://egg.5ch.net/moeplus/" title="萌えニュース＋ ＠5ch掲示板" target="_blank">萌えニュース＋ </a></h1>
+					<div class="isp"><span>投稿時速：</span>8res/h</div>
+					<div class="more"><a href="/moeplus/" title="萌えニュース＋ ＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+
+				</header>
+				
+	
+				<article>
+					<ol>
+						<li data-twitter="2nn_moeplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-09-21T07:19:37+09:00">09/21 07:19</time>
+									<span class="res">180res</span>
+									<span class="avg">0.1res/h</span>
+									<span class="crt">50.0%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/moeplus/1600640377/-100" target="_blank" class="thread">【漫画】原泰久の大人気中国春秋戦国漫画「キングダム」第59巻</a> <a href="/moeplus/1600640377/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://www.new-akiba.com/news/187650" target="_blank">にゅーあきばどっとこむ</a></cite></span>
+								<span class="poster">Posted by 朝一から閉店までφ ★</span>
+								<span><a href="/moeplus/1600640377/">2NNのURL</a></span>
+							</footer>
+						</li>
+						<li data-twitter="2nn_moeplus">
+							<header>
+								<div class="status">
+
+									<time pubdate datetime="2020-11-28T23:02:12+09:00">11/28 23:02</time>
+									<span class="res">142res</span>
+									<span class="avg">2.4res/h</span>
+									<span class="crt">25.0%</span>
+
+								</div>
+							</header>
+							<h2><a href="https://egg.5ch.net/test/read.cgi/moeplus/1606572132/-100" target="_blank" class="thread">【アニメ】「ぼくらの」BD-BOX用イラスト、少年少女たちとジアースを鬼頭莫宏が描き下ろし</a> <a href="/moeplus/1606572132/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h2>
+							<footer class="news-source">
+								<span><cite><a href="https://amp.natalie.mu/comic/news/406425" target="_blank">ナタリー</a></cite></span>
+								<span class="poster">Posted by 朝一から閉店までφ ★</span>
+								<span><a href="/moeplus/1606572132/">2NNのURL</a></span>
+							</footer>
+						</li>
+
+					</ol>
+				</article>
+			</section>
+
+		</section>
+
+
+		<aside class="ads pc">
+<script type='text/javascript'>
+if($('.pc').css('display') != 'none'){
+	var googletag = googletag || {};
+	googletag.cmd = googletag.cmd || [];
+	(function() {
+	var gads = document.createElement('script');
+	gads.async = true;
+	gads.type = 'text/javascript';
+	var useSSL = 'https:' == document.location.protocol;
+	gads.src = (useSSL ? 'https:' : 'http:') +
+	'//www.googletagservices.com/tag/js/gpt.js';
+	var node = document.getElementsByTagName('script')[0];
+	node.parentNode.insertBefore(gads, node);
+	})();
+}
+</script>
+<script type='text/javascript'>
+if($('.pc').css('display') != 'none'){
+	googletag.cmd.push(function() {
+	googletag.defineSlot('/83555300/pc_2nn_header_468x60', [[1, 1], [468, 60]],
+	'div-gpt-ad-1426238917183-0').addService(googletag.pubads());
+	googletag.pubads().enableSingleRequest();
+	googletag.enableServices();
+	});
+}
+</script>
+<div id='div-gpt-ad-1426238917183-0' class="pc">
+<script type='text/javascript'>
+if($('.pc').css('display') != 'none'){
+	googletag.cmd.push(function() {
+	googletag.display('div-gpt-ad-1426238917183-0'); });
+}
+</script>
+</div>
+		</aside>
+
+		<aside class="ads sp" style="margin-bottom:25px;">
+		<aside class="ads sp">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000089878:1000134728' class='fluct_async' src='https://sh.adingo.jp/async/?G=1000089878&U=1000134728' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000089878:1000134727' class='fluct_async' src='https://sh.adingo.jp/async/?G=1000089878&U=1000134727' async><\/scr"+"ipt>");
+	}
+}
+</script>
+		</aside>
+
+		</aside>
+
+		<menu class="sp"><a href="#wrapper" class="to-top">▲ このページのトップへ</a></menu>
+	</div>
+
+
+	<div id="side">
+		<aside id="login" class="box1">
+			<header>
+				<h2>ユーザーログイン</h2>
+			</header>
+			<div>
+				<form method="POST" action="https://www.2nn.jp/">
+					<ul>
+						<li>メールアドレス<br><input type="email" name="UserID" required class="user-id"><span><input type="submit" value="再発行" class="submit"></span></li>
+						<li>パスワード<br><input type="password" name="Password" required class="password"><input type="submit" value="ログイン" class="submit"></li>
+					</ul>
+				</form>
+			</div>
+			<aside><a href="/apply/">ユーザー新規登録</a> <a href="javascript:void(0)">パスワード再発行</a></aside>
+		</aside>
+
+		<aside id="description" class="box1">
+			<header>
+				<h2>2ちゃんねるニュース速報＋ナビ</h2>
+			</header>
+			<div>
+				<p>このサイトは<a href="http://www.5ch.net/" target="_blank">5ちゃんねる</a>(旧2ちゃんねる)のニュース速報＋系掲示板の書き込みを自動解析し、人気の高いニュース及び最新のニュースをリアルタイムで提供しています。</p>
+				<p class="visitors">2NN現在閲覧者数 <span>8068</span>人/10min</p>
+			</div>
+		</aside>
+		
+<!--		<aside id="info" class="box2">
+			<header>
+				<h2>お知らせ</h2>
+			</header>
+			<div>
+				<article>
+					<header>■<time datetime="2020-07-01T01:43:00+09:00" pubdate>7月1日（水）</time></header>
+					<p>本日0時頃から1時40分頃まで、SSL証明書の期限切れによりアクセスができない状態になっていました。ご迷惑をおかけしました。</p>
+				</article>
+			</div>
+		</aside>-->
+		<section class="box2 recom" data-twitter="2nn_seijiplus">
+			<header>
+				<h2 class="seijinewsplus">注目ニュース</h2>
+			</header>
+			<figure><img src="data:image/jpeg;base64,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" alt="世良公則 コロナ感染拡大報道の実情に苦言 「空港検疫では外国籍の感染者が圧倒的に多いという実情、あまり公に報道されていない」" data-src-url="/img/seijinewsplus/1606774825.jpg"></figure>
+			<article>
+				<header>
+					<span class="seijinewsplus">★</span>政治ニュース＋
+					<time pubdate datetime="2020-12-01T07:20:25+09:00">12/01 07:20</time>
+
+				</header>
+				<p><a href="https://fate.5ch.net/test/read.cgi/seijinewsplus/1606774825/-100" target="_blank" class="thread">世良公則 コロナ感染拡大報道の実情に苦言 「空港検疫では外国籍の感染者が圧倒的に多いという実情、あまり公に報道されていない」</a></p>
+			</article>
+			<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/67a0251246d350bce18bfb9e260dce56ee12a4c4" target="_blank">Yahoo!ニュース</a></cite></span>
+				<span class="poster">Posted by Felis silvestris catus ★</span>
+				<span><a href="/seijinewsplus/1606774825/">2NNのURL</a></span>
+			</footer>
+		</section>
+<aside class="ads pc">
+<div id="criteo_894761"><script>if($('.pc').css('display') != 'none' && $('#side').innerWidth() >= 300){ CriteoDisplayAd("criteo_894761", function() { var slotid = "criteo_894761"; var div = document.getElementById(slotid);
+if (div) { var ifr = document.createElement('iframe'); ifr.setAttribute("id", slotid+"_iframe"), ifr.setAttribute("frameborder","0"), ifr.setAttribute("allowtransparency","true"), ifr.setAttribute("hspace","0"), ifr.setAttribute("marginwidth","0"), ifr.setAttribute("marginheight","0"), ifr.setAttribute("scrolling","no"), ifr.setAttribute("vspace","0"), ifr.setAttribute("width", "300"), ifr.setAttribute("height", "250");
+div.appendChild(ifr);
+var htmlcode = "<html><head></head><body><script type=\"text/javascript\">\n"+
+"var microadCompass = microadCompass || {};\n"+
+"microadCompass.queue = microadCompass.queue || [];\n"+
+"</scr"+"ipt>\n"+
+"<script type=\"text/javascript\" charset=\"UTF-8\" src=\"//j.microad.net/js/compass.js\" onload=\"new microadCompass.AdInitializer().initialize();\" async></scr"+"ipt>\n"+
+"<div id=\"7d09e577da69400ef64d91a5d25bea16\">\n"+
+"	<script type=\"text/javascript\">\n"+
+"		microadCompass.queue.push({\n"+
+"			\"spot\": \"7d09e577da69400ef64d91a5d25bea16\",\n"+
+"			\"url\": \"${COMPASS_EXT_URL}\",\n"+
+"			\"referrer\": \"${COMPASS_EXT_REF}\"\n"+
+"		});\n"+
+"	</scr"+"ipt>\n"+
+"</div></body></html>";
+var ifrd = ifr.contentWindow.document; ifrd.open(); ifrd.write(htmlcode); ifrd.close(); } }); }</script></div>
+<div id="criteo_894762"><script>if($('.pc').css('display') != 'none' && $('#side').innerWidth() < 300 && $('#side').innerWidth() >= 200){ CriteoDisplayAd("criteo_894762", function() {  }); }</script></div>
+</aside>		<aside class="ads sp">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087202:1000130567' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087202&U=1000130567' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087202:1000130566' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087202&U=1000130566' async><\/scr"+"ipt>");
+	}
+}
+</script>
+		</aside>
+		<section id="hot-keywords" class="box2">
+			<header>
+				<h2>ホットキーワード</h2>
+			</header>
+			<article>
+				<ol>
+					<li><a href="/word/%e5%b0%8f%e5%ae%a4%e5%9c%ad"><strong>小室圭</strong></a></li>
+					<li><a href="/word/%e5%a4%a7%e7%b5%b1%e9%a0%98%e9%81%b8"><strong>大統領選</strong></a></li>
+					<li><a href="/word/%e7%a7%8b%e7%af%a0%e5%ae%ae"><strong>秋篠宮</strong></a></li>
+					<li><a href="/word/%e3%82%b3%e3%83%ad%e3%83%8a"><strong>コロナ</strong></a></li>
+					<li><a href="/word/%e7%9c%9e%e5%ad%90%e3%81%95%e3%81%be"><strong>眞子さま</strong></a></li>
+					<li><a href="/word/%e3%83%88%e3%83%a9%e3%83%b3%e3%83%97%e5%a4%a7%e7%b5%b1%e9%a0%98"><strong>トランプ大統領</strong></a></li>
+					<li><a href="/word/%e9%9f%93%e5%9b%bd%e6%94%bf%e5%ba%9c"><strong>韓国政府</strong></a></li>
+					<li><a href="/word/%e3%83%90%e3%82%a4%e3%83%87%e3%83%b3"><strong>バイデン</strong></a></li>
+					<li><a href="/word/%e5%ae%ae%e5%b4%8e%e8%ac%99%e4%bb%8b"><strong>宮崎謙介</strong></a></li>
+					<li><a href="/word/%e9%ac%bc%e6%bb%85%e3%81%ae%e5%88%83"><strong>鬼滅の刃</strong></a></li>
+					<li><a href="/word/%e7%b1%b3%e5%a4%a7%e7%b5%b1%e9%a0%98"><strong>米大統領</strong></a></li>
+					<li><a href="/word/%e9%87%91%e5%ad%90%e6%81%b5%e7%be%8e"><strong>金子恵美</strong></a></li>
+					<li><a href="/word/5%e3%81%a1%e3%82%83%e3%82%93%e3%81%ad%e3%82%8b"><strong>5ちゃんねる</strong></a></li>
+					<li><a href="/word/Goto"><strong>Goto</strong></a></li>
+					<li><a href="/word/%e5%ae%89%e5%80%8d%e6%99%8b%e4%b8%89"><strong>安倍晋三</strong></a></li>
+					<li><a href="/word/%e6%9c%ad%e5%b9%8c"><strong>札幌</strong></a></li>
+					<li><a href="/word/%e4%b9%85%e4%bf%9d%e5%bb%ba%e8%8b%b1"><strong>久保建英</strong></a></li>
+					<li><a href="/word/%e3%82%a2%e3%83%bc%e3%83%a2%e3%83%b3%e3%83%89%e3%82%a2%e3%82%a4"><strong>アーモンドアイ</strong></a></li>
+					<li><a href="/word/%e5%b7%a8%e4%ba%ba"><strong>巨人</strong></a></li>
+					<li><a href="/word/%e3%83%9b%e3%83%af%e3%82%a4%e3%83%88%e3%83%8f%e3%82%a6%e3%82%b9"><strong>ホワイトハウス</strong></a></li>
+					<li><a href="/word/%e5%86%85%e9%96%a3%e6%94%af%e6%8c%81%e7%8e%87"><strong>内閣支持率</strong></a></li>
+					<li><a href="/word/%e5%a4%a9%e7%a9%82%e3%81%ae%e3%82%b5%e3%82%af%e3%83%8a%e3%83%92%e3%83%a1"><strong>天穂のサクナヒメ</strong></a></li>
+					<li><a href="/word/5ch"><strong>5ch</strong></a></li>
+					<li><a href="/word/%e6%9c%a8%e6%9d%91%e6%8b%93%e5%93%89"><strong>木村拓哉</strong></a></li>
+					<li><a href="/word/%e8%bf%91%e8%97%a4%e7%9c%9f%e5%bd%a6"><strong>近藤真彦</strong></a></li>
+					<li><a href="/word/%e5%8c%97%e4%b9%9d%e5%b7%9e%e5%b8%82"><strong>北九州市</strong></a></li>
+					<li><a href="/word/%e6%97%a5%e6%9c%ac%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba"><strong>日本シリーズ</strong></a></li>
+					<li><a href="/word/%e5%8c%97%e6%9c%9d%e9%ae%ae"><strong>北朝鮮</strong></a></li>
+					<li><a href="/word/%e3%83%8a%e3%82%a4%e3%82%ad"><strong>ナイキ</strong></a></li>
+					<li><a href="/word/%e8%8f%85%e7%be%a9%e5%81%89"><strong>菅義偉</strong></a></li>
+					<li><a href="/word/%e6%9c%9d%e6%97%a5%e6%96%b0%e8%81%9e"><strong>朝日新聞</strong></a></li>
+					<li><a href="/word/%e9%ba%92%e9%ba%9f%e3%81%8c%e3%81%8f%e3%82%8b"><strong>麒麟がくる</strong></a></li>
+
+				</ol>
+			</article>
+		</section>
+		<section id="latest" class="box1">
+			<header>
+				<h2>新着ニュース</h2>
+			</header>
+			<article>
+				<ol>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:46:45+09:00">12/01 08:46</time>
+									<span class="res">3res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606780005/-100" target="_blank" class="thread">【香川】息子が盗んだ交際相手のスマホを証拠隠滅 書類送検された元警部補を相手取り 女性と両親が2千万円の損害賠償を求め提訴</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.yomiuri.co.jp/national/20201130-OYT1T50238/" target="_blank">YOMIURI ONLINE [読売新聞]</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606780005/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:38:21+09:00">12/01 08:38</time>
+									<span class="res">115res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779501/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★29</a> <a href="/newsplus/1606779501/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606779501/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-01T08:38:11+09:00">12/01 08:38</time>
+									<span class="res">16res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606779491/-100" target="_blank" class="thread">【サッカー】&lt;エイバル・FW武藤嘉紀&gt;敵地のベティス戦で移籍後初ゴール!乾は不運にガックリ...</a> <a href="/mnewsplus/1606779491/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/38bc3b60c4c977645e442e1f032ee7d34916c9a0" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by Egg ★</span>
+							<span><a href="/mnewsplus/1606779491/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:31:05+09:00">12/01 08:31</time>
+									<span class="res">91res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606779065/-100" target="_blank" class="thread">【日経新聞】結局、社会主義が感染症に強かったのか</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.nikkei.com/article/DGXMZO66715920X21C20A1000000/" target="_blank">日本経済新聞</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606779065/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:28:01+09:00">12/01 08:28</time>
+									<span class="res">89res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778881/-100" target="_blank" class="thread">【大阪】コロナ対応で看護師不足 若年がん病棟が一時閉鎖</a> <a href="/newsplus/1606778881/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/ASNCZ7K5GNCZPTIL01K.html" target="_blank">朝日新聞デジタル</a></cite></span>
+							<span class="poster">Posted by 蚤の市 ★</span>
+							<span><a href="/newsplus/1606778881/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:21:58+09:00">12/01 08:21</time>
+									<span class="res">254res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778518/-100" target="_blank" class="thread">菅氏は「輝きのない首相」 独紙が批判的論評</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.jiji.com/jc/article?k=2020120100185&g=int" target="_blank">時事通信</a></cite></span>
+							<span class="poster">Posted by 蚤の市 ★</span>
+							<span><a href="/newsplus/1606778518/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T08:20:57+09:00">12/01 08:20</time>
+									<span class="res">256res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606778457/-100" target="_blank" class="thread">【論争】ナイキCMに「感動した」「日本人を差別主義者の悪者にしてる」賛否両論 実体験ストーリーの説明伝わらず</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/shinoharashuji/20201201-00210363/" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606778457/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_bizplus">
+						<header>
+							<div class="status">
+								<span class="bizplus">★</span>ビジネスニュース＋ 
+								<time pubdate datetime="2020-12-01T08:14:47+09:00">12/01 08:14</time>
+									<span class="res">11res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606778087/-100" target="_blank" class="thread">【2020】今年の“新語”大賞は「ぴえん」 新型コロナ関連のワードも続々トップ10入り</a> <a href="/bizplus/1606778087/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.oricon.co.jp/news/2177878/full/" target="_blank">ORICON STYLE</a></cite></span>
+							<span class="poster">Posted by trick ★</span>
+							<span><a href="/bizplus/1606778087/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_news4plus">
+						<header>
+							<div class="status">
+								<span class="news4plus">★</span>東アジアニュース速報＋ 
+								<time pubdate datetime="2020-12-01T08:14:12+09:00">12/01 08:14</time>
+									<span class="res">85res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://lavender.5ch.net/test/read.cgi/news4plus/1606778052/-100" target="_blank" class="thread">【中央日報】朝日新聞 「韓国政府、日本企業の代わりに徴用被害者賠償の可能性」★4</a> <a href="/news4plus/1606778052/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/DA3S14713210.html" target="_blank">朝日新聞デジタル</a></cite></span>
+							<span class="poster">Posted by 昆虫図鑑 ★</span>
+							<span><a href="/news4plus/1606778052/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_bizplus">
+						<header>
+							<div class="status">
+								<span class="bizplus">★</span>ビジネスニュース＋ 
+								<time pubdate datetime="2020-12-01T08:12:44+09:00">12/01 08:12</time>
+									<span class="res">13res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://egg.5ch.net/test/read.cgi/bizplus/1606777964/-100" target="_blank" class="thread">【携帯】KDDIが35年縛り!? スマホと住宅ローンのセット割を開始</a> <a href="/bizplus/1606777964/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://business.nikkei.com/atcl/gen/19/00002/113001279/" target="_blank">日本経済新聞</a></cite></span>
+							<span class="poster">Posted by trick ★</span>
+							<span><a href="/bizplus/1606777964/">2NNのURL</a></span>
+						</footer>
+					</li>
+
+				</ol>
+			</article>
+		</section>
+<aside class="ads pc">
+<div id="criteo_894764"><script>if($('.pc').css('display') != 'none' && $('#side').innerWidth() < 300 && $('#side').innerWidth() >= 200){ CriteoDisplayAd("criteo_894764", function() { /* Passback */ }); }</script></div>
+</aside>		<section id="closed" class="box1">
+			<header>
+				<h2>最新1000スレッド</h2>
+			</header>
+			<article>
+				<ol>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T07:15:06+09:00">12/01 07:15</time>
+									<span class="avg">709res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606774506/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★28</a> <a href="/newsplus/1606774506/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606774506/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T06:22:16+09:00">12/01 06:22</time>
+									<span class="avg">521res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606771336/-100" target="_blank" class="thread">【人種差別】ナイキのツイッターCMが物議…感動した、おかしい、不買運動します  様々な声 ★5</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://twitter.com/nikejapan/status/1332519583882862595" target="_blank">twitter.com</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606771336/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T04:49:02+09:00">12/01 04:49</time>
+									<span class="avg">437res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606765742/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★27</a> <a href="/newsplus/1606765742/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by ばーど ★</span>
+							<span><a href="/newsplus/1606765742/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T03:04:47+09:00">12/01 03:04</time>
+									<span class="avg">233res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606759487/-100" target="_blank" class="thread">【竹中平蔵】コロナ禍で全世界が認めつつある「MMT(現代貨幣理論)」 財政均衡論は間違いだった…★2</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://blogos.com/article/500687/" target="_blank">BLOGOS</a></cite></span>
+							<span class="poster">Posted by どこさ ★</span>
+							<span><a href="/newsplus/1606759487/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T02:32:32+09:00">12/01 02:32</time>
+									<span class="avg">261res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606757552/-100" target="_blank" class="thread">【人種差別】ナイキのツイッターCMが物議…感動した、おかしい、不買運動します  様々な声 ★4</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://twitter.com/nikejapan/status/1332519583882862595" target="_blank">twitter.com</a></cite></span>
+							<span class="poster">Posted by どこさ ★</span>
+							<span><a href="/newsplus/1606757552/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T02:24:42+09:00">12/01 02:24</time>
+									<span class="avg">204res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606757082/-100" target="_blank" class="thread">独身が増え続ける原因を｢若者の恋愛離れ｣にしたがるメディアの大ウソ…「皆婚」を支えていたのはお見合い★2</a> <a href="/newsplus/1606757082/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://president.jp/articles/-/40873" target="_blank">PRESIDENT</a></cite></span>
+							<span class="poster">Posted by どこさ ★</span>
+							<span><a href="/newsplus/1606757082/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T02:14:46+09:00">12/01 02:14</time>
+									<span class="avg">562res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606756486/-100" target="_blank" class="thread">【米大統領選】「私は大差で勝ったのだ」 トランプ氏「ホワイトハウス退去」を撤回か?★26</a> <a href="/newsplus/1606756486/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/byline/iizukamakiko/20201129-00209973/" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by ebolanium2014 р ★</span>
+							<span><a href="/newsplus/1606756486/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-01T02:03:12+09:00">12/01 02:03</time>
+									<span class="avg">152res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1606755792/-100" target="_blank" class="thread">【CM】ナイキのCM動画が炎上「今日からNIKE不買」「私の知っている日本社会ではない」★2</a> <a href="/mnewsplus/1606755792/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.youtube.com/watch?v=G02u6sN_sRc" target="_blank">YouTube</a></cite></span>
+							<span class="poster">Posted by muffin ★</span>
+							<span><a href="/mnewsplus/1606755792/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T01:56:15+09:00">12/01 01:56</time>
+									<span class="avg">265res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606755375/-100" target="_blank" class="thread">【西村担当相】「無症状で知らず知らずのうちにコロナを広げる」「感染拡大続けば、皆さんの今後の就活に影響」若者に  ★3</a> <a href="/newsplus/1606755375/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/ASNCZ71V8NCZULFA03M.html" target="_blank">朝日新聞デジタル</a></cite></span>
+							<span class="poster">Posted by potato ★</span>
+							<span><a href="/newsplus/1606755375/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-01T01:07:59+09:00">12/01 01:07</time>
+									<span class="avg">482res/h</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1606752479/-100" target="_blank" class="thread">【皇室】秋篠宮皇嗣殿下、長女・眞子内親王殿下と小室圭さんの「結婚を認める」とご発言 ★26</a> <a href="/newsplus/1606752479/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www3.nhk.or.jp/news/html/20201130/k10012737451000.html" target="_blank">NHK</a></cite></span>
+							<span class="poster">Posted by potato ★</span>
+							<span><a href="/newsplus/1606752479/">2NNのURL</a></span>
+						</footer>
+					</li>
+
+				</ol>
+			</article>
+		</section>
+
+
+		<aside id="description2" class="box2">
+			<p>5ちゃんねる(旧2ちゃんねる)ニュース速報＋系掲示板の情報をそれぞれ1分～10分間隔で自動取得・解析更新しています。</p>
+			<p>何かありましたら<a href="http://www.2nn.jp/test/read.cgi/temp/1432303805/l50" target="_blank">掲示板</a>か<a href="mailto:webmaster@2nn.jp">メール</a>へ。</p>
+			<address>開発・運営：<a href="mailto:webmaster@2nn.jp">中島竜馬</a> <a href="http://twitter.com/nihoncha" target="_blank" class="twitter"><img src="/img/social/t_mini-a.png" alt="Twitter"></a></address>
+		</aside>
+
+		<aside class="ads pc">
+<aside class="ads pc">
+<div class="ad_plb">
+	<script type="text/javascript">
+	if($('#side').innerWidth() >= 300){
+		$('.ad_plb').attr('id','dc5900b7e4d528302580153d8345ee85');
+		
+		microadCompass.queue.push({
+			"spot": "dc5900b7e4d528302580153d8345ee85",
+			"url": "${COMPASS_EXT_URL}",
+			"referrer": "${COMPASS_EXT_REF}"
+		});
+	}
+	</script>
+</div>
+<div id="criteo_894760"><script>if($('.pc').css('display') != 'none' && $('#side').innerWidth() < 300 && $('#side').innerWidth() >= 200){ CriteoDisplayAd("criteo_894760", function() { var slotid = "criteo_894760"; var div = document.getElementById(slotid);
+if (div) { var ifr = document.createElement('iframe'); ifr.setAttribute("id", slotid+"_iframe"), ifr.setAttribute("frameborder","0"), ifr.setAttribute("allowtransparency","true"), ifr.setAttribute("hspace","0"), ifr.setAttribute("marginwidth","0"), ifr.setAttribute("marginheight","0"), ifr.setAttribute("scrolling","no"), ifr.setAttribute("vspace","0"), ifr.setAttribute("width", "200"), ifr.setAttribute("height", "200");
+div.appendChild(ifr);
+var htmlcode = "<html><head></head><body><script type=\"text/javascript\">\n"+
+"var microadCompass = microadCompass || {};\n"+
+"microadCompass.queue = microadCompass.queue || [];\n"+
+"</scr"+"ipt>\n"+
+"<script type=\"text/javascript\" charset=\"UTF-8\" src=\"//j.microad.net/js/compass.js\" onload=\"new microadCompass.AdInitializer().initialize();\" async></scr"+"ipt>\n"+
+"<div id=\"e8591e1010eb8b8b4bf3fc37896ece97\" style=\"justify-content:inherit\">\n"+
+"<script type=\"text/javascript\">\n"+
+"	microadCompass.queue.push({\n"+
+"		\"spot\": \"e8591e1010eb8b8b4bf3fc37896ece97\",\n"+
+"		\"url\": \"${COMPASS_EXT_URL}\",\n"+
+"		\"referrer\": \"${COMPASS_EXT_REF}\"\n"+
+"	});\n"+
+"</scr"+"ipt></div></body></html>";
+var ifrd = ifr.contentWindow.document; ifrd.open(); ifrd.write(htmlcode); ifrd.close(); } }); }</script></div>
+</aside>
+		</aside>
+		<aside class="ads sp">
+<script type="text/javascript">
+if($('.sp').css('display') != 'none'){
+	var ua = navigator.userAgent;
+	if(ua.match(/Android/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087504:1000131018' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087504&U=1000131018' async><\/scr"+"ipt>");
+	}else if(ua.match(/iPhone/)){
+		document.write ("<scr"+"ipt type='text/javascript' id='fluct_async_1000087504:1000131017' class='fluct_async' src='//sh.adingo.jp/async/?G=1000087504&U=1000131017' async><\/scr"+"ipt>");
+	}
+}
+</script>
+
+		</aside>
+
+		<menu><a href="javascript:void(0)" class="sp">PC版</a></menu>
+	</div>
+	<footer id="footer">
+		<menu><a href="#wrapper" class="to-top">▲ このページのトップへ</a></menu>
+		<p>2NN.JP Since 2004</p>
+	</footer>
+</div><!--220.102.55.131-->
+</body>
+</html>
