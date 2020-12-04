@@ -1,0 +1,22 @@
+
+      board_diff = 0
+      Thread.where(board_id: board.id,
+      mirror_ver: board.mirror_ver).each do | thread |
+        max = ThreadResCount.where(thread_id: thread.id, interval: 5).maximum(:cnt)
+        min = ThreadResCount.where(thread_id: thread.id, interval: 5).minimum(:cnt)
+        diff = 0
+        if (max.present? && min.present?) then
+          diff = max - min
+          thread.res_cnt_diff = diff
+          thread.save!
+          board_diff += diff
+        end
+      end
+      board.res_cnt_diff = board_diff
+      board.save!
+      Thread.where(board_id: board.id,
+      mirror_ver: board.mirror_ver).each do | thread |
+        thread.res_cnt_diff
+        thread.res_cnt_percent = thread.res_cnt_diff.to_f / board_diff.to_f
+        thread.save!
+      end
