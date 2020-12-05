@@ -130,6 +130,7 @@ module Snn
       html = URI.open(url, "r:binary") do |f|
         charset = f.charset; f.read
       end
+      mirror_order = 0
       html.scan(/<a href=".+?l50">.+?a>/).each do |e|
         e = Kconv.toutf8(e)
         if (e.match('<a href="(.+?)/l50">.+?: (.+?)</a>')) then
@@ -148,6 +149,8 @@ module Snn
               thread.tid = tid.to_d
               thread.title = title
             end
+            mirror_order += 1
+            thread.mirror_order = mirror_order
             thread.res_cnt = res_cnt.to_d
             thread.mirror_ver = board.mirror_ver
             thread.mirrored_at = now

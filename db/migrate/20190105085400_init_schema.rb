@@ -35,6 +35,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.integer  "tid"
         t.string   "title", limit: 2047
         t.integer  "mirror_ver"
+        t.integer  "mirror_order"
         t.datetime "mirrored_at"
         t.integer  "res_cnt"
         t.integer  "res_added"

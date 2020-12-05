@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'top#index'
+  #mount Api => '/api'
   #get '/about', to: 'about#index'
   #namespace :admin do
   #  root 'top#index'
