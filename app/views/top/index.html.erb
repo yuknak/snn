@@ -59,37 +59,12 @@
 	<div id="main">
 
 		<section id="news-ranking">
-			<section class="newsplus">
-				<header class="board-header">
-					<h1><a href="https://<%= @board.server.name %>/<%= @board.name %>/" title="<%= @board.title %>＠5ch掲示板" target="_blank"><%= @board.title %></a></h1>
-					<div class="isp"><span>投稿時速：</span><%= @board.res_speed %>res/h</div>
-					<div class="more"><a href="/newsplus/" title="<%= @board.title %>＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
 
-				</header>
+			<%= render partial: 'layouts/articles' %>
 
-				<article>
-					<ol>
+			<%= render partial: 'layouts/articles' %>
 
-        <% @threads.each do |thread| %>
-
-						<li data-twitter="2nn_newsplus">
-							<header>
-								<div class="status">
-									<time pubdate datetime="<%= Time.at(thread.tid).strftime("%Y-%m-%dT%H:%M:%S%:z") %>"><%= Time.at(thread.tid).strftime("%m/%d %H:%M") %></time>
-									<span class="res"><%= thread.res_cnt %>res</span>
-									<span class="avg"><%= thread.res_speed %>res/h</span>
-									<span class="crt"><%= thread.res_percent ? (thread.res_percent * 100).round(2) : "--.--" %>%</span>
-								</div>
-							</header>
-							<h2><a href="https://<%= thread.board.server.name %>/test/read.cgi/<%= thread.board.name %>/<%= thread.tid %>/-100" target="_blank" class="thread"><%= thread.title %></a></h2>
-						</li>
-                    
-        <% end %>
-
-					</ol>
-				</article>
-
-			</section>
+			<%= render partial: 'layouts/articles' %>
 
 		</section>
 

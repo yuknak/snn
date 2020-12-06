@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   root 'top#index'
-  #mount Api => '/api'
+  mount Api => '/api'
   #get '/about', to: 'about#index'
-  #namespace :admin do
-  #  root 'top#index'
+  namespace :admin do
+    root 'top#index'
   #  get '/log', to: 'log#index'
   #  resources :daily_weights
-  #end
+  end
   get '/:id', to: 'top#index'
 end

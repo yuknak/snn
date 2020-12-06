@@ -18,16 +18,14 @@ module V1
     helpers V1::Helpers
     
     mount V1::Server
-    #mount V1::Item
-    #mount V1::ItemFile
-    #mount V1::Transfer
-    #mount V1::Provenance
+    mount V1::Board
+    mount V1::Thread
 
     #add_swagger_documentation(
     #  doc_version: '1.0.0',
     #  info: {
-    #    title: 'TAKUMI 匠 API 1.0',
-    #    description: 'TAKUMI 匠 API specification document'
+    #    title: 'API 1.0',
+    #    description: 'API specification document'
     #  }
     #)
 

@@ -3,28 +3,34 @@ module V1
 
   ##############################################################################
   
-  class ServerEntity < Grape::Entity
-      format_with(:iso_timestamp) { |dt| dt.iso8601 }
-      expose :id
+  class BoardEntity < Grape::Entity
+      format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
+      expose :server_id
       expose :name
       expose :title
       expose :mirror
+      expose :mirror_ver
+      with_options(format_with: :iso_timestamp) do
+        expose :mirrored_at
+      end
+      expose :res_added
+      expose :res_speed
       with_options(format_with: :iso_timestamp) do
         expose :created_at
         expose :updated_at
       end
   end
 
-  class ServersEntity < Grape::Entity
+  class BoardsEntity < Grape::Entity
     expose :page
     expose :per_page
     expose :total_pages
     expose :total  
-    expose :data, using: ServerEntity
+    expose :data, using: BoardEntity
   end
 
   ##############################################################################
-  class Server < Grape::API
+  class Board < Grape::API
   
     ############################################################################
 
@@ -34,14 +40,14 @@ module V1
 
     ############################################################################
     
-    resource :server do
+    resource :board do
   
       ##########################################################################
 
       get do
-        servers = FiveCh::Server.all.order(id: "ASC")
-        servers = ransack_index(servers)
-        present servers, with: ServersEntity
+        boards = FiveCh::Board.all.order(id: "ASC")
+        boards = ransack_index(boards)
+        present boards, with: BoardsEntity
       end
 
     end

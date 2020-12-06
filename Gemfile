@@ -47,7 +47,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # added later
-#gem 'faraday'
-#gem 'nokogiri'
-#gem 'feedjira'
 gem 'whenever', require: false
+gem 'grape'
+gem 'grape-entity'
+gem 'kaminari'
+gem 'ransack'
