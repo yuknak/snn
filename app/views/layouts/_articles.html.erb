@@ -1,15 +1,15 @@
-			<section class="newsplus">
+			<section class="<%= board.name %>">
 				<header class="board-header">
-					<h1><a href="https://<%= @board.server.name %>/<%= @board.name %>/" title="<%= @board.title %>＠5ch掲示板" target="_blank"><%= @board.title %></a></h1>
-					<div class="isp"><span>投稿時速：</span><%= @board.res_speed %>res/h</div>
-					<div class="more"><a href="/newsplus/" title="<%= @board.title %>＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
+					<h1><a href="https://<%= board.server.name %>/<%= board.name %>/" title="<%= board.title %>＠5ch掲示板" target="_blank"><%= board.title %></a></h1>
+					<div class="isp"><span>投稿時速：</span><%= board.res_speed %>res/h</div>
+					<div class="more"><a href="/<%= board.name %>/" title="<%= board.title %>＠2ch掲示板のニュース一覧"><span class="pc">もっと見る &gt;</span><span class="sp">一覧</span></a></div>
 
 				</header>
 
 				<article>
 					<ol>
 
-        <% @threads.each do |thread| %>
+        <% threads.each do |thread| %>
 
 						<li>
 							<header>

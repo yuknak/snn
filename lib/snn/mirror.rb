@@ -31,6 +31,9 @@ module Snn
           server_name = $1
           board_name = $2
           board_title = $3
+          unless (@@default_mirrored_boards.include?(board_name)) then
+            next
+          end
           server = Server.find_by(name: server_name)
           if (server.nil?) then
             server = Server.new
@@ -201,12 +204,12 @@ module Snn
 
       #servers_and_boards
 
-      @@default_mirrored_boards.each do |board_name|
-        threads(board_name)
+      Board.all.each do |board|
+        threads(board.name)
       end
 
-      @@default_mirrored_boards.each do |board_name|
-        calc(board_name)
+      Board.all.each do |board|
+        calc(board.name)
       end
 
     end

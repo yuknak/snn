@@ -60,14 +60,35 @@
 
 		<section id="news-ranking">
 
-			<%= render partial: 'layouts/articles' %>
+		<% if (@id.blank?) then %>
 
-			<%= render partial: 'layouts/articles' %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('newsplus'), threads: get_threads('newsplus', 8) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('mnewsplus'), threads: get_threads('mnewsplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('news4plus'), threads: get_threads('news4plus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('bizplus'), threads: get_threads('bizplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('seijinewsplus'), threads: get_threads('seijinewsplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('scienceplus'), threads: get_threads('scienceplus', 4) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('news5plus'), threads: get_threads('news5plus', 2) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('femnewsplus'), threads: get_threads('femnewsplus', 2) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('moeplus'), threads: get_threads('moeplus', 2) } %>
 
-			<%= render partial: 'layouts/articles' %>
+		<% else %>
 
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board(@id), threads: get_threads(@id, 50) } %>
+
+		<% end %>
+		
 		</section>
-
 
 		<aside class="ads pc">
 
@@ -136,7 +157,171 @@
 			<header>
 				<h2>新着ニュース</h2>
 			</header>
+			<article>
+				<ol>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-06T18:42:49+09:00">18:42</time>
+									<span class="res">4res</span>
 
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1607247769/-100" target="_blank" class="thread">踏切で転倒し…JR予讃線の踏切で人と列車衝突【香川・坂出市】</a> <a href="/newsplus/1607247769/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/db55097d9a1264d0d900003d8e95277756af0950" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by どどん ★</span>
+							<span><a href="/newsplus/1607247769/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-06T18:39:03+09:00">18:39</time>
+									<span class="res">51res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1607247543/-100" target="_blank" class="thread">埼玉・川越市立中、生徒ら35人クラスター 重症者なし</a> <a href="/newsplus/1607247543/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/f07749162de3ed13ce9b660893bbcfba4396bc20" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by どどん ★</span>
+							<span><a href="/newsplus/1607247543/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:36:33+09:00">18:36</time>
+									<span class="res">16res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607247393/-100" target="_blank" class="thread">【将棋】竜王戦、豊島将之氏が竜王初防衛  羽生九段の奪取はならず、通算タイトル100期は持ち越し</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://this.kiji.is/708250380271222784" target="_blank">共同通信</a></cite></span>
+							<span class="poster">Posted by 首都圏の虎 ★</span>
+							<span><a href="/mnewsplus/1607247393/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:32:16+09:00">18:32</time>
+									<span class="res">80res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607247136/-100" target="_blank" class="thread">【芸能】渡部建の謝罪会見に海外の反応 「人の前で謝るのはありえない」「もっと報じるニュースあるでしょ」</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.sponichi.co.jp/entertainment/news/2020/12/06/kiji/20201206s00041000258000c.html" target="_blank">スポーツニッポン</a></cite></span>
+							<span class="poster">Posted by muffin ★</span>
+							<span><a href="/mnewsplus/1607247136/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_newsplus">
+						<header>
+							<div class="status">
+								<span class="newsplus">★</span>ニュース速報＋
+								<time pubdate datetime="2020-12-06T18:32:09+09:00">18:32</time>
+									<span class="res">18res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://asahi.5ch.net/test/read.cgi/newsplus/1607247129/-100" target="_blank" class="thread">【アメリカ】大統領選後 初の集会参加 トランプ氏「最高裁まで戦う」 ★2</a> <a href="/newsplus/1607247129/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.yahoo.co.jp/articles/49e522c31fd5d3a9345572a3294e627aeb92ddae" target="_blank">Yahoo!ニュース</a></cite></span>
+							<span class="poster">Posted by 首都圏の虎 ★</span>
+							<span><a href="/newsplus/1607247129/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_bizplus">
+						<header>
+							<div class="status">
+								<span class="bizplus">★</span>ビジネスニュース＋ 
+								<time pubdate datetime="2020-12-06T18:30:41+09:00">18:30</time>
+									<span class="res">6res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://egg.5ch.net/test/read.cgi/bizplus/1607247041/-100" target="_blank" class="thread">【携帯】ahamoは「えげつない」 ドコモショップ代理店は悲鳴「お先真っ暗」</a> <a href="/bizplus/1607247041/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.asahi.com/articles/ASND54HPGND4ULFA023.html" target="_blank">朝日新聞デジタル</a></cite></span>
+							<span class="poster">Posted by trick ★</span>
+							<span><a href="/bizplus/1607247041/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:28:41+09:00">18:28</time>
+									<span class="res">12res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607246921/-100" target="_blank" class="thread">【気象予報士・木原実さん】一定期間テレビ出演欠席を報告…同居家族のコロナ陽性で、自身は陰性と発表</a> <a href="/mnewsplus/1607246921/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.livedoor.com/article/detail/19337040/" target="_blank">livedoor ニュース</a></cite></span>
+							<span class="poster">Posted by 首都圏の虎 ★</span>
+							<span><a href="/mnewsplus/1607246921/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:18:30+09:00">18:18</time>
+									<span class="res">2res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607246310/-100" target="_blank" class="thread">【サッカー】早稲田1-1慶應、明治1-0立正、法政4-3中央、専修1-0順天堂、桐蔭横浜3-1筑波/大学サッカー</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://web.gekisaka.jp/news/detail/?318162-318162-fl" target="_blank">ゲキサカ</a></cite></span>
+							<span class="poster">Posted by 征夷大将軍 ★</span>
+							<span><a href="/mnewsplus/1607246310/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:18:16+09:00">18:18</time>
+									<span class="res">98res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607246296/-100" target="_blank" class="thread">【声優】「鬼滅」炭治郎役・花江夏樹、顔を出すのは声優の認知度上げるため「声優っていう職業を一般的にしていきたい」</a> <a href="/mnewsplus/1607246296/"><img src="/img/photo.png" alt="画像あり" title="画像あり"></a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://www.daily.co.jp/gossip/2020/12/06/0013918501.shtml" target="_blank">デイリースポーツ</a></cite></span>
+							<span class="poster">Posted by muffin ★</span>
+							<span><a href="/mnewsplus/1607246296/">2NNのURL</a></span>
+						</footer>
+					</li>
+					<li data-twitter="2nn_mnewsplus">
+						<header>
+							<div class="status">
+								<span class="mnewsplus">★</span>芸能･スポーツ速報＋
+								<time pubdate datetime="2020-12-06T18:15:09+09:00">18:15</time>
+									<span class="res">73res</span>
+
+							</div>
+						</header>
+						<h3><a href="https://hayabusa9.5ch.net/test/read.cgi/mnewsplus/1607246109/-100" target="_blank" class="thread">【ゲーム】昔はゲームのセーブデータがよく消えた…「ドラクエ3とFE外伝で何度泣いたか」「カセット落とすと血の気が引いた」</a></h3>
+						<footer class="news-source">
+								<span><cite><a href="https://news.careerconnection.jp/?p=106236" target="_blank">キャリコネニュース</a></cite></span>
+							<span class="poster">Posted by muffin ★</span>
+							<span><a href="/mnewsplus/1607246109/">2NNのURL</a></span>
+						</footer>
+					</li>
+
+				</ol>
+			</article>
 		</section>
 <aside class="ads pc">
 <div id="criteo_894764"></div>

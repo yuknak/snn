@@ -1,12 +1,25 @@
 class TopController < ApplicationController
-  
+
+  def get_board(name)
+    FiveCh::Board.find_by(name: name)
+  end
+
+  def get_threads(board_name, limit)
+    board = get_board(board_name)
+    FiveCh::Thread.where(board_id: board.id)
+      .order(res_speed: 'DESC', mirror_order: 'ASC').limit(limit)
+  end
+
+  helper_method :get_board
+  helper_method :get_threads
 
   def index
-    
-    @last_updated_at = FiveCh::Thread.all.order(id: 'DESC').first.updated_at
-    @board = FiveCh::Board.where(id: 11).first
-    @threads = FiveCh::Thread.where(board_id: 11).order(res_speed: 'DESC', mirror_order: 'ASC').limit(8)
 
+    @id = params[:id]
+
+    @last_updated_at = FiveCh::Thread
+      .all.order(id: 'DESC').first.updated_at
+    
     render "index"
     
   end
