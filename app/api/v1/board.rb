@@ -5,7 +5,13 @@ module V1
   
   class BoardEntity < Grape::Entity
       format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
+      expose :id
       expose :server_id
+      # TODO: heavy load when index access
+      expose :server_name do |board, options|
+        server = ::FiveCh::Server.find(board.server_id)
+        server.name
+      end
       expose :name
       expose :title
       expose :mirror
@@ -48,6 +54,12 @@ module V1
         boards = FiveCh::Board.all.order(id: "ASC")
         boards = ransack_index(boards)
         present boards, with: BoardsEntity
+      end
+
+      get ':id' do
+        board_name = params[:id]
+        board = FiveCh::Board.find_by(name: board_name)
+        present board, with: BoardEntity
       end
 
     end

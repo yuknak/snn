@@ -50,12 +50,11 @@ module V1
   
       ##########################################################################
 
-      get do
-
-        board = get_board('newsplus')
+      get ':id' do
+        board_name = params[:id]
+        board = get_board(board_name)
         threads = FiveCh::Thread.where(board_id: board.id)
           .order(res_speed: 'DESC', mirror_order: 'ASC').limit(25)
-        #threads = FiveCh::Thread.all.order(id: "ASC")
         threads = ransack_index(threads)
         present threads, with: ThreadsEntity
       end
