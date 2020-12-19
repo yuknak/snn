@@ -2,16 +2,16 @@
 module V1
 
   ##############################################################################
-  
+
+  class BoardServerEntity < Grape::Entity
+    expose :name
+  end
+
   class BoardEntity < Grape::Entity
       format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
       expose :id
       expose :server_id
-      # TODO: heavy load when index access
-      expose :server_name do |board, options|
-        server = ::FiveCh::Server.find(board.server_id)
-        server.name
-      end
+      expose :server, using: BoardServerEntity
       expose :name
       expose :title
       expose :mirror
@@ -51,7 +51,7 @@ module V1
       ##########################################################################
 
       get do
-        boards = FiveCh::Board.all.order(id: "ASC")
+        boards = FiveCh::Board.all.includes(:server).order(id: "ASC")
         boards = ransack_index(boards)
         present boards, with: BoardsEntity
       end
