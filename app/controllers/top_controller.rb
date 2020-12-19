@@ -6,8 +6,8 @@ class TopController < ApplicationController
 
   def get_threads(board_name, limit)
     board = get_board(board_name)
-    FiveCh::Thread.where(board_id: board.id)
-      .order(res_speed: 'DESC', mirror_order: 'ASC').limit(limit)
+    threads = FiveCh::Thread.where(board_id: board.id, mirror_ver: board.mirror_ver)
+    .order(res_speed: 'DESC', mirror_order: 'ASC').limit(limit)
   end
 
   helper_method :get_board

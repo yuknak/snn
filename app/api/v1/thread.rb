@@ -53,8 +53,8 @@ module V1
       get ':id' do
         board_name = params[:id]
         board = get_board(board_name)
-        threads = FiveCh::Thread.where(board_id: board.id)
-          .order(res_speed: 'DESC', mirror_order: 'ASC').limit(25)
+        threads = FiveCh::Thread.where(board_id: board.id, mirror_ver: board.mirror_ver)
+          .order(res_speed: 'DESC', mirror_order: 'ASC').limit(50)
         threads = ransack_index(threads)
         present threads, with: ThreadsEntity
       end

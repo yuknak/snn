@@ -2,7 +2,7 @@ Rails.application.configure do
 
   # For test on localhost
   config.hosts << "udev"
-  #config.web_console.whitelisted_ips = '172.23.0.1'
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
 
   # Settings specified here will take precedence over those in config/application.rb.
 
