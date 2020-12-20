@@ -202,7 +202,7 @@ module Snn
 
     def self.test3
 
-      #servers_and_boards
+      servers_and_boards
 
       Board.all.each do |board|
         threads(board.name)
