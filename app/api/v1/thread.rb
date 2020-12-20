@@ -6,8 +6,12 @@ module V1
   ##############################################################################
   # GeneralThread includes each thread's board info(only name).
 
+  class GeneralThreadServerEntity < Grape::Entity
+    expose :name
+  end
   class GeneralThreadBoardEntity < Grape::Entity
     expose :name
+    expose :server, using: GeneralThreadServerEntity #=>
   end
   class GeneralThreadEntity < Grape::Entity
     format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
@@ -102,20 +106,26 @@ module V1
 
       get ':id' do
         board_name = params[:id]
-        if (board_name == 'latest') then
-          threads = FiveCh::Thread.all.includes(:board).order(tid: 'DESC').limit(50)
+        if (board_name == 'latest'||
+          board_name == 'today'||
+          board_name == 'yesterday'||
+          board_name == 'festival') then
+          threads = FiveCh::Thread.all.includes([board: :server])
+            .order(tid: 'DESC').limit(50)
           threads = ransack_index(threads)
           present threads, with: GeneralThreadsEntity  
 
         elsif board_name == 'top' then
-          threads = FiveCh::Thread.all.includes(:board).order(tid: 'DESC').limit(50)
+          threads = FiveCh::Thread.all.includes([board: :server])
+            .order(tid: 'DESC').limit(50)
           threads = ransack_index(threads)
           present threads, with: GeneralThreadsEntity  
 
         else
           board = get_board(board_name)
-          threads = FiveCh::Thread.where(board_id: board.id, mirror_ver: board.mirror_ver)
-            .order(res_speed: 'DESC', mirror_order: 'ASC').limit(50)
+          threads = FiveCh::Thread.where(
+            board_id: board.id, mirror_ver: board.mirror_ver)
+              .order(res_speed: 'DESC', mirror_order: 'ASC').limit(50)
           threads = ransack_index(threads)
           threads[:board] = board
           #puts threads.to_json
