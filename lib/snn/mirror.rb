@@ -1,4 +1,5 @@
 require 'kconv'
+require 'open-uri'
 
 module Snn
 
@@ -202,7 +203,9 @@ module Snn
 
     def self.test3
 
-      #servers_and_boards
+      if (Server.all.count <= 0) then
+        servers_and_boards
+      end
 
       Board.all.each do |board|
         threads(board.name)

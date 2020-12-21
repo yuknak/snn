@@ -65,4 +65,4 @@ EXPOSE 3001
 # The main command to run when the container starts.
 ENV PORT 3001
 
-CMD ["bundle", "exec", "puma", "--config", "config/puma.rb"]
+CMD bundle exec crono start && bundle exec puma --config config/puma.rb

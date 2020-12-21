@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_085400) do
+ActiveRecord::Schema.define(version: 2020_12_21_105704) do
 
   create_table "board_res_counts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "board_id"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2019_01_05_085400) do
     t.datetime "updated_at", null: false
     t.index ["mirror"], name: "index_boards_2"
     t.index ["name"], name: "index_boards_1", unique: true
+  end
+
+  create_table "crono_jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "job_id", null: false
+    t.text "log", size: :long
+    t.datetime "last_performed_at"
+    t.boolean "healthy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
   end
 
   create_table "servers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
