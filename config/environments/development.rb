@@ -1,9 +1,10 @@
 Rails.application.configure do
 
   # For test on localhost
-  config.hosts << "udev"
-  config.hosts << "www.supernn.local"
-  config.hosts << "www.supernn.net"
+  #config.hosts << "udev"
+  #config.hosts << "supernn.local"
+  #config.hosts << "supernn.net"
+  config.hosts.clear
   config.web_console.whitelisted_ips = '0.0.0.0/0'
 
   # Settings specified here will take precedence over those in config/application.rb.

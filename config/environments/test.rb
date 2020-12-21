@@ -6,6 +6,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.hosts << "udev"
+  config.hosts << ".supernn.local"
+  config.hosts << ".supernn.net"
+
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 
