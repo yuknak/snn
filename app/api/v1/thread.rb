@@ -3,52 +3,18 @@ module V1
 
   ##############################################################################
 
-  ##############################################################################
-  # GeneralThread includes each thread's board info(only name).
-
-  class GeneralThreadServerEntity < Grape::Entity
+  class ThreadServerEntity < Grape::Entity
     expose :name
   end
-  class GeneralThreadBoardEntity < Grape::Entity
+  class ThreadBoardEntity < Grape::Entity
     expose :name
-    expose :server, using: GeneralThreadServerEntity #=>
+    expose :server, using: ThreadServerEntity #=>
   end
-  class GeneralThreadEntity < Grape::Entity
-    format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
-    expose :id
-    expose :board_id
-    expose :board, using: GeneralThreadBoardEntity # special =>
-    expose :tid
-    expose :title
-    expose :mirror_ver
-    expose :mirror_order
-    with_options(format_with: :iso_timestamp) do
-      expose :mirrored_at
-    end
-    expose :res_cnt
-    expose :res_added
-    expose :res_speed
-    expose :res_percent
-    with_options(format_with: :iso_timestamp) do
-      expose :created_at
-      expose :updated_at
-    end
-  end
-  class GeneralThreadsEntity < Grape::Entity
-    expose :page
-    expose :per_page
-    expose :total_pages
-    expose :total  
-    expose :data, using: GeneralThreadEntity # index =>
-  end
-
-  ##############################################################################
-  # The below includes ONE board info in the index data structure,
-  # for getting A board index specified in param
   class ThreadEntity < Grape::Entity
     format_with(:iso_timestamp) { |dt| dt.nil? ? nil : dt.iso8601 }
     expose :id
     expose :board_id
+    expose :board, using: ThreadBoardEntity # =>
     expose :tid
     expose :title
     expose :mirror_ver
@@ -81,9 +47,17 @@ module V1
     expose :per_page
     expose :total_pages
     expose :total  
-    expose :board, using: ThreadBoardEntity # special =>
-    expose :data, using: ThreadEntity # index =>
+    expose :board, using: ThreadBoardEntity # =>
+    expose :data, using: ThreadEntity # data[] array =>
   end
+
+  ##############################################################################
+
+  class ThreadTopEntity < Grape::Entity
+    expose :data, using: ThreadsEntity # data[] array =>
+  end
+
+  ##############################################################################
 
   ##############################################################################
   class Thread < Grape::API
@@ -96,6 +70,57 @@ module V1
         FiveCh::Board.find_by(name: name)
       end
 
+      def epoch_today
+        t = Time.now
+        Time.local(0,0,0,t.day,t.mon,t.year,nil,nil,false,nil).to_i
+      end
+
+      def epoch_yesterday
+        t = Time.now.yesterday
+        Time.local(0,0,0,t.day,t.mon,t.year,nil,nil,false,nil).to_i
+      end
+
+      ##########################################################################
+
+      def get_latest
+        threads = FiveCh::Thread.all.includes([board: :server])
+          .order(tid: 'DESC').limit(50)
+        threads = ransack_index(threads)
+        present threads, with: ThreadsEntity  
+      end
+
+      def get_today
+        threads = FiveCh::Thread.where(
+          'tid >= ?', epoch_today).includes([board: :server])
+            .order(tid: 'DESC').limit(50)
+        threads = ransack_index(threads)
+        present threads, with: ThreadsEntity  
+      end
+
+      def get_yesterday
+        threads = FiveCh::Thread.where(
+          'tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
+            .order(tid: 'DESC').limit(50)
+        threads = ransack_index(threads)
+        present threads, with: ThreadsEntity  
+      end
+
+      def get_festival
+        threads = FiveCh::Thread.all.includes([board: :server])
+          .order(res_speed: 'DESC', mirror_order: 'ASC').limit(50)
+        threads = ransack_index(threads)
+        present threads, with: ThreadsEntity  
+      end
+
+      ##########################################################################
+
+      def get_top
+        threads = FiveCh::Thread.all.includes([board: :server])
+        .order(tid: 'DESC').limit(50)
+        threads = ransack_index(threads)
+        present threads, with: ThreadsEntity  
+      end
+
     end
 
     ############################################################################
@@ -105,22 +130,24 @@ module V1
       ##########################################################################
 
       get ':id' do
+
         board_name = params[:id]
-        if (board_name == 'latest'||
-          board_name == 'today'||
-          board_name == 'yesterday'||
-          board_name == 'festival') then
-          threads = FiveCh::Thread.all.includes([board: :server])
-            .order(tid: 'DESC').limit(50)
-          threads = ransack_index(threads)
-          present threads, with: GeneralThreadsEntity  
 
+        # process special screens
+        if (board_name == 'latest') then
+          get_latest
+        elsif (board_name == 'today') then
+          get_today
+        elsif (board_name == 'yesterday') then
+          get_yesterday
+        elsif (board_name == 'festival') then
+          get_festival
+
+        # a special data structure
         elsif board_name == 'top' then
-          threads = FiveCh::Thread.all.includes([board: :server])
-            .order(tid: 'DESC').limit(50)
-          threads = ransack_index(threads)
-          present threads, with: GeneralThreadsEntity  
+          get_top
 
+        # process each board
         else
           board = get_board(board_name)
           threads = FiveCh::Thread.where(
