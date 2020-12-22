@@ -65,8 +65,6 @@ module V1
   end
 
   ##############################################################################
-
-  ##############################################################################
   class Thread < Grape::API
   
     ############################################################################
@@ -124,11 +122,45 @@ module V1
       end
 
       ##########################################################################
+=begin
+      <%= render partial: 'layouts/articles', locals:
+				{board: get_board('newsplus'), threads: get_threads('newsplus', 8) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('mnewsplus'), threads: get_threads('mnewsplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('news4plus'), threads: get_threads('news4plus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('bizplus'), threads: get_threads('bizplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('seijinewsplus'), threads: get_threads('seijinewsplus', 5) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('scienceplus'), threads: get_threads('scienceplus', 4) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('news5plus'), threads: get_threads('news5plus', 2) } %>
+			<%= render partial: 'layouts/articles', locals:
+				{board: get_board('femnewsplus'), threads: get_threads('femnewsplus', 2) } %>
+			<%= render partial: 'layouts/articles', locals:
+        {board: get_board('moeplus'), threads: get_threads('moeplus', 2) } %>
+=end
+        
+      @@top_boards = [
+        { name: "newsplus", count: 8},
+        { name: "mnewsplus", count: 5},
+        { name: "news4plus", count: 5},
+        { name: "bizplus", count: 5},
+        { name: "seijinewsplus", count:5},
+        { name: "scienceplus", count:4},
+        { name: "news5plus", count:2},
+        { name: "femnewsplus", count:2},
+        { name: "moeplus", count:2},
+      ]
 
       def get_top
         data = []
-        params[:per_page] = 3
-        FiveCh::Board.all.each do |board|
+        #FiveCh::Board.all.each do |board|
+        @@top_boards.each do |top_board|
+          board = get_board(top_board[:name])
+          params[:per_page] = top_board[:count]
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
               .includes([board: :server])
