@@ -21,6 +21,7 @@ module V1
     expose :res_cnt
     expose :res_added
     expose :res_speed
+    expose :res_speed_max
     expose :res_percent
   end
   class ThreadBoardEntity < Grape::Entity
@@ -54,6 +55,7 @@ module V1
     expose :res_cnt
     expose :res_added
     expose :res_speed
+    expose :res_speed_max
     expose :res_percent
   end
   class ThreadsEntity < Grape::Entity
@@ -99,7 +101,7 @@ module V1
         params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ?', epoch_today).includes([board: :server])
-            .order(tid: 'DESC')
+            .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
@@ -108,7 +110,7 @@ module V1
         params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
-            .order(tid: 'DESC')
+            .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
@@ -116,7 +118,7 @@ module V1
       def get_festival
         params[:per_page] = 50
         threads = FiveCh::Thread.all.includes([board: :server])
-          .order(res_speed: 'DESC', mirror_order: 'ASC')
+          .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end

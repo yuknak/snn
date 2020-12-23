@@ -13,7 +13,6 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.datetime "updated_at", null: false
       end
       add_index "servers", ["name"], name: "index_servers_1", unique: true
-      add_index "servers", ["mirror"], name: "index_servers_2"
 
       create_table "boards", force: :cascade do |t|
         t.integer  "server_id"
@@ -28,7 +27,6 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.datetime "updated_at", null: false
       end
       add_index "boards", ["name"], name: "index_boards_1", unique: true
-      add_index "boards", ["mirror"], name: "index_boards_2"
 
       create_table "threads", force: :cascade do |t|
         t.integer  "board_id"
@@ -41,12 +39,14 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.integer  "res_added"
         t.float    "res_speed"
         t.float    "res_speed_max"
+        t.float    "res_speed_init"
         t.float    "res_percent"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
       end
       add_index "threads", ["board_id", "tid"], name: "index_threads_1", unique: true
-      add_index "threads", ["board_id", "mirror_ver"], name: "index_threads_2"
+      add_index "threads", ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
+      add_index "threads", ["tid", "res_speed_max"], name: "index_threads_3"
     
       create_table "thread_res_counts", force: :cascade do |t|
         t.integer  "thread_id"

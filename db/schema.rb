@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.float "res_speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mirror"], name: "index_boards_2"
     t.index ["name"], name: "index_boards_1", unique: true
   end
 
@@ -50,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.boolean "mirror", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mirror"], name: "index_servers_2"
     t.index ["name"], name: "index_servers_1", unique: true
   end
 
@@ -72,11 +70,13 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.integer "res_added"
     t.float "res_speed"
     t.float "res_speed_max"
+    t.float "res_speed_init"
     t.float "res_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id", "mirror_ver"], name: "index_threads_2"
+    t.index ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
     t.index ["board_id", "tid"], name: "index_threads_1", unique: true
+    t.index ["tid", "res_speed_max"], name: "index_threads_3"
   end
 
 end
