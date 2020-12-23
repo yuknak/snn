@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.integer "mirror_ver"
     t.integer "mirror_order"
     t.datetime "mirrored_at"
+    t.integer "prev_epoch"
+    t.integer "prev_res_cnt"
     t.integer "res_cnt"
     t.integer "res_added"
     t.float "res_speed"

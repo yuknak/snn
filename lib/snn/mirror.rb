@@ -60,32 +60,19 @@ module Snn
     #########################################################################
 
     def self.threads_proc_res_count(epoch, thread)
-      thread_res_count =
-        ThreadResCount.where(thread_id: thread.id).order(epoch: 'desc').first
-      if (thread_res_count.present?) then
-        prev_count = thread_res_count.new_cnt
-        prev_epoch = thread_res_count.epoch
-        # calc thread speed
-        diff_sec = epoch - prev_epoch
-        diff_cnt = thread.res_cnt - prev_count
+      if (thread.prev_epoch != 0 &&
+          thread.prev_res_cnt < thread.res_cnt) then
+        diff_sec = epoch - thread.prev_epoch
+        diff_cnt = thread.res_cnt - thread.prev_res_cnt
         thread.res_added = diff_cnt
         speed = (diff_cnt.to_f / diff_sec.to_f) * 3600.0
         thread.res_speed_max = [speed, thread.res_speed].max
         thread.res_speed = speed
-        thread.save! #TODO: duplicated call
-        if (thread.res_cnt > thread_res_count.new_cnt) then
-          thread_res_count = ThreadResCount.new
-          thread_res_count.thread_id = thread.id
-          thread_res_count.new_cnt = thread.res_cnt
-          thread_res_count.epoch = epoch
-          thread_res_count.save!
-        end
-      else
-        thread_res_count = ThreadResCount.new
-        thread_res_count.thread_id = thread.id
-        thread_res_count.new_cnt = thread.res_cnt
-        thread_res_count.epoch = epoch
-        thread_res_count.save!
+        thread.prev_res_cnt = thread.res_cnt
+        thread.prev_epoch = epoch
+      elsif (thread.prev_epoch == 0) then
+        thread.prev_res_cnt = thread.res_cnt
+        thread.prev_epoch = epoch
       end
     end
 
@@ -156,6 +143,8 @@ module Snn
               thread.board_id = board.id
               thread.tid = tid.to_d
               thread.title = title
+              thread.prev_epoch = 0
+              thread.prev_res_cnt = 0
               thread.res_added = 0
               thread.res_percent = 0
               thread.res_speed = 0
@@ -166,8 +155,8 @@ module Snn
             thread.res_cnt = res_cnt.to_d
             thread.mirror_ver = board.mirror_ver
             thread.mirrored_at = now
-            thread.save!
             threads_proc_res_count(epoch, thread) # ==> sub
+            thread.save!
           end
         end
       end
