@@ -23,7 +23,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.integer  "mirror_ver"
         t.datetime "mirrored_at"
         t.integer  "res_added"
-        t.integer  "res_speed"
+        t.float    "res_speed"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false
       end
@@ -39,7 +39,8 @@ class InitSchema < ActiveRecord::Migration[4.2]
         t.datetime "mirrored_at"
         t.integer  "res_cnt"
         t.integer  "res_added"
-        t.integer  "res_speed"
+        t.float    "res_speed"
+        t.float    "res_speed_max"
         t.float    "res_percent"
         t.datetime "created_at", null: false
         t.datetime "updated_at", null: false

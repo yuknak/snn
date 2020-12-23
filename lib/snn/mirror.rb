@@ -47,6 +47,8 @@ module Snn
             board.server_id = server.id
             board.name = board_name
             board.title = board_title
+            board.res_added = 0
+            board.res_speed = 0
             board.save!
           end
         end
@@ -67,7 +69,9 @@ module Snn
         diff_sec = epoch - prev_epoch
         diff_cnt = thread.res_cnt - prev_count
         thread.res_added = diff_cnt
-        thread.res_speed = (diff_cnt.to_f / diff_sec.to_f) * 3600
+        speed = (diff_cnt.to_f / diff_sec.to_f) * 3600.0
+        thread.res_speed_max = [speed, thread.res_speed].max
+        thread.res_speed = speed
         thread.save! #TODO: duplicated call
         if (thread.res_cnt > thread_res_count.new_cnt) then
           thread_res_count = ThreadResCount.new
@@ -94,9 +98,9 @@ module Snn
         prev_epoch = board_res_count.epoch
         # calc board speed
         diff_sec = epoch - prev_epoch
-        board.res_speed = (board.res_added.to_f / diff_sec.to_f) * 3600
+        board.res_speed = (board.res_added.to_f / diff_sec.to_f) * 3600.0
         board.save! #TODO: duplicated call
-      end
+    end
       board_res_count = BoardResCount.new
       board_res_count.board_id = board.id
       board_res_count.new_cnt = board.res_added
@@ -152,6 +156,10 @@ module Snn
               thread.board_id = board.id
               thread.tid = tid.to_d
               thread.title = title
+              thread.res_added = 0
+              thread.res_percent = 0
+              thread.res_speed = 0
+              thread.res_speed_max = 0
             end
             mirror_order += 1
             thread.mirror_order = mirror_order
