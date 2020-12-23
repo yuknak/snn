@@ -160,7 +160,6 @@ module Snn
               thread.res_percent = 0
               thread.res_speed = 0
               thread.res_speed_max = 0
-              thread.res_speed_init = 0
             end
             mirror_order += 1
             thread.mirror_order = mirror_order

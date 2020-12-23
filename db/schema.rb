@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.integer "res_added"
     t.float "res_speed"
     t.float "res_speed_max"
-    t.float "res_speed_init"
     t.float "res_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -16,7 +16,7 @@
 # Crono.perform(AggregateJob).every 1.minutes
 # Crono.perform(AggregateJob).every 10.second # for test
 
-Crono.perform(AggregateJob).every 5.minutes
+Crono.perform(AggregateJob).every 2.minutes
 
 
 #bundle exec crono start
