@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.boolean "mirror", default: false
     t.integer "mirror_ver"
     t.datetime "mirrored_at"
+    t.integer "prev_epoch"
     t.integer "res_added"
     t.float "res_speed"
     t.datetime "created_at", null: false

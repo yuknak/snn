@@ -47,6 +47,7 @@ module Snn
             board.server_id = server.id
             board.name = board_name
             board.title = board_title
+            board.prev_epoch = 0
             board.res_added = 0
             board.res_speed = 0
             board.save!
@@ -64,7 +65,6 @@ module Snn
           thread.prev_res_cnt < thread.res_cnt) then
         diff_sec = epoch - thread.prev_epoch
         diff_cnt = thread.res_cnt - thread.prev_res_cnt
-        thread.res_added = diff_cnt
         speed = (diff_cnt.to_f / diff_sec.to_f) * 3600.0
         thread.res_speed_max = [speed, thread.res_speed].max
         thread.res_speed = speed
@@ -79,20 +79,13 @@ module Snn
     #########################################################################
 
     def self.boards_proc_res_count(epoch, board)
-      board_res_count =
-        BoardResCount.where(board_id: board.id).order(epoch: 'desc').first
-      if (board_res_count.present?) then
-        prev_epoch = board_res_count.epoch
-        # calc board speed
-        diff_sec = epoch - prev_epoch
-        board.res_speed = (board.res_added.to_f / diff_sec.to_f) * 3600.0
-        board.save! #TODO: duplicated call
-    end
-      board_res_count = BoardResCount.new
-      board_res_count.board_id = board.id
-      board_res_count.new_cnt = board.res_added
-      board_res_count.epoch = epoch
-      board_res_count.save!
+      if (board.prev_epoch != 0) then
+        diff_sec = epoch - board.prev_epoch
+        speed = (board.res_added.to_f / diff_sec.to_f) * 3600.0
+        board.res_speed = speed
+        board.prev_epoch = epoch
+      end
+      board.prev_epoch = epoch
     end
 
     #########################################################################
@@ -145,10 +138,13 @@ module Snn
               thread.title = title
               thread.prev_epoch = 0
               thread.prev_res_cnt = 0
+              thread.res_cnt = 0
               thread.res_added = 0
               thread.res_percent = 0
               thread.res_speed = 0
               thread.res_speed_max = 0
+            else
+              thread.res_added = (res_cnt.to_d - thread.res_cnt)
             end
             mirror_order += 1
             thread.mirror_order = mirror_order
@@ -183,9 +179,9 @@ module Snn
         end
       end
       board.res_added = board_res_added
-      board.save!
       epoch = Time.now.to_i
       boards_proc_res_count(epoch, board)
+      board.save!
       Thread.where(board_id: board.id,
       mirror_ver: board.mirror_ver).each do | thread |
         if (thread.res_added.present? && board_res_added > 0) then
