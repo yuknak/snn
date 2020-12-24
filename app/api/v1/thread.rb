@@ -146,7 +146,7 @@ module V1
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
               .includes([board: :server])
-              .order(res_speed: 'DESC', mirror_order: 'ASC')
+              .order(res_percent: 'DESC', mirror_order: 'ASC')
           threads = ransack_index(threads)
           threads[:board] = board
           data.push(threads)
@@ -205,7 +205,7 @@ module V1
           board = get_board(board_name)
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
-              .order(res_speed: 'DESC', mirror_order: 'ASC')
+              .order(res_percent: 'DESC', mirror_order: 'ASC')
             .includes([board: :server])
           threads = ransack_index(threads)
           threads[:board] = board
