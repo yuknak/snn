@@ -49,20 +49,6 @@ class InitSchema < ActiveRecord::Migration[4.2]
       add_index "threads", ["board_id", "tid"], name: "index_threads_1", unique: true
       add_index "threads", ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
       add_index "threads", ["tid", "res_speed_max"], name: "index_threads_3"
-    
-      create_table "thread_res_counts", force: :cascade do |t|
-        t.integer  "thread_id"
-        t.integer  "epoch"
-        t.integer  "new_cnt"
-      end
-      add_index "thread_res_counts", ["thread_id", "epoch"], name: "index_thread_res_counts_1", unique: true
-
-      create_table "board_res_counts", force: :cascade do |t|
-        t.integer  "board_id"
-        t.integer  "epoch"
-        t.integer  "new_cnt"
-      end
-      add_index "board_res_counts", ["board_id", "epoch"], name: "index_board_res_counts_1", unique: true
 
     end
 
