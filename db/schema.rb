@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_12_21_105704) do
 
-  create_table "board_res_counts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "board_id"
-    t.integer "epoch"
-    t.integer "new_cnt"
-    t.index ["board_id", "epoch"], name: "index_board_res_counts_1", unique: true
-  end
-
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "server_id"
     t.string "name"
@@ -51,13 +44,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_servers_1", unique: true
-  end
-
-  create_table "thread_res_counts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "thread_id"
-    t.integer "epoch"
-    t.integer "new_cnt"
-    t.index ["thread_id", "epoch"], name: "index_thread_res_counts_1", unique: true
   end
 
   create_table "threads", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
