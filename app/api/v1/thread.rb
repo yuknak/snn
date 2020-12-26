@@ -21,6 +21,7 @@ module V1
     expose :res_cnt
     expose :res_added
     expose :res_speed
+    expose :res_speed_max
     expose :res_percent
   end
   class ThreadBoardEntity < Grape::Entity
@@ -54,6 +55,7 @@ module V1
     expose :res_cnt
     expose :res_added
     expose :res_speed
+    expose :res_speed_max
     expose :res_percent
   end
   class ThreadsEntity < Grape::Entity
@@ -99,7 +101,7 @@ module V1
         params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ?', epoch_today).includes([board: :server])
-            .order(tid: 'DESC')
+            .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
@@ -108,7 +110,7 @@ module V1
         params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
-            .order(tid: 'DESC')
+            .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
@@ -116,32 +118,12 @@ module V1
       def get_festival
         params[:per_page] = 50
         threads = FiveCh::Thread.all.includes([board: :server])
-          .order(res_speed: 'DESC', mirror_order: 'ASC')
+          .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
 
       ##########################################################################
-=begin
-      <%= render partial: 'layouts/articles', locals:
-				{board: get_board('newsplus'), threads: get_threads('newsplus', 8) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('mnewsplus'), threads: get_threads('mnewsplus', 5) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('news4plus'), threads: get_threads('news4plus', 5) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('bizplus'), threads: get_threads('bizplus', 5) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('seijinewsplus'), threads: get_threads('seijinewsplus', 5) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('scienceplus'), threads: get_threads('scienceplus', 4) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('news5plus'), threads: get_threads('news5plus', 2) } %>
-			<%= render partial: 'layouts/articles', locals:
-				{board: get_board('femnewsplus'), threads: get_threads('femnewsplus', 2) } %>
-			<%= render partial: 'layouts/articles', locals:
-        {board: get_board('moeplus'), threads: get_threads('moeplus', 2) } %>
-=end
         
       @@top_boards = [
         { name: "newsplus", count: 8},
@@ -164,7 +146,7 @@ module V1
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
               .includes([board: :server])
-              .order(res_speed: 'DESC', mirror_order: 'ASC')
+              .order(res_percent: 'DESC', mirror_order: 'ASC')
           threads = ransack_index(threads)
           threads[:board] = board
           data.push(threads)
@@ -172,6 +154,18 @@ module V1
         top_data = {}
         top_data[:data] = data
         present top_data, with: ThreadTopEntity
+      end
+
+      ##########################################################################
+
+      def get_search
+        params[:per_page] = 50
+        q_str = "%#{params[:q]}%"
+        threads = FiveCh::Thread.where(
+          'title like ?',q_str).includes([board: :server])
+            .order(tid: 'DESC')
+        threads = ransack_index(threads)
+        present threads, with: ThreadsWithPagingEntity  
       end
 
     end
@@ -196,19 +190,22 @@ module V1
         elsif (board_name == 'festival') then
           get_festival
 
-        # a special data structure
+        # for top page, having special data strucure
         elsif board_name == 'top' then
           get_top
-          #get_latest
 
-        # process each board
+        # thread search
+        elsif board_name == 'search' then
+          get_search
+
+        # process each board, normal pattern
         else
-          params[:per_page] = 50
+          #params[:per_page] = 50
 
           board = get_board(board_name)
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
-              .order(res_speed: 'DESC', mirror_order: 'ASC')
+              .order(res_percent: 'DESC', mirror_order: 'ASC')
             .includes([board: :server])
           threads = ransack_index(threads)
           threads[:board] = board

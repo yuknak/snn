@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_12_21_105704) do
 
-  create_table "board_res_counts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "board_id"
-    t.integer "epoch"
-    t.integer "new_cnt"
-    t.index ["board_id", "epoch"], name: "index_board_res_counts_1", unique: true
-  end
-
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "server_id"
     t.string "name"
@@ -26,11 +19,11 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.boolean "mirror", default: false
     t.integer "mirror_ver"
     t.datetime "mirrored_at"
+    t.integer "prev_epoch"
     t.integer "res_added"
-    t.integer "res_speed"
+    t.float "res_speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mirror"], name: "index_boards_2"
     t.index ["name"], name: "index_boards_1", unique: true
   end
 
@@ -50,15 +43,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.boolean "mirror", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mirror"], name: "index_servers_2"
     t.index ["name"], name: "index_servers_1", unique: true
-  end
-
-  create_table "thread_res_counts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "thread_id"
-    t.integer "epoch"
-    t.integer "new_cnt"
-    t.index ["thread_id", "epoch"], name: "index_thread_res_counts_1", unique: true
   end
 
   create_table "threads", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -68,14 +53,18 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.integer "mirror_ver"
     t.integer "mirror_order"
     t.datetime "mirrored_at"
+    t.integer "prev_epoch"
+    t.integer "prev_res_cnt"
     t.integer "res_cnt"
     t.integer "res_added"
-    t.integer "res_speed"
+    t.float "res_speed"
+    t.float "res_speed_max"
     t.float "res_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id", "mirror_ver"], name: "index_threads_2"
+    t.index ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
     t.index ["board_id", "tid"], name: "index_threads_1", unique: true
+    t.index ["tid", "res_speed_max"], name: "index_threads_3"
   end
 
 end
