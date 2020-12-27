@@ -40,7 +40,8 @@ WORKDIR $APP_HOME
 
 # Install dependencies defined in Gemfile.
 COPY Gemfile Gemfile.lock $APP_HOME/
-RUN mkdir -p /opt/vendor/bundle \
+RUN chown app:app $APP_HOME/Gemfile.lock \
+ && mkdir -p /opt/vendor/bundle \
  && chown -R app:app /opt/vendor \
  && su app -s /bin/bash -c "bundle install --path /opt/vendor/bundle"
 
