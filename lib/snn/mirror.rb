@@ -6,7 +6,7 @@ module Snn
   class Mirror
 
     include FiveCh
-
+    
     #########################################################################
 
     @@default_mirrored_boards = [
@@ -16,8 +16,6 @@ module Snn
       "scienceplus", "femnewsplus", "moeplus",
       "idolplus", "dqnplus"
     ]
-
-    #########################################################################
 
     def self.servers_and_boards
       puts "Start servers_and_boards"
@@ -56,6 +54,36 @@ module Snn
       end
       puts "End servers_and_boards"
 
+    end
+
+    #########################################################################
+
+    @@overwrite_mirrored_board_names = [
+      { name: "newsplus", title: "ニュー速"},
+      { name: "mnewsplus", title: "芸スポ"},
+      { name: "news4plus", title: "東アジア"},
+      { name: "bizplus", title: "ビジネス"},
+      { name: "seijinewsplus", title: "政治"},
+      { name: "news5plus", title: "国際"},
+      { name: "scienceplus", title: "科学"},
+      { name: "femnewsplus", title: "ローカル"},
+      { name: "moeplus", title: "萌え"},
+      { name: "idolplus", title: "アイドル"},
+      { name: "dqnplus", title: "痛い"},
+    ]
+
+    def self.overwrite_board_names
+      puts "Start overwrite_board_names"
+      Board.all.each do | board |
+        overwrite_title = @@overwrite_mirrored_board_names
+            .find{|b| b[:name]==board.name}[:title]
+        if (overwrite_title.present?) then
+          puts "Renamed from '#{board.title}' to '#{overwrite_title}'"
+          board.title = overwrite_title
+          board.save!
+        end
+      end
+      puts "End overwrite_board_names"
     end
 
     #########################################################################
@@ -198,6 +226,7 @@ module Snn
 
       if (Server.all.count <= 0) then
         servers_and_boards
+        overwrite_board_names
       end
 
       Board.all.each do |board|
