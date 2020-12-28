@@ -155,6 +155,16 @@ module Snn
             next
           end
           title = $2
+          if (title.include?("スレッド")) then
+            if (title.include?("作成")) then
+              puts ("Skipped:" + title)
+              next
+            end
+            if (title.include?("依頼")) then
+              puts ("Skipped:" + title)
+              next
+            end
+          end
           if (title.match('^(.+) \((\d+)\)$')) then
             title = $1
             res_cnt = $2
