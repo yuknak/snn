@@ -87,18 +87,23 @@ module V1
         Time.local(0,0,0,t.day,t.mon,t.year,nil,nil,false,nil).to_i
       end
 
+      def epoch_aweekago
+        t = Time.now.ago(1.week)
+        Time.local(0,0,0,t.day,t.mon,t.year,nil,nil,false,nil).to_i
+      end
+
       ##########################################################################
 
       def get_latest
-        params[:per_page] = 50
-        threads = FiveCh::Thread.all.includes([board: :server])
-          .order(tid: 'DESC')
+        # get from a week ago
+        threads = FiveCh::Thread.where(
+          'tid >= ?', epoch_aweekago).includes([board: :server])
+            .order(tid: 'DESC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
       end
 
       def get_today
-        params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ?', epoch_today).includes([board: :server])
             .order(res_speed_max: 'DESC', tid: 'ASC')
@@ -107,7 +112,6 @@ module V1
       end
 
       def get_yesterday
-        params[:per_page] = 50
         threads = FiveCh::Thread.where(
           'tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
             .order(res_speed_max: 'DESC', tid: 'ASC')
@@ -115,12 +119,17 @@ module V1
         present threads, with: ThreadsWithPagingEntity  
       end
 
-      def get_festival
-        params[:per_page] = 50
-        threads = FiveCh::Thread.all.includes([board: :server])
-          .order(res_speed_max: 'DESC', tid: 'ASC')
+      def get_week
+        threads = FiveCh::Thread.where(
+          'tid >= ?', epoch_aweekago).includes([board: :server])
+            .order(res_speed_max: 'DESC', tid: 'ASC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
+      end
+
+      # TODO: deprecated
+      def get_festival
+        get_week
       end
 
       ##########################################################################
@@ -139,7 +148,6 @@ module V1
 
       def get_top
         data = []
-        #FiveCh::Board.all.each do |board|
         @@top_boards.each do |top_board|
           board = get_board(top_board[:name])
           params[:per_page] = top_board[:count]
@@ -159,7 +167,6 @@ module V1
       ##########################################################################
 
       def get_search
-        params[:per_page] = 50
         q_str = "%#{params[:q]}%"
         threads = FiveCh::Thread.where(
           'title like ?',q_str).includes([board: :server])
@@ -187,7 +194,9 @@ module V1
           get_today
         elsif (board_name == 'yesterday') then
           get_yesterday
-        elsif (board_name == 'festival') then
+        elsif (board_name == 'week') then
+          get_week
+        elsif (board_name == 'festival') then # TODO: deprecated
           get_festival
 
         # for top page, having special data strucure
@@ -200,8 +209,6 @@ module V1
 
         # process each board, normal pattern
         else
-          #params[:per_page] = 50
-
           board = get_board(board_name)
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
