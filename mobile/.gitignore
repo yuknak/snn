@@ -64,5 +64,4 @@ buck-out/
 /ios/Pods/
 
 # add
-/dist/*bundle.web.js
-/dist/index.html
+.watchman-cookie*
