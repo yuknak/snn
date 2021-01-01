@@ -22,11 +22,7 @@ class HomeTabTop extends Component {
     this.state = {
       refreshing: false
     }
-    //TODO: remove later
-    id = setInterval(()=>{
-      console.log(JSON.stringify(this.props.appInfoState))
-      //->{"appStateReducer":{"state":"active"}}
-    }, 5000)
+
   }
 
   componentDidMount() {
