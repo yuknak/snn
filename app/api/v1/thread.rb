@@ -67,7 +67,7 @@ module V1
   end
 
   ##############################################################################
-  class Thread < Grape::API
+  class Thread < V1::Root
   
     ############################################################################
 
@@ -183,6 +183,20 @@ module V1
   
       ##########################################################################
 
+      params do
+        requires :q, type: String
+      end
+      get 'search' do
+
+        get_search
+
+      end
+
+      ##########################################################################
+
+      params do
+        requires :id, type: String
+      end
       get ':id' do
 
         board_name = params[:id]
@@ -202,10 +216,6 @@ module V1
         # for top page, having special data strucure
         elsif board_name == 'top' then
           get_top
-
-        # thread search
-        elsif board_name == 'search' then
-          get_search
 
         # process each board, normal pattern
         else

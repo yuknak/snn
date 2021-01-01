@@ -36,7 +36,7 @@ module V1
   end
 
   ##############################################################################
-  class Board < Grape::API
+  class Board < V1::Root
   
     ############################################################################
 
@@ -56,6 +56,9 @@ module V1
         present boards, with: BoardsEntity
       end
 
+      params do
+        requires :id, type: String
+      end
       get ':id' do
         board_name = params[:id]
         board = FiveCh::Board.find_by(name: board_name)
