@@ -2,6 +2,25 @@
 
 import { StyleSheet } from 'react-native'
 import Moment from 'moment-timezone';
+import DeviceInfo from 'react-native-device-info';
+
+////////////////////////////////////////////////////////////////////////////////
+export function getDeviceInfo()
+{
+  var info ={}
+  info.applicationName = DeviceInfo.getApplicationName()
+  info.brand = DeviceInfo.getBrand()
+  info.bundleId = DeviceInfo.getBundleId()
+  info.buildNumber = DeviceInfo.getBuildNumber()
+  info.deviceId = DeviceInfo.getDeviceId()
+  info.deviceType = DeviceInfo.getDeviceType()
+  info.readableVersion = DeviceInfo.getReadableVersion()
+  info.systemName = DeviceInfo.getSystemName()
+  info.systemVersion = DeviceInfo.getSystemVersion()
+  info.uniqueId = DeviceInfo.getUniqueId();
+  info.version = DeviceInfo.getVersion();
+  return info
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 export function replaceTitle(str)
