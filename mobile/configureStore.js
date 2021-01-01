@@ -12,12 +12,14 @@ import apiStateReducer from './src/redux/ApiState';
 import appStateReducer from './src/redux/AppState';
 import uiStateReducer from './src/redux/UiState';
 import settingStateReducer from './src/redux/SettingState';
+import appInfoStateReducer from './src/redux/AppInfoState'; //redux-rn-misc-enhancer
 
 ////////////////////////////////////////////////////////////////////////////////
 // redux-rn-misc-enhancer
+// to get globally state of app(active, inactive etc)
 // https://github.com/quipper/redux-rn-misc-enhancer
 
-import { compose  } from 'redux';
+import { compose } from 'redux';
 import {
   applyAppStateListener,
   //applyNetInfoListener, // NetInfo is deprecated
@@ -48,6 +50,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
+    appInfoState: appInfoStateReducer,// redux-rn-misc-enhancer
     apiState: apiStateReducer,
     appState: appStateReducer,
     uiState: uiStateReducer,

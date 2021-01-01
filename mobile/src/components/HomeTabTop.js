@@ -22,6 +22,11 @@ class HomeTabTop extends Component {
     this.state = {
       refreshing: false
     }
+    //TODO: remove later
+    id = setInterval(()=>{
+      console.log(JSON.stringify(this.props.appInfoState))
+      //->{"appStateReducer":{"state":"active"}}
+    }, 5000)
   }
 
   componentDidMount() {
@@ -104,16 +109,6 @@ class HomeTabTop extends Component {
       </Right>
       </ListItem>
       )
-      /*
-      ele.push(
-      <ListItem onPress={()=>{
-        this.props.navigation.jumpTo('Category',{boardName: d.board.name})
-        }} key={d.board.name} style={[listItemStyles,listHeaderStyles(d.board.name)]}>
-          <Text style={{color: '#FFFFFF'}}>{d.board.title}&nbsp;</Text>
-          <Text style={{color: '#FFFFFF'}}>{d.board.res_speed}res/h&nbsp;</Text>
-      </ListItem>
-      )
-      */
       d.data.forEach((item)=> {
         ele.push(
             <ListItem key={d.board.name+item.tid} style={listItemStyles} onPress={()=>{
@@ -171,6 +166,7 @@ class HomeTabTop extends Component {
 
 const mapStateToProps = state => {
   return {
+    appInfoState: state.appInfoState,
     apiState: state.apiState,
     appState: state.appState,
   }
