@@ -14,6 +14,21 @@ import uiStateReducer from './src/redux/UiState';
 import settingStateReducer from './src/redux/SettingState';
 
 ////////////////////////////////////////////////////////////////////////////////
+// redux-rn-misc-enhancer
+// https://github.com/quipper/redux-rn-misc-enhancer
+
+import { compose  } from 'redux';
+import {
+  applyAppStateListener,
+  //applyNetInfoListener, // NetInfo is deprecated
+} from 'redux-rn-misc-enhancer';
+
+const enhancer = compose(
+  applyAppStateListener(),
+  //applyNetInfoListener(),
+);
+
+////////////////////////////////////////////////////////////////////////////////
 // Using Redux-Thunk framework with persist and encrypting
 
 const encryptor = encryptTransform({
@@ -45,7 +60,8 @@ const persistedReducer = persistReducer(
 
 const store = reduxCreateStore(
   //persistedReducer, applyMiddleware(logger, thunk)
-  persistedReducer, applyMiddleware(thunk)
+  //persistedReducer, applyMiddleware(thunk)
+  persistedReducer, compose(enhancer, applyMiddleware(thunk))
 )
 
 export const persistor = persistStore(store)
