@@ -30,7 +30,7 @@ export default function reducer(state=initialState, action) {
       // TODO: Get error status somehow.
       return { ...state, calling: false, response: action.response }
     default:
-      console.log("ApiState reducer: default case called: "+action.type)
+      //console.log("ApiState reducer: default case called: "+action.type)
       return state
   }
 }

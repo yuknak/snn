@@ -12,6 +12,13 @@ import FlatListDropDown from './FlatListDropDown'
 import { ThemeProvider } from '@react-navigation/native';
 import PageButtons from './PageButtons'
 
+import { YellowBox } from 'react-native'
+
+
+YellowBox.ignoreWarnings([
+	'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
+
 ////////////////////////////////////////////////////////////////////////////////
 
 class Search extends Component {

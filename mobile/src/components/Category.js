@@ -165,7 +165,7 @@ class Category extends PureComponent {
     }
 
     // TODO: use theme color in scrollable tab
-    console.log('activetab:'+this.state.activeTab)
+    //console.log('activetab:'+this.state.activeTab)
     return (
       <Container>
         {tabs}

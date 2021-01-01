@@ -65,7 +65,7 @@ class HomeTabTop extends Component {
     return true
   }
   render() {
-    console.log("render called")
+    //console.log("render called")
     //return null
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName] &&
@@ -73,7 +73,7 @@ class HomeTabTop extends Component {
       data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
     }
     if (!data) {
-      console.log("render called NULL")
+      //console.log("render called NULL")
       return null
     }
     var params = {}

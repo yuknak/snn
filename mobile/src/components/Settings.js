@@ -8,7 +8,12 @@ import { Formik } from 'formik'
 import { brandColors, formatEpoch, listItemStyles, listHeaderStyles } from '../lib/Common';
 
 import { Container, Content, Button, Left, Right, Body, Text,Icon,List,ListItem,Switch,Grid,Col,Card } from 'native-base'
+
+import { YellowBox } from 'react-native'
 import { Alert } from 'react-native';
+YellowBox.ignoreWarnings([
+	'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
 
 ////////////////////////////////////////////////////////////////////////////////
 

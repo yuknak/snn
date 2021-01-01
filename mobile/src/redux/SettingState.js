@@ -18,7 +18,7 @@ export default function reducer(state=initialState, action) {
     case Action.SETTING_UPDATE:
       return { ...state, settings: action.settings }
     default:
-      console.log("Settingtate reducer: default case called: "+action.type)
+      //console.log("Settingtate reducer: default case called: "+action.type)
       return state;
   }
 }
