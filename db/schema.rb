@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_105704) do
+ActiveRecord::Schema.define(version: 2021_01_01_000000) do
 
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "server_id"
@@ -65,6 +65,24 @@ ActiveRecord::Schema.define(version: 2020_12_21_105704) do
     t.index ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
     t.index ["board_id", "tid"], name: "index_threads_1", unique: true
     t.index ["tid", "res_speed_max"], name: "index_threads_3"
+  end
+
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "ip"
+    t.string "application_name"
+    t.string "brand"
+    t.string "bundle_id"
+    t.string "build_number"
+    t.string "device_id"
+    t.string "device_type"
+    t.string "readable_version"
+    t.string "system_name"
+    t.string "system_version"
+    t.string "unique_id"
+    t.string "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unique_id"], name: "index_users_1", unique: true
   end
 
 end

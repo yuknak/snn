@@ -84,6 +84,9 @@ export const dispatchAppSuccess = (dispatch, name, response) => {
     ) {
     dispatch({type: Action.APP_RECS, response: response, name: name})
   
+  } else if (name.startsWith('post:/user/check')) {
+    dispatch({type: Action.APP_REC, response: response, name: name})
+
   }
 
 }

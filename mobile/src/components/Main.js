@@ -35,20 +35,41 @@ class Main extends PureComponent {
         //api
         var info = getDeviceInfo()
         console.log(JSON.stringify(info))
+        this.props.api({
+          method: 'post',
+          url: '/user/check',
+          params: {info: encodeURIComponent(JSON.stringify(info))},
+          //noLoading: true
+        }, (res)=>{ 
         // Version check by server => 
         // Showing 'please update' msgbox and jump to url
+        if (res.data.show_msgbox) {
         Alert.alert(
-          "お知らせ",
-          "アプリのバージョンUPを行ってください",
+          res.data.msg_title,
+          res.data.msg_body,
           [
             {
               text: 'OK',
               onPress: () => {
-                Linking.openURL("https://www.yahoo.co.jp/")
+                if (res.data.do_redir) {
+                  if (Platform.OS === 'android') {
+                    Linking.openURL(res.data.redir_url_android)
+                  } else {
+                    Linking.openURL(res.data.redir_url_ios)
+                  }
+                }
               } 
             }
           ]
         )
+        }  
+        }, (e)=> {
+          console.log(JSON.stringify(e))
+          //Error
+          //Alert.alert('',JSON.stringify(e))
+    
+        })
+
       }
     //}, 15 * 1000)
   }

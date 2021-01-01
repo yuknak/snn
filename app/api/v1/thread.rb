@@ -146,6 +146,7 @@ module V1
         { name: "moeplus", count:2},
       ]
 
+      #TODO: NEED CACHE!!
       def get_top
         data = []
         @@top_boards.each do |top_board|
