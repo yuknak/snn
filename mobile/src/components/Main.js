@@ -4,15 +4,18 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import * as apiState from '../redux/ApiState'
 import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import { StyleProvider } from 'native-base'
-import getTheme from './native-base-theme/components'
-import platform from './native-base-theme/variables/platform';
+import getTheme from '../../native-base-theme/components'
+import platform from '../../native-base-theme/variables/platform';
 
 import HomeHeader from './MyHeader'
 import NavDrawerScreens from './NavDrawerScreens'
 import MyWebView from './MyWebView'
 //import { Alert } from 'react-native'
+
+const Stack = createStackNavigator()
 
 ////////////////////////////////////////////////////////////////////////////////
 class Main extends PureComponent {
@@ -22,10 +25,14 @@ class Main extends PureComponent {
     }
   }
   componentDidMount() {
-
+    this.id = setInterval(()=>
+    {
+      var state = this.props.appInfoState.appStateReducer.state
+      //console.log(state)
+    }, 5000)
   }
   componentWillUnmount() {
-
+    clearInterval(this.id)
   }
   render() {
     return (
