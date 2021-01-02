@@ -31,7 +31,7 @@ class About extends Component {
       <Container>
         <Content padder>
           <Card>
-            <CardItem header bordered>
+            <CardItem header >
               <Text>SUPERNN 掲示板ニュース速報</Text>
             </CardItem>
             <CardItem bordered>
@@ -41,12 +41,11 @@ class About extends Component {
                 </Text>
               </Body>
             </CardItem>
-            <CardItem bordered>
-              <Body>
-                <Text>
-                Made by yn
-                </Text>
-              </Body>
+            <CardItem >
+              <Button onPress={()=>{
+              this.props.navigation.push("MyWebView",
+                {uri:'https://www.supernn.net/'})}}
+              ><Text>SUPERNNホームページを見る</Text></Button>
             </CardItem>
   
           </Card>
