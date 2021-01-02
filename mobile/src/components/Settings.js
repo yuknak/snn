@@ -57,7 +57,7 @@ class SettingsTab extends PureComponent {
       </Button>
       </Left>
       <Body>
-        <Text>閲覧時の記事件数</Text>
+        <Text>閲覧記事件数</Text>
       </Body>
 
       <Picker
