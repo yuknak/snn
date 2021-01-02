@@ -88,7 +88,14 @@ class Tutorial extends PureComponent {
       </Container>
         <Footer>
           <FooterTab>
-          <Button  onPress={()=>{this.props.navigation.goBack()}}>
+          <Button  onPress={()=>{
+            if (this.props.settingState.settings) {
+              var settings = JSON.parse(JSON.stringify(this.props.settingState.settings))
+              settings.show_tutorial = false
+              this.props.updateSettings(JSON.parse(JSON.stringify(settings)))
+              this.props.navigation.goBack()  
+            }
+          }}>
             <Text style={{ fontWeight: 'bold' }}>アプリの使用をはじめる</Text>
           </Button>
           </FooterTab>
@@ -115,6 +122,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(uiState.startLoading()),
     endLoading: () =>
       dispatch(uiState.endLoading()),
+    updateSettings: (settings) =>
+      dispatch(settingState.updateSettings(settings)),
   }
 }
 

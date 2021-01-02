@@ -7,7 +7,7 @@ import * as settingState from '../redux/SettingState'
 import { Formik } from 'formik'
 import { brandColors, formatEpoch, listItemStyles, listHeaderStyles } from '../lib/Common';
 
-import { Container, Content, Button, Left, Right, Body, Text,Icon,List,ListItem,Switch,Grid,Col,Card } from 'native-base'
+import { CardItem, Container, Content, Button, Left, Right, Body, Text,Icon,List,ListItem,Switch,Grid,Col,Card } from 'native-base'
 
 import { YellowBox } from 'react-native'
 import { Alert } from 'react-native';
@@ -29,11 +29,15 @@ class SettingsTab extends PureComponent {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
       //Alert.alert('',JSON.stringify(this.props.appState.settings))
       // deep copy
-      this.setState({settings: JSON.parse(JSON.stringify(this.props.settingState.settings))})
+      if (this.props.settingState.settings) {
+        this.setState({settings: JSON.parse(JSON.stringify(this.props.settingState.settings))})
+      }
     });
     this._unsubscribe2 = this.props.navigation.addListener('blur', () => {
       //deep copy
-      this.props.updateSettings(JSON.parse(JSON.stringify(this.state.settings)))
+      if (this.state.settings) {
+        this.props.updateSettings(JSON.parse(JSON.stringify(this.state.settings)))
+      }
     });
   }
   componentWillUnmount() {
@@ -49,10 +53,12 @@ class SettingsTab extends PureComponent {
     itemList.push(
     <ListItem icon key={'webview_desktop'}>
     <Left>
-
+    <Button style={{ backgroundColor: "#007AFF" }}>
+    <Icon active name="desktop" />
+    </Button>
     </Left>
     <Body>
-      <Text>PC用ブラウザを用いる</Text>
+      <Text>PC用ブラウザを使用</Text>
     </Body>
     <Right>
       <Switch value={this.state.settings.webview_desktop} onValueChange={
@@ -68,7 +74,9 @@ class SettingsTab extends PureComponent {
     itemList.push(
       <ListItem icon key={'remove_ads'}>
       <Left>
-
+      <Button style={{ backgroundColor: "#007AFF" }}>
+      <Icon active name="shield" />
+      </Button>
       </Left>
       <Body>
         <Text>広告等を除去(実験版)</Text>
@@ -86,7 +94,9 @@ class SettingsTab extends PureComponent {
     itemList.push(
       <ListItem icon key={'show_tutorial'}>
       <Left>
-
+      <Button style={{ backgroundColor: "#007AFF" }}>
+      <Icon active name="rocket" />
+      </Button>
       </Left>
       <Body>
         <Text>起動時チュートリアル表示</Text>
@@ -110,8 +120,15 @@ class SettingsTab extends PureComponent {
             <ListItem itemDivider><Text>カテゴリ表示する掲示板(最低3つ)</Text></ListItem>
             <ListItem itemDivider/>
             */ }
+            <ListItem itemDivider><Text>設定</Text></ListItem>
               {itemList}
+              <ListItem itemDivider/>
             </List>
+            <CardItem>
+            <Text>※設定を反映するには
+              <Icon style={{fontSize: 18, color:'#007aff'}} name='chevron-back-outline' />
+              を押してください.</Text>
+            </CardItem>
             </Card>
           </Content>
       </Container>
