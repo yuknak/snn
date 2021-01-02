@@ -43,7 +43,7 @@ module V1
 					check[:msg_title]='お知らせ'
 					check[:msg_body]='このアプリの新しいバージョンが公開されています.アップデートを行ってください.'
 					check[:do_redir]=true
-					check[:redir_url_ios]='https://apps.apple.com/jp/app/id363992049'
+					check[:redir_url_ios]='https://apps.apple.com/jp/app/comicglass-comicreader/id363992049?l=ja'
           check[:redir_url_android]='https://play.google.com/store/apps/details?id=jp.co.airfront.android.a2chMate'
           pp check
           present check, with: UserCheckEntity
