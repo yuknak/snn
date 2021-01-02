@@ -61,14 +61,17 @@ class HomeTabTop extends Component {
       return false
     }
     if (JSON.stringify(d1)==JSON.stringify(d2)) {
+      //console.log("shouldComponentUpdate:render object same")
+      //console.log("shouldComponentUpdate:refreshing "+this.state.refreshing)
       if (!this.state.refreshing) {
         return false
       }
     }
     return true
   }
+
   render() {
-    //console.log("render called")
+    //console.log("hometab render called")
     //return null
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName] &&

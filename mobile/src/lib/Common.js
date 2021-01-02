@@ -5,6 +5,17 @@ import Moment from 'moment-timezone';
 import DeviceInfo from 'react-native-device-info';
 
 ////////////////////////////////////////////////////////////////////////////////
+var flagApiProcessing = 0
+export function apiProcessing(flag=-1)
+{
+  if (flag >= 0) {
+    flagApiProcessing = flag
+  }
+  //console.log("apiProcessing:"+flagApiProcessing)
+  return flagApiProcessing
+}
+
+////////////////////////////////////////////////////////////////////////////////
 export function getDeviceInfo()
 {
   var info ={}
