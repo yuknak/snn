@@ -9,6 +9,7 @@ const initialState = {
     webview_desktop: true,
     remove_ads: true,
     show_tutorial: true,
+    goch_view_article_mode: "bottom50",
   }
 }
 

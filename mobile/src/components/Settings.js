@@ -7,7 +7,7 @@ import * as settingState from '../redux/SettingState'
 import { Formik } from 'formik'
 import { brandColors, formatEpoch, listItemStyles, listHeaderStyles } from '../lib/Common';
 
-import { CardItem, Container, Content, Button, Left, Right, Body, Text,Icon,List,ListItem,Switch,Grid,Col,Card } from 'native-base'
+import { Title,Header, CardItem, Container, Content, Button, Left, Right, Body, Text,Icon,List,ListItem,Switch,Grid,Col,Card,Picker } from 'native-base'
 
 import { YellowBox } from 'react-native'
 import { Alert } from 'react-native';
@@ -49,7 +49,50 @@ class SettingsTab extends PureComponent {
     if (!this.state.settings) {
       return null
     }
-
+    itemList.push(
+      <ListItem icon key={'goch_view_article_mode'}>
+      <Left>
+      <Button style={{ backgroundColor: "#007AFF" }}>
+      <Icon active name="newspaper" />
+      </Button>
+      </Left>
+      <Body>
+        <Text>閲覧時の記事件数</Text>
+      </Body>
+      <Right>
+      <Picker
+      renderHeader={backAction =>
+        <Header>
+          <Left>
+            <Button transparent onPress={backAction}>
+              <Icon name="chevron-back-outline"/>
+            </Button>
+          </Left>
+          <Body style={{ flex: 3 }}>
+            <Title>閲覧時の記事件数</Title>
+          </Body>
+          <Right />
+        </Header>}
+          mode="dropdown"
+          iosIcon={<Icon name="chevron-down-outline" />}
+          style={{ width: undefined }}
+          placeholder="選択してください"　// 無い場合
+          placeholderStyle={{ color: "#bfc6ea" }}
+          placeholderIconColor="#007aff"
+          selectedValue={this.state.settings.goch_view_article_mode}
+          onValueChange={(value)=>{
+            this.state.settings.goch_view_article_mode = value
+            //deep copy
+            this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})
+          }}
+        >
+          <Picker.Item label="最新50" value="bottom50" />
+          <Picker.Item label="1-100" value="top100" />
+          <Picker.Item label="全部" value="all" />
+        </Picker>
+      </Right>
+      </ListItem>
+      )
     itemList.push(
     <ListItem icon key={'webview_desktop'}>
     <Left>
@@ -111,6 +154,7 @@ class SettingsTab extends PureComponent {
       </Right>
       </ListItem>
       )
+
     return (
       <Container>
         <Content>
