@@ -14,6 +14,7 @@ import platform from '../../native-base-theme/variables/platform';
 import HomeHeader from './MyHeader'
 import NavDrawerScreens from './NavDrawerScreens'
 import MyWebView from './MyWebView'
+import Tutorial from './Tutorial'
 import { Alert } from 'react-native'
 import { getDeviceInfo } from '../lib/Common';
 
@@ -72,6 +73,7 @@ class Main extends PureComponent {
 
       }
     //}, 15 * 1000)
+
   }
   componentWillUnmount() {
     //clearInterval(this.id)
@@ -90,6 +92,12 @@ class Main extends PureComponent {
       <Stack.Screen
           name="MyWebView"
           component={MyWebView}
+          options={{
+          header: () => <HomeHeader onPress={{}} />
+          }}/>
+      <Stack.Screen
+          name="Tutorial"
+          component={Tutorial}
           options={{
           header: () => <HomeHeader onPress={{}} />
           }}/>

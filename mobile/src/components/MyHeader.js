@@ -30,11 +30,13 @@ class MyHeader extends PureComponent {
       this.props.uiState.routeName == 'Settings' ||
       this.props.uiState.routeName == 'MyWebView') {
       type = 'back'
+    } else if (this.props.uiState.routeName == 'Tutorial') {
+      type = 'none'
     }
     return (
       <>
       <Header>
-        <Left>{type=='back' ? back : menu}</Left>
+        <Left>{type=='back' ? back : type=='menu' ? menu : null }</Left>
         <Body>
           <Title>SUPERNN</Title>
           <Subtitle>掲示板ニュース速報</Subtitle>

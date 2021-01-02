@@ -10,7 +10,7 @@ import HomeHeader from './MyHeader'
 import HomeTab from './HomeTab';
 import HomeTabTop from './HomeTabTop';
 import { Alert, RefreshControl,View } from "react-native";
-import Test from './Test.js'
+import Tutorial from './Tutorial'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +36,10 @@ class Home extends PureComponent {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
     });
+    setTimeout(()=>{
+      this.props.navigation.push("Tutorial",
+        {uri:'https://www.supernn.net/'})}
+    , 500)
   }
   componentWillUnmount() {
     this._unsubscribe()
