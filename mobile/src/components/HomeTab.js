@@ -10,6 +10,7 @@ import { listCategoryStyles, replaceTitle, brandColors, formatEpoch, listItemSty
 
 import { YellowBox } from 'react-native'
 import PageButtons from './PageButtons'
+import ArrowUp from './ArrowUp'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -147,6 +148,9 @@ class HomeTab extends Component {
           {...this.props}
         />
           </ScrollView>
+          <ArrowUp onPress={()=>{
+              this.listref.scrollTo({ y: 0, animated: true, })
+            }}/> 
         </Container>
         </Tab>
     )

@@ -5,6 +5,7 @@ import { Container, Item, Header, Title, Input, Content, Footer, FooterTab, Butt
 import * as uiState from '../redux/UiState'
 import * as appState from '../redux/AppState'
 import * as settingState from '../redux/SettingState'
+import ArrowUp from './ArrowUp'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -189,9 +190,12 @@ class MyWebView extends PureComponent {
     }
     var loadingDiv = (<Spinner color='black'/>)
     return (
+      <>
       <Container>
         { this.state.loading ? loadingDiv : null }
         {webview}
+
+      </Container>
         <Footer>
           <FooterTab>
           <Button  onPress={()=>{Linking.openURL(this.state.url)}}>
@@ -208,7 +212,7 @@ class MyWebView extends PureComponent {
           </Button>
           </FooterTab>
         </Footer>
-      </Container>
+        </>
     );
   }
 }
