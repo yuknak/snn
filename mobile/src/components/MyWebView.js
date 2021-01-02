@@ -202,11 +202,19 @@ class MyWebView extends PureComponent {
             <Icon name="browsers"/>
             <Text>ブラウザ</Text>
           </Button>
-          <Button  onPress={()=>{this.webref.goBack()}}>
+          <Button  onPress={()=>{
+            if (this.webref) {
+              this.webref.goBack()
+            }
+            }}>
             <Icon name="chevron-back"/>
             <Text>戻る</Text>
           </Button>
-          <Button  onPress={()=>{this.webref.reload()}}>
+          <Button  onPress={()=>{
+            if (this.webref) {
+              this.webref.reload()
+            }
+            }}>
             <Icon name="refresh"/>
             <Text>更新</Text>
           </Button>
