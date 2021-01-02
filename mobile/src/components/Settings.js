@@ -59,7 +59,7 @@ class SettingsTab extends PureComponent {
       <Body>
         <Text>閲覧時の記事件数</Text>
       </Body>
-      <Right>
+
       <Picker
       renderHeader={backAction =>
         <Header>
@@ -90,7 +90,7 @@ class SettingsTab extends PureComponent {
           <Picker.Item label="1-100" value="top100" />
           <Picker.Item label="全部" value="all" />
         </Picker>
-      </Right>
+
       </ListItem>
       )
     itemList.push(
