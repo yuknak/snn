@@ -61,6 +61,10 @@ class Search extends Component {
             onKeyPress={()=>{}}
             onSubmitEditing={(e)=>{
               var q = this.state.queryStr
+              if (q.trim() == '') {
+                Alert.alert('','検索文字列を入力してください.')
+                return
+              }
               this.props.api({
                 method: 'get',
                 url: '/thread/search',
