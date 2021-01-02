@@ -12,7 +12,6 @@ import { YellowBox } from 'react-native'
 import PageButtons from './PageButtons'
 import ArrowUp from './ArrowUp'
 import { goChanUrl } from '../lib/Common'
-import CategoryTabList from './HomeTabList'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -20,7 +19,7 @@ YellowBox.ignoreWarnings([
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class CategoryTab extends Component {
+class CategoryTabList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,22 +27,7 @@ class CategoryTab extends Component {
     }
   }
   componentDidMount() {
-    this.props.set_scroll_callback(this.props.index, ()=>{
-      if (this.listref) {
-        this.listref.scrollTo({ y: 0, animated: true, })
-      }
-    })
-    //this.setState({refreshing: true})
-    this.props.api({
-      method: 'get',
-      url: '/thread/'+this.props.boardName,
-      params: {per_page: 50},
-      //noLoading: true
-    }, ()=>{ 
 
-    }, ()=> {
-
-    })
   }
   componentWillUnmount(){
   }
@@ -58,10 +42,9 @@ class CategoryTab extends Component {
       return false
     }
     if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      if (!this.state.refreshing) {
-        //console.log("render SKIP")
+
         return false
-      }
+
     }
     return true
   }
@@ -79,53 +62,56 @@ class CategoryTab extends Component {
     var params = {}
     params = {per_page: 50}
     return (
-      <Tab key={this.props.key} heading={this.props.heading}>
-      <Container>
-      <ScrollView
-        ref={(r) => (this.listref = r)}
-        refreshControl={
-        <RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={()=>{  
-            if (this.state.refreshing) {
-              return
-            }           
-            this.setState({refreshing: true})
-            this.props.api({
-              method: 'get',
-              url: '/thread/'+this.props.boardName,
-              params: {per_page: 50},
-              //noLoading: true
-            }, ()=>{ 
-              this.setState({refreshing: false})
-            }, ()=> {
-              this.setState({refreshing: false})
-            })
-          }} />
-        }
-      >
-        <PageButtons
-          header={true}
-          listref={this.listref}
-          url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
-          recs_key={'get:/thread/'+this.props.boardName}
-          {...this.props}
+
+        <>   
+
+
+        <List>
+        <ListItem icon key={this.props.boardName} style={[listItemStyles,listHeaderStyles(this.props.boardName)]}>
+        <Left>
+          <Button style={listHeaderStyles(this.props.boardName)}>
+            <Icon name="newspaper" />
+          </Button>
+        </Left>
+        <Body>
+          <Text style={{color: '#FFFFFF'}}>{this.props.title}</Text>
+        </Body>
+        <Right>
+          <Text style={{color: '#FFFFFF',fontSize: 12}}>更新:{formatDatetime(board.mirrored_at)} 時速:{board.res_speed}res/h</Text>
+        </Right>
+        </ListItem>
+
+        </List>
+
+        <List
+          dataArray={data}
+          renderRow={(item) =>
+            <ListItem key={item.tid} style={listItemStyles}
+            onPress={()=>{
+              this.props.navigation.push("MyWebView", {
+                uri: goChanUrl(
+                  this.props.serverName,
+                  this.props.boardName,
+                  item.tid,
+                  this.props.settingState.settings.goch_view_article_mode
+                  )})
+              }}
+            >
+              <Text>
+                <Text style={listCategoryStyles(this.props.boardName)}>★</Text>
+                <Text>{formatEpoch(item.tid)}&nbsp;</Text>
+                <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
+                <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed*100))/100}res/h&nbsp;</Text>
+                <Text style={{color: brandColors.brandInfo}}>{Math.round(parseFloat(item.res_percent*10000))/100}%&nbsp;</Text>
+                <Text>{replaceTitle(item.title)}</Text>
+              </Text>
+            </ListItem>
+          }
+          keyExtractor={(item, index) => index.toString()}
         />
-        <CategoryTabList {...this.props} />
-        <PageButtons
-          listref={this.listref}
-          url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
-          recs_key={'get:/thread/'+this.props.boardName}
-          {...this.props}
-        />
-      </ScrollView>
-      <ArrowUp onPress={()=>{
-              this.listref.scrollTo({ y: 0, animated: true, })
-            }}/> 
-      </Container>
-      </Tab>
+
+
+        </>
     )
   }
 }
@@ -148,6 +134,6 @@ const mapDispatchToProps = dispatch => {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryTab)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryTabList)
 
 ////////////////////////////////////////////////////////////////////////////////

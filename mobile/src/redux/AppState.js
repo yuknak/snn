@@ -54,6 +54,7 @@ export default function reducer(state=initialState, action) {
 export const dispatchAppSuccess = (dispatch, name, response) => {
   
   //////// Login sessions request handler
+  /*
   if (
     name === 'post:/barong/identity/sessions') {// Login OK
     dispatch({type: Action.APP_AUTH_SUCCESS, response: response})
@@ -62,6 +63,7 @@ export const dispatchAppSuccess = (dispatch, name, response) => {
   } else if (name === 'delete:/barong/identity/sessions') {// Logoff OK -> Session Clear
     dispatch({type: Action.APP_INIT_STATE })
   }
+  */
 
   //////// REC: Returns one record.
   if (
@@ -94,7 +96,7 @@ export const dispatchAppSuccess = (dispatch, name, response) => {
 ////////////////////////////////////////////////////////////////////////////////
 
 export const dispatchAppError = (dispatch, name, errResponse) => {
-
+  /*
   // Login sessions error
   if (name === 'delete:/barong/identity/sessions'||// Logoff Error
       name === 'get:/barong/resource/users/me') {// Login Check Error -> Session Clear
@@ -118,6 +120,7 @@ export const dispatchAppError = (dispatch, name, errResponse) => {
       // void
     }
   }
+  */
 }
 
 ////////////////////////////////////////////////////////////////////////////////

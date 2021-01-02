@@ -63,6 +63,7 @@ function buildErrorMessage(errResponse)
 // {method: 'post', url: '/user_account' data: { key : value, ... }}
 
 export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
+  console.log("api called"+params.url)
 
   //params.withCredentials = true 
   //params.baseURL = window.location.origin + '/api/v2'
@@ -84,14 +85,14 @@ export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
     if (!params.noLoading) { // can be turned off
       dispatch({type: Action.UI_LOADING_START})
     }
-    dispatch({ type: Action.API_START, name: name})
-    console.log(JSON.stringify(params))
+    //dispatch({ type: Action.API_START, name: name})
     apiProcessing(1)
+console.log("axios.request called:" + name)
     axios.request(params).then((response) => {
       apiProcessing(0)
       //success
-      dispatch({type: Action.API_SUCCESS,
-        name: name,  response: response})
+      //dispatch({type: Action.API_SUCCESS,
+      //  name: name,  response: response})
       if (!params.noLoading) { // can be turned off
         dispatch({type: Action.UI_LOADING_END})
       }
@@ -100,8 +101,8 @@ export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
     }).catch((errResponse) => {
       apiProcessing(0)
       // error
-      dispatch({type: Action.API_ERROR,
-        name: name, response: errResponse})
+      //dispatch({type: Action.API_ERROR,
+      //  name: name, response: errResponse})
       if (!params.hideAlert) { // can be turned off by defining params.hideAlert: true
         dispatch({type: Action.UI_ALERT_SHOW,
           variant: 'warning', message: buildErrorMessage(errResponse) })

@@ -12,6 +12,7 @@ import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
 import { goChanUrl } from '../lib/Common'
 import HomeTabTopList from './HomeTabTopList'
+import { purgeStoredState } from 'redux-persist';
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -37,6 +38,7 @@ class HomeTabTop extends Component {
     })
 
     //this.setState({refreshing: true})
+    console.log('HomeTabTop: mount api called')
     this.props.api({
       method: 'get',
       url: '/thread/'+this.props.boardName,
@@ -63,8 +65,8 @@ class HomeTabTop extends Component {
       return false
     }
     if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      console.log("shouldComponentUpdate:render object same")
-      console.log("shouldComponentUpdate:refreshing "+this.state.refreshing)
+      //console.log("shouldComponentUpdate:render object same")
+      //console.log("shouldComponentUpdate:refreshing "+this.state.refreshing)
       if (!this.state.refreshing) {
         return false
       }
@@ -73,7 +75,7 @@ class HomeTabTop extends Component {
   }
 
   render() {
-    console.log("hometab render called")
+    //console.log("hometabtop render called")
     //return null
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName] &&
@@ -81,7 +83,7 @@ class HomeTabTop extends Component {
       data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
     }
     if (!data) {
-      console.log("hometab render called NULL")
+      //console.log("hometab render called NULL")
       return null
     }
     var params = {}
@@ -99,6 +101,7 @@ class HomeTabTop extends Component {
                 return
               }
               this.setState({refreshing: true})
+              console.log('HomeTabTop: refresh api called')
               this.props.api({
                 method: 'get',
                 url: '/thread/'+this.props.boardName,
@@ -138,8 +141,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    api: (params,success,error) =>
-      dispatch(apiState.api(params,success,error)),
+    api: (params,success,error) => {
+      //console.log("api DISPATCH called")
+      dispatch(apiState.api(params,success,error))
+    },
   }
 }
 ////////////////////////////////////////////////////////////////////////////////

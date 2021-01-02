@@ -12,7 +12,6 @@ import { YellowBox } from 'react-native'
 import PageButtons from './PageButtons'
 import ArrowUp from './ArrowUp'
 import { goChanUrl } from '../lib/Common'
-import HomeTabList from './HomeTabList'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -20,7 +19,7 @@ YellowBox.ignoreWarnings([
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class HomeTab extends Component {
+class HomeTabList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,23 +27,6 @@ class HomeTab extends Component {
     }
   }
   componentDidMount() {
-    this.props.set_scroll_callback(this.props.index, ()=>{
-      if (this.listref) {
-        this.listref.scrollTo({ y: 0, animated: true, })
-      }
-    })
-    //this.setState({refreshing: true})
-    console.log('HomeTab: mount api called')
-    this.props.api({
-      method: 'get',
-      url: '/thread/'+this.props.boardName,
-      params: {per_page: 50},
-      //noLoading: true
-    }, ()=>{ 
-
-    }, ()=> {
-
-    })
   }
   componentWillUnmount(){
   }
@@ -59,14 +41,11 @@ class HomeTab extends Component {
       return false
     }
     if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      if (!this.state.refreshing) {
         return false
-      }
     }
     return true
   }
   render() {
-    //console.log("hometab render called")
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName]) {
       data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
@@ -77,54 +56,52 @@ class HomeTab extends Component {
     var params = {}
     params = {per_page: 50}
     return (
-      <Tab key={this.props.key} heading={this.props.heading}>
-      <Container>
-        <ScrollView
-        ref={(r) => (this.listref = r)}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={()=>{        
-              if (this.state.refreshing) {
-                return
-              }
-              this.setState({refreshing: true})
-              console.log('HomeTab: refresh api called')
-              this.props.api({
-                method: 'get',
-                url: '/thread/'+this.props.boardName,
-                params: {per_page: 50},
-                //noLoading: true
-              }, ()=>{ 
-                this.setState({refreshing: false})
-              }, ()=> {
-                this.setState({refreshing: false})
-              })
+        <>
+
+
+
+        <List>
+        <ListItem icon style={[listItemStyles,listHeaderStyles(this.props.boardName)]}>
+      <Left>
+        <Button style={listHeaderStyles(this.props.boardName)}>
+          <Icon  name="newspaper" />
+        </Button>
+      </Left>
+      <Body>
+        <Text style={{color: '#FFFFFF'}}>{this.props.title}</Text>
+      </Body>
+      <Right>
+      </Right>
+      </ListItem>
+        </List>
+
+        <List
+          dataArray={data}
+          renderRow={(item) =>
+            <ListItem key={item.tid} style={listItemStyles}
+              onPress={()=>{
+                this.props.navigation.push("MyWebView", {
+                  uri: goChanUrl(
+                    item.board.server.name,
+                    item.board.name,
+                    item.tid,
+                    this.props.settingState.settings.goch_view_article_mode
+                    )})
+                }}
+              >
+              <Text>
+                <Text style={listCategoryStyles(item.board.name)}>★</Text>
+                <Text>{formatEpoch(item.tid)}&nbsp;</Text>
+                <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
+                <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed_max*100))/100}res/h&nbsp;</Text>
+                <Text>{replaceTitle(item.title)}</Text>
+              </Text>
+            </ListItem>
           }
-          } /> }
-        >
-        <PageButtons
-          header={true}
-          listref={this.listref}
-          url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
-          recs_key={'get:/thread/'+this.props.boardName}
-          {...this.props}
-        />
-          <HomeTabList {...this.props} />
-          <PageButtons
-          listref={this.listref}
-          url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
-          recs_key={'get:/thread/'+this.props.boardName}
-          {...this.props}
-        />
-          </ScrollView>
-          <ArrowUp onPress={()=>{
-              this.listref.scrollTo({ y: 0, animated: true, })
-            }}/> 
-        </Container>
-        </Tab>
+          keyExtractor={(item, index) => index.toString()}
+          />
+
+        </>
     )
   }
 }
@@ -147,6 +124,6 @@ const mapDispatchToProps = dispatch => {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeTab)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeTabList)
 
 ////////////////////////////////////////////////////////////////////////////////

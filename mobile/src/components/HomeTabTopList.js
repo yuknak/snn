@@ -29,24 +29,7 @@ class HomeTabTopList extends Component {
   }
 
   componentDidMount() {
-    this.props.set_scroll_callback(this.props.index, ()=>{
-      if (this.listref) {
-        this.listref.scrollTo({ y: 0, animated: true, })
-      }
-    })
 
-    //this.setState({refreshing: true})
-    this.props.api({
-      method: 'get',
-      url: '/thread/'+this.props.boardName,
-      params: {per_page: 50},
-      //noLoading: true
-    }, ()=>{ 
-      //Alert.alert("",JSON.stringify(this.props.appState.recs['get:/thread/'+this.props.boardName]))
-      //this.setState({refreshing: false})
-    }, ()=> {
-      //this.setState({refreshing: false})
-    })
   }
   componentWillUnmount(){
   }
@@ -62,15 +45,15 @@ class HomeTabTopList extends Component {
       return false
     }
     if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      console.log("hometablist shouldComponentUpdate:render object same")
-      console.log("hometablist shouldComponentUpdate:refreshing "+this.state.refreshing)
+      //console.log("hometablist shouldComponentUpdate:render object same")
+      //console.log("hometablist shouldComponentUpdate:refreshing "+this.state.refreshing)
         return false
     }
     return true
   }
 
   render() {
-    console.log("hometablist render called")
+    //console.log("hometablist render called")
     //return null
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName] &&
@@ -78,7 +61,7 @@ class HomeTabTopList extends Component {
       data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
     }
     if (!data) {
-      console.log("hometablist render called NULL")
+      //console.log("hometablist render called NULL")
       return null
     }
     var params = {}

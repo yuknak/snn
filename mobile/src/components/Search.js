@@ -15,7 +15,7 @@ import PageButtons from './PageButtons'
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
 import { goChanUrl } from '../lib/Common'
-
+import SearchList from './SearchList'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -107,7 +107,7 @@ class Search extends Component {
           }
           } /> }
         >
-        <PageButtons
+         <PageButtons
           header={true}
           listref={this.listref}
           url={'/thread/search'}
@@ -115,39 +115,14 @@ class Search extends Component {
           recs_key={'get:/thread/search'}
           {...this.props}
         />
-        <List
-          dataArray={data==null?[]:data}
-          renderRow={(item) =>
-            <ListItem key={item.tid} style={listItemStyles}
-            onPress={()=>{
-              this.props.navigation.push("MyWebView", {
-                uri: goChanUrl(
-                  item.board.server.name,
-                  item.board.name,
-                  item.tid,
-                  this.props.settingState.settings.goch_view_article_mode
-                  )})
-              }}          
-            >
-              <Text>
-                <Text style={listCategoryStyles(item.board.name)}>★</Text>
-                <Text>{formatEpoch(item.tid)}&nbsp;</Text>
-                <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
-                <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed_max*100))/100}res/h&nbsp;</Text>
-                <Text>{replaceTitle(item.title)}</Text>
-              </Text>
-            </ListItem>
-          }
-          keyExtractor={(item, index) => index.toString()}
-          />
-        <PageButtons
+          <SearchList {...this.props} />
+          <PageButtons
           listref={this.listref}
           url={'/thread/search'}
           params={{q: this.state.queryStr, per_page: 50}}
           recs_key={'get:/thread/search'}
           {...this.props}
         />
-
           </ScrollView>
           <ArrowUp onPress={()=>{
               this.listref.scrollTo({ y: 0, animated: true, })

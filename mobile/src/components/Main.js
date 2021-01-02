@@ -31,11 +31,11 @@ class Main extends PureComponent {
     //this.id = setInterval(()=>
     //{
       var state = this.props.appInfoState.appStateReducer.state
-      console.log(state)
+      console.log("Main:"+state)
       if (state == 'active') {
         //api
         var info = getDeviceInfo()
-        console.log(JSON.stringify(info))
+        console.log("Main:"+JSON.stringify(info))
         this.props.api({
           method: 'post',
           url: '/user/check',
@@ -65,7 +65,7 @@ class Main extends PureComponent {
         )
         }  
         }, (e)=> {
-          console.log(JSON.stringify(e))
+          console.log("Main:"+JSON.stringify(e))
           //Error
           //Alert.alert('',JSON.stringify(e))
     
