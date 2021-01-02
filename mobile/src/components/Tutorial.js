@@ -89,7 +89,7 @@ class Tutorial extends PureComponent {
         <Footer>
           <FooterTab>
           <Button  onPress={()=>{this.props.navigation.goBack()}}>
-            <Text>アプリの使用をはじめる</Text>
+            <Text style={{ fontWeight: 'bold' }}>アプリの使用をはじめる</Text>
           </Button>
           </FooterTab>
         </Footer>

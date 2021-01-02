@@ -83,7 +83,24 @@ class SettingsTab extends PureComponent {
       </Right>
       </ListItem>
       )
-  
+    itemList.push(
+      <ListItem icon key={'show_tutorial'}>
+      <Left>
+
+      </Left>
+      <Body>
+        <Text>起動時チュートリアル表示</Text>
+      </Body>
+      <Right>
+        <Switch value={this.state.settings.show_tutorial} onValueChange={
+          (value) => {
+            this.state.settings.show_tutorial = value
+            //deep copy
+            this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})
+          }}/>
+      </Right>
+      </ListItem>
+      )
     return (
       <Container>
         <Content>

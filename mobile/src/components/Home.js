@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
+import * as settingState from '../redux/SettingState'
 
 import { Tabs, Tab, Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Text,Icon,List,ListItem,Thumbnail,Subtitle,ScrollableTab } from 'native-base';
 import HomeHeader from './MyHeader'
@@ -36,10 +37,12 @@ class Home extends PureComponent {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
     });
-    setTimeout(()=>{
-      this.props.navigation.push("Tutorial",
-        {uri:'https://www.supernn.net/'})}
-    , 500)
+    if (this.props.settingState.settings.show_tutorial) {
+      setTimeout(()=>{
+        this.props.navigation.push("Tutorial",
+          {uri:'https://www.supernn.net/'})}
+      , 500)
+    }
   }
   componentWillUnmount() {
     this._unsubscribe()
@@ -103,6 +106,7 @@ class Home extends PureComponent {
 const mapStateToProps = state => {
   return {
     uiState: state.uiState,
+    settingState: state.settingState,
   }
 }
 

@@ -8,6 +8,7 @@ const initialState = {
   settings: {
     webview_desktop: true,
     remove_ads: true,
+    show_tutorial: true,
   }
 }
 
