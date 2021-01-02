@@ -119,7 +119,7 @@ class Search extends Component {
                 <Text style={listCategoryStyles(item.board.name)}>★</Text>
                 <Text>{formatEpoch(item.tid)}&nbsp;</Text>
                 <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
-                <Text style={{color: brandColors.brandDanger}}>{item.res_speed_max}res/h&nbsp;</Text>
+                <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed_max*100))/100}res/h&nbsp;</Text>
                 <Text>{replaceTitle(item.title)}</Text>
               </Text>
             </ListItem>

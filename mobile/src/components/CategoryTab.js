@@ -140,7 +140,7 @@ class CategoryTab extends Component {
                 <Text style={listCategoryStyles(this.props.boardName)}>★</Text>
                 <Text>{formatEpoch(item.tid)}&nbsp;</Text>
                 <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
-                <Text style={{color: brandColors.brandDanger}}>{item.res_speed}res/h&nbsp;</Text>
+                <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed*100))/100}res/h&nbsp;</Text>
                 <Text style={{color: brandColors.brandInfo}}>{Math.round(parseFloat(item.res_percent*10000))/100}%&nbsp;</Text>
                 <Text>{replaceTitle(item.title)}</Text>
               </Text>
