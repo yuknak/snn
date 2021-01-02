@@ -13,6 +13,7 @@ import { ThemeProvider } from '@react-navigation/native';
 import PageButtons from './PageButtons'
 
 import { YellowBox } from 'react-native'
+import ArrowUp from './ArrowUp'
 
 
 YellowBox.ignoreWarnings([
@@ -135,6 +136,9 @@ class Search extends Component {
         />
 
           </ScrollView>
+          <ArrowUp onPress={()=>{
+              this.listref.scrollTo({ y: 0, animated: true, })
+            }}/> 
       </Container>
     ) 
   }
