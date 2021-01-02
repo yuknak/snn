@@ -14,6 +14,7 @@ import PageButtons from './PageButtons'
 
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
+import { goChanUrl } from '../lib/Common'
 
 
 YellowBox.ignoreWarnings([
@@ -113,9 +114,17 @@ class Search extends Component {
         <List
           dataArray={data==null?[]:data}
           renderRow={(item) =>
-            <ListItem key={item.tid} style={listItemStyles} onPress={()=>{
-              this.props.navigation.push("MyWebView",
-                {uri:'https://'+item.board.server.name+'/test/read.cgi/'+item.board.name+'/'+item.tid+'/-100'})}}>
+            <ListItem key={item.tid} style={listItemStyles}
+            onPress={()=>{
+              this.props.navigation.push("MyWebView", {
+                uri: goChanUrl(
+                  item.board.server.name,
+                  item.board.name,
+                  item.tid,
+                  this.props.settingState.settings.goch_view_article_mode
+                  )})
+              }}          
+            >
               <Text>
                 <Text style={listCategoryStyles(item.board.name)}>★</Text>
                 <Text>{formatEpoch(item.tid)}&nbsp;</Text>
@@ -150,6 +159,7 @@ const mapStateToProps = state => {
     apiState: state.apiState,
     appState: state.appState,
     uiState: state.uiState,
+    settingState: state.settingState,
   }
 }
 

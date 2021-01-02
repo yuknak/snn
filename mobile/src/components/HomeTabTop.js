@@ -10,6 +10,7 @@ import { formatDatetime, listCategoryStyles, replaceTitle, brandColors, formatEp
 
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
+import { goChanUrl } from '../lib/Common'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -112,9 +113,17 @@ class HomeTabTop extends Component {
       )
       d.data.forEach((item)=> {
         ele.push(
-            <ListItem key={d.board.name+item.tid} style={listItemStyles} onPress={()=>{
-              this.props.navigation.push("MyWebView",
-                {uri:'https://'+d.board.server.name+'/test/read.cgi/'+d.board.name+'/'+item.tid+'/-100'})}}>
+            <ListItem key={d.board.name+item.tid} style={listItemStyles}
+              onPress={()=>{
+              this.props.navigation.push("MyWebView", {
+                uri: goChanUrl(
+                  d.board.server.name,
+                  d.board.name,
+                  item.tid,
+                  this.props.settingState.settings.goch_view_article_mode
+                  )})
+              }}
+              >
               <Text>
                 <Text style={listCategoryStyles(d.board.name)}>★</Text>
                 <Text>{formatEpoch(item.tid)}&nbsp;</Text>
@@ -173,6 +182,7 @@ const mapStateToProps = state => {
     appInfoState: state.appInfoState,
     apiState: state.apiState,
     appState: state.appState,
+    settingState: state.settingState,
   }
 }
 

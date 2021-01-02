@@ -16,6 +16,23 @@ export function apiProcessing(flag=-1)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+export function goChanUrl(server, board, tid, mode)
+{
+  var suffix='l50'
+  if (mode=="bottom50") {
+    suffix="l50"
+  } else if (mode=="top100") {
+    suffix="-100"
+  } else if (mode=="all") {
+    suffix=""
+  }
+  var uri = "https://"+server+
+    "/test/read.cgi/"+board+
+    "/"+tid+"/"+suffix
+  return uri
+}
+
+////////////////////////////////////////////////////////////////////////////////
 export function getDeviceInfo()
 {
   var info ={}
