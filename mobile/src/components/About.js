@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
 import { Alert } from 'react-native';
+import { tutorial_url, hp_url } from '../lib/Common';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -24,9 +25,15 @@ class About extends Component {
   componentWillUnmount() {
     this._unsubscribe()
   }
+
   render() {
     //        <List><ListItem onPress={()=>{Alert.alert('test')}}><Text>test</Text></ListItem></List>
-
+    const button = hp_url() ? (
+      <Button onPress={()=>{
+                    this.props.navigation.push("MyWebView",
+                      {uri: hp_url()})}}
+                    ><Text>SUPERNNホームページを見る</Text></Button>
+        ) : null 
     return (
       <Container>
         <Content padder>
@@ -42,10 +49,7 @@ class About extends Component {
               </Body>
             </CardItem>
             <CardItem >
-              <Button onPress={()=>{
-              this.props.navigation.push("MyWebView",
-                {uri:'https://www.supernn.net/'})}}
-              ><Text>SUPERNNホームページを見る</Text></Button>
+              {button}
             </CardItem>
   
           </Card>

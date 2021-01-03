@@ -16,7 +16,7 @@ import NavDrawerScreens from './NavDrawerScreens'
 import MyWebView from './MyWebView'
 import Tutorial from './Tutorial'
 import { Alert } from 'react-native'
-import { getDeviceInfo } from '../lib/Common';
+import { getDeviceInfo, tutorial_url, hp_url } from '../lib/Common';
 
 const Stack = createStackNavigator()
 
@@ -42,6 +42,8 @@ class Main extends PureComponent {
           params: {info: encodeURIComponent(JSON.stringify(info))},
           //noLoading: true
         }, (res)=>{ 
+          hp_url(res.data.hp_url)
+          tutorial_url(res.data.tutorial_url)
         // Version check by server => 
         // Showing 'please update' msgbox and jump to url
         if (res.data.show_msgbox) {
@@ -67,7 +69,7 @@ class Main extends PureComponent {
         }, (e)=> {
           console.log("Main:"+JSON.stringify(e))
           //Error
-          //Alert.alert('',JSON.stringify(e))
+          Alert.alert('','ネットワークエラー.')
     
         })
 

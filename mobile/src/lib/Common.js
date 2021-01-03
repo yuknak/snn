@@ -5,6 +5,24 @@ import Moment from 'moment-timezone';
 import DeviceInfo from 'react-native-device-info';
 
 ////////////////////////////////////////////////////////////////////////////////
+var var_hp_url = null
+var var_tutorial_url = null
+
+export function hp_url(url = '') {
+  if (url == '')
+    return var_hp_url
+    var_hp_url = url
+  console.log('hp_url='+var_hp_url)
+}
+
+export function tutorial_url(url = '') {
+  if (url == '')
+    return var_tutorial_url
+  var_tutorial_url = url
+  console.log('tutorial_url='+var_tutorial_url)
+}
+
+////////////////////////////////////////////////////////////////////////////////
 var flagApiProcessing = 0
 export function apiProcessing(flag=-1)
 {
