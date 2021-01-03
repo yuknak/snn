@@ -33,9 +33,13 @@ class Tutorial extends PureComponent {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
       //Alert.alert(JSON.stringify(this.props.route))
     });
+    this._unsubscribe2 = this.props.navigation.addListener('blur', () => {
+      this.props.endLoading()
+    });
   }
   componentWillUnmount() {
     this._unsubscribe()
+    this._unsubscribe2()
     //Alert.alert('web unmount')
   }
   // How to inject JS in details
