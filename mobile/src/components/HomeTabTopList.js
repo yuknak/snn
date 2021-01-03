@@ -70,7 +70,7 @@ class HomeTabTopList extends Component {
           flexDirection: 'column',
           alignItems: 'center',
           }}>
-          <Text>ネットワークエラーによりデータがありません.</Text>
+          <Text>No data.</Text>
         </View>
       )
     }
