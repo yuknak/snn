@@ -47,8 +47,9 @@ module V1
 
 					check = {}
           check[:show_msgbox]=false
-          check[:hp_url]="https://www.supernn.net/"
-          check[:tutorial_url]="https://www.supernn.net/tutorial.html"
+          # disable cache by uuid
+          check[:hp_url]="https://www.supernn.net/index.html?"+SecureRandom.uuid
+          check[:tutorial_url]="https://www.supernn.net/tutorial.html?"+SecureRandom.uuid
           
           if (!check[:show_msgbox]) then
             # no notice
