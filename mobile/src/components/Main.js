@@ -32,7 +32,7 @@ class Main extends PureComponent {
     //{
       var state = this.props.appInfoState.appStateReducer.state
       console.log("Main:"+state)
-      if (state == 'active') {
+      //if (state == 'active') { DID NOT WORK ONLY ON REAL IPHONE RELEASE
         //api
         var info = getDeviceInfo()
         console.log("Main:"+JSON.stringify(info))
@@ -73,7 +73,7 @@ class Main extends PureComponent {
     
         })
 
-      }
+      //}
     //}, 15 * 1000)
 
   }
