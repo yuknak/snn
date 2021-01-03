@@ -62,7 +62,17 @@ class HomeTabTopList extends Component {
     }
     if (!data) {
       //console.log("hometablist render called NULL")
-      return null
+      return (
+        <View style={{
+          //backgroundColor: 'red',
+          height: 200,
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
+          }}>
+          <Text>ネットワークエラーによりデータがありません.</Text>
+        </View>
+      )
     }
     var params = {}
     params = {per_page: 50}

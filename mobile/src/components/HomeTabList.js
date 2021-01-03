@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Tab, Container, Content, Text,List,ListItem,Left,Right,Button,Icon,Body } from 'native-base';
-import { Alert, RefreshControl,ScrollView } from "react-native";
+import { View,Alert, RefreshControl,ScrollView } from "react-native";
 import * as apiState from '../redux/ApiState'
 import { listCategoryStyles, replaceTitle, brandColors, formatEpoch, listItemStyles, listHeaderStyles } from '../lib/Common';
 
@@ -51,7 +51,17 @@ class HomeTabList extends Component {
       data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
     }
     if (!data) {
-      return null
+      return (
+        <View style={{
+          //backgroundColor: 'red',
+          height: 200,
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
+          }}>
+          <Text>ネットワークエラーによりデータがありません.</Text>
+        </View>
+      )
     }
     var params = {}
     params = {per_page: 50}

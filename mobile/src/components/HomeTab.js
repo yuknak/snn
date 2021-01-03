@@ -61,34 +61,8 @@ class HomeTab extends Component {
   }
   componentWillUnmount(){
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!this.props.appState.recs['get:/thread/'+this.props.boardName] ||
-        !this.props.appState.recs['get:/thread/'+this.props.boardName].data) {
-      return true
-    }
-    var d1 = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
-    var d2 = nextProps.appState.recs['get:/thread/'+this.props.boardName].data.data
-    if (!d1||!d2) {
-      return false
-    }
-    if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      if (!this.state.refreshing) {
-        return false
-      }
-    }
-    return true
-  }
+
   render() {
-    //console.log("hometab render called")
-    var data = null
-    if (this.props.appState.recs['get:/thread/'+this.props.boardName]) {
-      data = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
-    }
-    if (!data) {
-      return null
-    }
-    var params = {}
-    params = {per_page: 50}
     return (
       <Tab key={this.props.key} heading={this.props.heading}>
       <Container>
