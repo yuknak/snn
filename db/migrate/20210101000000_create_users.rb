@@ -2,6 +2,7 @@ class CreateUsers < ActiveRecord::Migration[4.2]
     def self.up
       create_table :users do |t|
         t.string   :ip
+        t.string   :ip_country
         t.string   :application_name
         t.string   :brand
         t.string   :bundle_id
