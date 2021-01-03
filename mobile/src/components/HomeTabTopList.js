@@ -97,7 +97,7 @@ class HomeTabTopList extends Component {
         <Text style={{color: '#FFFFFF'}}>{d.board.title}</Text>
       </Body>
       <Right>
-        <Text style={{color: '#FFFFFF',fontSize: 12}}>{formatDatetime(d.board.mirrored_at)} {d.board.res_speed}res/h</Text>
+        <Text style={{color: '#FFFFFF',fontSize: 12}}>{formatDatetime(d.board.mirrored_at)} {Math.round(parseFloat(d.board.res_speed*100))/100}res/h</Text>
         <Text style={{color: '#FFFFFF',fontSize: 27}}>&nbsp;<Icon style={{color: '#FFFFFF'}} name="chevron-forward"/></Text>
       </Right>
       </ListItem>
