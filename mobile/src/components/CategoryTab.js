@@ -37,7 +37,7 @@ class CategoryTab extends Component {
         this.props.api({
           method: 'get',
           url: '/thread/'+this.props.boardName,
-          params: {per_page: 50},
+          params: {},
           //noLoading: true
         }, ()=>{ 
     
@@ -50,7 +50,7 @@ class CategoryTab extends Component {
     this.props.api({
       method: 'get',
       url: '/thread/'+this.props.boardName,
-      params: {per_page: 50},
+      params: {},
       //noLoading: true
     }, ()=>{ 
 
@@ -77,7 +77,7 @@ class CategoryTab extends Component {
             this.props.api({
               method: 'get',
               url: '/thread/'+this.props.boardName,
-              params: {per_page: 50},
+              params: {},
               //noLoading: true
             }, ()=>{ 
               this.setState({refreshing: false})
@@ -91,7 +91,7 @@ class CategoryTab extends Component {
           header={true}
           listref={this.listref}
           url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
+          params={{}}
           recs_key={'get:/thread/'+this.props.boardName}
           {...this.props}
         />
@@ -99,7 +99,7 @@ class CategoryTab extends Component {
         <PageButtons
           listref={this.listref}
           url={'/thread/'+this.props.boardName}
-          params={{per_page: 50}}
+          params={{}}
           recs_key={'get:/thread/'+this.props.boardName}
           {...this.props}
         />

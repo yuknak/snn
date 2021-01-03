@@ -51,7 +51,7 @@ class PageButtons extends React.Component {
       this.props.api({ method: 'get',
       //noLoading: true, // prevent from going back index 0 tab
       url: this.props.url,
-      params: { ...this.props.params, page: 1, per_page: 50}},
+      params: { ...this.props.params, page: 1}},
       ()=> {
         setTimeout(()=>{
           this.props.listref.scrollTo({ y: 0, animated: true, })
@@ -63,7 +63,7 @@ class PageButtons extends React.Component {
         this.props.api({ method: 'get',
         //noLoading: true,
         url: this.props.url,
-        params: {...this.props.params,page: prev_page, per_page: 50}},
+        params: {...this.props.params,page: prev_page}},
         ()=> {
           setTimeout(()=>{
             this.props.listref.scrollTo({ y: 0, animated: true, })
@@ -76,7 +76,7 @@ class PageButtons extends React.Component {
         this.props.api({ method: 'get',
         //noLoading: true,
         url: this.props.url,
-        params: {...this.props.params,page: next_page, per_page: 50}},
+        params: {...this.props.params,page: next_page}},
         ()=> {
           setTimeout(()=>{
             this.props.listref.scrollTo({ y: 0, animated: true, })
@@ -89,7 +89,7 @@ class PageButtons extends React.Component {
         this.props.api({ method: 'get',
         //noLoading: true,
         url: this.props.url,
-        params: {...this.props.params,page: total_pages, per_page: 50}},
+        params: {...this.props.params,page: total_pages}},
         ()=> {
           setTimeout(()=>{
             this.props.listref.scrollTo({ y: 0, animated: true, })

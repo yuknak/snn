@@ -12,7 +12,7 @@ module V1
     # to understand available params
     # See also : https://gist.github.com/be9/6446051
     
-    def ransack_index(scope, default_per_page = 20)
+    def ransack_index(scope, default_per_page = 50)
       collection = scope.ransack(params[:q]).result.page(
         params[:page]).per((params[:per_page] || default_per_page).to_i)
       current, total, per_page =

@@ -48,7 +48,7 @@ class Search extends Component {
       //return null
     }
     var params = {}
-    params = {per_page: 50}
+    //params = {per_page: 50}
     return (
       <Container>
       <Header searchBar rounded>
@@ -68,7 +68,7 @@ class Search extends Component {
               this.props.api({
                 method: 'get',
                 url: '/thread/search',
-                params: {q: q, per_page: 50},
+                params: {q: q},
                 //noLoading: true
               }, ()=>{ 
               }, ()=> {
@@ -97,7 +97,7 @@ class Search extends Component {
               this.props.api({
                 method: 'get',
                 url: '/thread/search',
-                params: {q: q, per_page: 50},
+                params: {q: q},
                 //noLoading: true
               }, ()=>{ 
                 this.setState({refreshing: false})
@@ -111,7 +111,7 @@ class Search extends Component {
           header={true}
           listref={this.listref}
           url={'/thread/search'}
-          params={{q: this.state.queryStr, per_page: 50}}
+          params={{q: this.state.queryStr}}
           recs_key={'get:/thread/search'}
           {...this.props}
         />
@@ -119,7 +119,7 @@ class Search extends Component {
           <PageButtons
           listref={this.listref}
           url={'/thread/search'}
-          params={{q: this.state.queryStr, per_page: 50}}
+          params={{q: this.state.queryStr}}
           recs_key={'get:/thread/search'}
           {...this.props}
         />

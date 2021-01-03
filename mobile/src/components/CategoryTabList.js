@@ -70,7 +70,7 @@ class CategoryTabList extends Component {
       )
     }
     var params = {}
-    params = {per_page: 50}
+    //params = {per_page: 50}
     return (
 
         <>   

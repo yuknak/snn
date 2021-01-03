@@ -75,7 +75,7 @@ class HomeTabTopList extends Component {
       )
     }
     var params = {}
-    params = {per_page: 50}
+    //params = {per_page: 50}
 
     var ele = []
     data.forEach((d)=> {

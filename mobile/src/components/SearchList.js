@@ -65,7 +65,7 @@ class SearchList extends Component {
       //return null
     }
     var params = {}
-    params = {per_page: 50}
+    //params = {per_page: 50}
     return (
         <>
 
