@@ -250,21 +250,21 @@ module Snn
           exec_flg = true
         elsif ((board.name == 'news4plus') && (diff >= 240)) then
           exec_flg = true
-        elsif ((board.name == 'bizplus') && (diff >= 300)) then
+        elsif ((board.name == 'bizplus') && (diff >= 600)) then
           exec_flg = true
-        elsif ((board.name == 'seijinewsplus') && (diff >= 300)) then
+        elsif ((board.name == 'seijinewsplus') && (diff >= 600)) then
           exec_flg = true
-        elsif ((board.name == 'news5plus') && (diff >= 600)) then
+        elsif ((board.name == 'news5plus') && (diff >= 900)) then
           exec_flg = true
-        elsif ((board.name == 'scienceplus') && (diff >= 600)) then
+        elsif ((board.name == 'scienceplus') && (diff >= 900)) then
           exec_flg = true
-        elsif ((board.name == 'femnewsplus') && (diff >= 600)) then
+        elsif ((board.name == 'femnewsplus') && (diff >= 900)) then
           exec_flg = true
-        elsif ((board.name == 'moeplus') && (diff >= 600)) then
+        elsif ((board.name == 'moeplus') && (diff >= 900)) then
           exec_flg = true
-        elsif ((board.name == 'idolplus') && (diff >= 600)) then
+        elsif ((board.name == 'idolplus') && (diff >= 900)) then
           exec_flg = true
-        elsif ((board.name == 'dqnplus') && (diff >= 600)) then
+        elsif ((board.name == 'dqnplus') && (diff >= 900)) then
           exec_flg = true
         else
           #
