@@ -146,7 +146,6 @@ module V1
         { name: "moeplus", count:2},
       ]
 
-      #TODO: NEED CACHE!!
       def get_top
         data = []
         @@top_boards.each do |top_board|
@@ -162,7 +161,13 @@ module V1
         end
         top_data = {}
         top_data[:data] = data
-        present top_data, with: ThreadTopEntity
+        top_data
+      end
+
+      def cache_top
+        Rails.cache.fetch("/top", expires_in: 15.seconds) do
+          get_top.to_json
+        end
       end
 
       ##########################################################################
@@ -216,7 +221,8 @@ module V1
 
         # for top page, having special data strucure
         elsif board_name == 'top' then
-          get_top
+          top_data = JSON.parse(cache_top)
+          present top_data, with: ThreadTopEntity
 
         # process each board, normal pattern
         else
