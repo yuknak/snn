@@ -239,12 +239,41 @@ module Snn
         overwrite_board_names
       end
 
+      now = now = Time.now
       Board.all.each do |board|
-        threads(board.name)
-      end
-
-      Board.all.each do |board|
-        calc(board.name)
+        exec_flg = false
+        diff = (now - board.mirrored_at).to_i
+        #puts "#{exec_flg} #{diff}"
+        if ((board.name == 'newsplus') && (diff >= 120)) then
+          exec_flg = true
+        elsif ((board.name == 'mnewsplus') && (diff >= 180)) then
+          exec_flg = true
+        elsif ((board.name == 'news4plus') && (diff >= 240)) then
+          exec_flg = true
+        elsif ((board.name == 'bizplus') && (diff >= 300)) then
+          exec_flg = true
+        elsif ((board.name == 'seijinewsplus') && (diff >= 300)) then
+          exec_flg = true
+        elsif ((board.name == 'news5plus') && (diff >= 600)) then
+          exec_flg = true
+        elsif ((board.name == 'scienceplus') && (diff >= 600)) then
+          exec_flg = true
+        elsif ((board.name == 'femnewsplus') && (diff >= 600)) then
+          exec_flg = true
+        elsif ((board.name == 'moeplus') && (diff >= 600)) then
+          exec_flg = true
+        elsif ((board.name == 'idolplus') && (diff >= 600)) then
+          exec_flg = true
+        elsif ((board.name == 'dqnplus') && (diff >= 600)) then
+          exec_flg = true
+        else
+          #
+        end
+        #puts "#{board.name} #{diff} #{exec_flg}"
+        if (exec_flg) then
+          threads(board.name)
+          calc(board.name)
+        end
       end
 
     end
