@@ -1,27 +1,30 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import React from 'react';
-import { View } from 'react-native'
+import { PureComponent,View } from 'react-native'
 import { Spinner } from 'native-base'
 import { connect } from 'react-redux';
 import * as uiState from '../redux/UiState'
-//import {ProgressBar} from '@react-native-community/progress-bar-android'
 import {ProgressBar, Colors} from 'react-native-paper'
 
 ////////////////////////////////////////////////////////////////////////////////
-//      <Spinner color='black' />
 
-
-const AppLoading = (props) => {
-  if (props.uiState.loading) {
-    //return null
+class AppLoading extends React.Component  {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+  }
+  render() {
+    if (!this.props.uiState.loading) {
+      return null
+    }
     return (
       <ProgressBar
         indeterminate={true} color={Colors.grey500}
       />
     );
   }
-  return null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
