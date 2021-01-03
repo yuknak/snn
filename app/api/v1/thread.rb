@@ -68,7 +68,7 @@ module V1
 
   ##############################################################################
   class Thread < V1::Root
-  
+ 
     ############################################################################
 
     helpers do
@@ -221,8 +221,10 @@ module V1
 
         # for top page, having special data strucure
         elsif board_name == 'top' then
-          top_data = JSON.parse(cache_top)
-          present top_data, with: ThreadTopEntity
+          #top_data = JSON.parse(cache_top)
+          #pp top_data
+          present get_top, with: ThreadTopEntity
+          #present top_data # TODO: ??
 
         # process each board, normal pattern
         else
