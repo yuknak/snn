@@ -32,6 +32,19 @@ class HomeTab extends Component {
       if (this.listref) {
         this.listref.scrollTo({ y: 0, animated: true, })
       }
+      if (!this.props.appState.recs['get:/thread/'+this.props.boardName] ||
+      !this.props.appState.recs['get:/thread/'+this.props.boardName].data) {
+        this.props.api({
+          method: 'get',
+          url: '/thread/'+this.props.boardName,
+          params: {per_page: 50},
+          //noLoading: true
+        }, ()=>{ 
+    
+        }, ()=> {
+    
+        })
+      }
     })
     //this.setState({refreshing: true})
     console.log('HomeTab: mount api called')

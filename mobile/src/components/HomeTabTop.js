@@ -35,6 +35,21 @@ class HomeTabTop extends Component {
       if (this.listref) {
         this.listref.scrollTo({ y: 0, animated: true, })
       }
+      if (!this.props.appState.recs['get:/thread/'+this.props.boardName] ||
+        !this.props.appState.recs['get:/thread/'+this.props.boardName].data) {
+          console.log('HomeTabTop: scroll api called')
+          this.props.api({
+            method: 'get',
+            url: '/thread/'+this.props.boardName,
+            params: {per_page: 50},
+            //noLoading: true
+          }, ()=>{ 
+            //Alert.alert("",JSON.stringify(this.props.appState.recs['get:/thread/'+this.props.boardName]))
+            //this.setState({refreshing: false})
+          }, ()=> {
+            //this.setState({refreshing: false})
+          })
+      }
     })
 
     //this.setState({refreshing: true})
