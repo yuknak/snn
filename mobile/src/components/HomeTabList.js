@@ -59,7 +59,7 @@ class HomeTabList extends Component {
           flexDirection: 'column',
           alignItems: 'center',
           }}>
-          <Text>No data.</Text>
+          <Icon style={{color:'#a9a9a9'}} name="ellipsis-horizontal" />
         </View>
       )
     }
