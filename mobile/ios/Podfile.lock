@@ -186,6 +186,8 @@ PODS:
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-splash-screen (3.2.0):
+    - React
   - react-native-webview (11.0.2):
     - React-Core
   - React-RCTActionSheet (0.61.5):
@@ -258,6 +260,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-progress-bar-android (from `../node_modules/@react-native-community/progress-bar-android`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -316,6 +319,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/progress-bar-android"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-splash-screen:
+    :path: "../node_modules/react-native-splash-screen"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -373,6 +378,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-webview: dfd7202ff115c44d3ea401c2f36122fb3ac79f07
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
