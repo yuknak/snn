@@ -7,12 +7,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 import store, { persistor } from './configureStore'
 import Main from './src/components/Main'
 //import { Alert } from 'react-native'
+import SplashScreen from 'react-native-splash-screen'
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export default class App extends React.Component {
   componentDidMount() {
     //Alert.alert('mount')
+    SplashScreen.hide()
   }
   render() {
   return (
