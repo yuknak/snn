@@ -147,16 +147,29 @@ module V1
       ]
 
       def get_top
+        # IMPORTANT NOTICE)
+        # DB functions behaviors are defenitely
+        # DIFFERENT if they are in Rails.cache.fetch block!!!
+        # because of Rails optimization.
+        # This is a known problem. Generally, we avoid this by using
+        # serialization (JSON).
+        # Here, our problem seems ransack_index does not load
+        # relation tables properly.
         data = []
         @@top_boards.each do |top_board|
           board = get_board(top_board[:name])
+          server = FiveCh::Server.find(board.server_id)
           params[:per_page] = top_board[:count]
           threads = FiveCh::Thread.where(
             board_id: board.id, mirror_ver: board.mirror_ver)
               .includes([board: :server])
               .order(res_percent: 'DESC', mirror_order: 'ASC')
           threads = ransack_index(threads)
-          threads[:board] = board
+          # DB object is DIFFERENT and also, we cannot add fields!
+          threads = JSON.parse(threads.to_json) # hack!
+          board = JSON.parse(board.to_json) # hack!
+          board[:server] = { name: server['name'] } # can add
+          threads[:board] = board # can add
           data.push(threads)
         end
         top_data = {}
@@ -221,10 +234,8 @@ module V1
 
         # for top page, having special data strucure
         elsif board_name == 'top' then
-          #top_data = JSON.parse(cache_top)
-          #pp top_data
-          present get_top, with: ThreadTopEntity
-          #present top_data # TODO: ??
+          top_data = JSON.parse(cache_top)
+          present top_data
 
         # process each board, normal pattern
         else
