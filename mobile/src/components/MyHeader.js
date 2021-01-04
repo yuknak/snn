@@ -39,7 +39,7 @@ class MyHeader extends PureComponent {
         <Left>{type=='back' ? back : type=='menu' ? menu : null }</Left>
         <Body>
           <Title>SUPERNN</Title>
-          <Subtitle>掲示板ニュース速報</Subtitle>
+          <Subtitle>掲示板速報</Subtitle>
         </Body>
         <Right />
       </Header>

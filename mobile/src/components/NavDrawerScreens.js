@@ -15,7 +15,7 @@ const Drawer = createDrawerNavigator()
 export default function NavDrawerScreens() {
   return (
     <Drawer.Navigator initialRouteName="NavHomeTabs">
-      <Drawer.Screen name="NavHomeTabs" options={{title: "ニュース", drawerIcon: () => (<Icon name="newspaper"/>)}} component={NavHomeTabs}/>
+      <Drawer.Screen name="NavHomeTabs" options={{title: "記事速報", drawerIcon: () => (<Icon name="newspaper"/>)}} component={NavHomeTabs}/>
       <Drawer.Screen name="Settings" options={{title: "設定", drawerIcon: () => (<Icon name="settings"/>)}} component={Settings} />
       <Drawer.Screen name="About" options={{title: "このアプリについて", drawerIcon: () => (<Icon name="information-circle" />)}} component={About} />
     </Drawer.Navigator>

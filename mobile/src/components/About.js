@@ -39,12 +39,12 @@ class About extends Component {
         <Content padder>
           <Card>
             <CardItem header >
-              <Text>SUPERNN 掲示板ニュース速報</Text>
+              <Text>SUPERNN 掲示板速報</Text>
             </CardItem>
             <CardItem bordered>
               <Body>
                 <Text>
-                このサイトはニュース系掲示板の書き込みを自動解析し、人気の高いニュース及び最新のニュースをリアルタイムで提供しています。
+                このサイトは掲示板の書き込みを自動解析し、人気の高い記事及び最新の記事をリアルタイムで提供しています。
                 </Text>
               </Body>
             </CardItem>
