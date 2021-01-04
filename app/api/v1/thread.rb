@@ -2,6 +2,26 @@
 module V1
 
   ##############################################################################
+  # IMPORTANT NOTICE)
+  # 1)
+  # About cache(Rails.cache.fetch)
+  # DB functions behaviors are defenitely
+  # DIFFERENT if they are in Rails.cache.fetch block!!!
+  # because of Rails optimization.
+  # This is a known problem. Generally, we avoid this by using
+  # serialization (JSON).
+  # Here, our problem seems ransack_index does not load
+  # relation tables properly.
+  # So, finally, as a result, Entities* are totally disposed --;
+  # because we have to do dynamic JSON generation.
+  # 2)
+  # And you HAVE TO do "rails dev:cache" to enable(toggle) cache.
+  # (under development mode)
+  # $ rails dev:cache
+  # Development mode is now being cached.
+  # $ rails dev:cache
+  # Development mode is no longer being cached.  
+  ##############################################################################
 
   class ThreadServerNameEntity < Grape::Entity
     expose :name
@@ -147,14 +167,6 @@ module V1
       ]
 
       def get_top
-        # IMPORTANT NOTICE)
-        # DB functions behaviors are defenitely
-        # DIFFERENT if they are in Rails.cache.fetch block!!!
-        # because of Rails optimization.
-        # This is a known problem. Generally, we avoid this by using
-        # serialization (JSON).
-        # Here, our problem seems ransack_index does not load
-        # relation tables properly.
         data = []
         @@top_boards.each do |top_board|
           board = get_board(top_board[:name])
@@ -174,12 +186,12 @@ module V1
         end
         top_data = {}
         top_data[:data] = data
-        top_data
+        top_data.to_json
       end
 
       def cache_top
         Rails.cache.fetch("/top", expires_in: 15.seconds) do
-          get_top.to_json
+          get_top
         end
       end
 
@@ -234,8 +246,9 @@ module V1
 
         # for top page, having special data strucure
         elsif board_name == 'top' then
-          top_data = JSON.parse(cache_top)
-          present top_data
+          # always no param(no page info)
+          data = JSON.parse(cache_top)
+          present data
 
         # process each board, normal pattern
         else
