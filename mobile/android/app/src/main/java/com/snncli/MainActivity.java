@@ -1,4 +1,4 @@
-package com.snncli;
+package biz.tetraserve.snncli;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;
