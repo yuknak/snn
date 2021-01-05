@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2021_01_01_000000) do
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "ip"
-    t.string "ip_country"
     t.string "application_name"
     t.string "brand"
     t.string "bundle_id"
