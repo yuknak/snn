@@ -11,25 +11,28 @@ module V1
     ############################################################################
     # Catch all server-side exceptions,
     # and make it as JSON return. Exceptions are also printed out to STDOUT
-
+    
     # All unmatched routes (but except for /)
     # https://stackoverflow.com/questions/23486871/
     # rails-4-grape-api-actioncontrollerroutingerror
     route :any, '*path' do
-      error!({ error:"Not Found '#{request.request_method} #{request.path}'" }, 404)
       puts "Not Found '#{request.request_method} #{request.path}'"
+      error!({ errmode: 'grape', status: 404,
+        error:"Not Found '#{request.request_method} #{request.path}'" }, 404)
     end
 
-    # Grape exception returns 400 
+    # Grape exception returns 400
     rescue_from Grape::Exceptions::Base do |e|
-      error!(e.message, 400)
       puts "#{e.message}"
+      error!({errmode: 'grape', status: 400,
+        error: e.message}, 400)
     end
 
     # Other exception 500
     rescue_from :all do |e|
-      error!({error: e.message, backtrace: e.backtrace[0]}, 500)
       puts "#{e.message} #{e.backtrace[0]}"
+      error!({errmode: 'grape', status: 500,
+        error: "#{e.message} #{e.backtrace[0]}"}, 500)
     end
 
     ############################################################################

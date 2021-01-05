@@ -67,7 +67,7 @@ class Main extends PureComponent {
         )
         }  
         }, (e)=> {
-          console.log("Main:"+JSON.stringify(e))
+          //console.log("Main2:"+JSON.stringify(e))
           //Error
           Alert.alert('','ネットワークエラー.')
     

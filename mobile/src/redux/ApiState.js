@@ -38,19 +38,17 @@ export default function reducer(state=initialState, action) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function buildErrorMessage(errResponse)
+function buildErrorMessage(errResponse, lastGrapeError)
 {
-  let message = JSON.stringify(errResponse)
-  if (errResponse && errResponse.response) {
-    if (errResponse.response.data &&
-        errResponse.response.status &&
-        errResponse.response.statusText
-      ) {
-      message = errResponse.response.status + " " +
-        errResponse.response.statusText + "\n" +
-          JSON.stringify(errResponse.response.data)
-    } else {
-      message = JSON.stringify(errResponse.response)
+  // Grape error return
+  var message = "Network Error"
+  if (lastGrapeError) {
+    // See in app/api/v*/root.rb
+    // { errmode: 'grape', status: {STATUS FROM GRAPE: 400, 404, 500}, error: {ERROR MSG FROM GRAPE} }
+    message = lastGrapeError
+  } else if (errResponse) {
+    if (errResponse.message) {
+      message = '{ errmode: "message", status: 0, error: "'+errResponse.message+'" }'
     }
   }
   return message;
@@ -62,53 +60,65 @@ function buildErrorMessage(errResponse)
 // {method: 'get', url: '/user_account' params: { key : value, ... }}
 // {method: 'post', url: '/user_account' data: { key : value, ... }}
 
+var lastGrapeError = null // A hack to get custom error info. from server
+
 export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
   console.log("api called"+params.url)
 
   //params.withCredentials = true 
   //params.baseURL = window.location.origin + '/api/v2'
 
-  params.baseURL = 'https://www.supernn.net/api/v1'
+  //params.baseURL = 'https://www.supernn.net/api/v1'
   //params.baseURL = 'http://test.tetraserve.local/api/v1'
   // NOTICE) Android emulator may not be able to understand
   //         names, IPs seems OK.
-  //params.baseURL = 'http://172.17.0.1:3000/api/v1'
+  params.baseURL = 'http://172.17.0.1:3000/api/v1'
+  params.timeout = 10 * 1000
   
-  params.validateStatus = function (status) { // we can overwrite what is success
-    return status >= 200 && status < 300; // but, use default behavior
-  }
+  //params.validateStatus = function (status) { 
+  //  return status >= 200 && status < 300; // =default
+  //}
+
+  // There are some problem in ReactNative + Axios
+  // This is a hack. See in buildErrorMessage
+  
+  params.transformResponse = [function (data) {
+    var chk = data.substring(0,100)
+    if (chk.indexOf('grape') >= 0 &&
+        chk.indexOf('errmode') >= 0) {
+      console.log('transformResponse:'+data)
+      lastGrapeError = data
+    }
+    return JSON.parse(data) // This is a mystery .... (--);
+  }]
+  
   let name = params.method + ':' + params.url
   if (params.nameExt) { // work with the same urls and different results
     name = name + ':' + params.nameExt
   }
   return dispatch => {
-    if (!params.noLoading) { // can be turned off
+    if (!params.noLoading) {
       dispatch({type: Action.UI_LOADING_START})
     }
-    //dispatch({ type: Action.API_START, name: name})
-    apiProcessing(1)
-console.log("axios.request called:" + name)
+console.log("Axios.request called:" + name)
+    lastGrapeError = null
     axios.request(params).then((response) => {
-      apiProcessing(0)
-      //success
-      //dispatch({type: Action.API_SUCCESS,
-      //  name: name,  response: response})
-      if (!params.noLoading) { // can be turned off
+      if (!params.noLoading) {
         dispatch({type: Action.UI_LOADING_END})
       }
+      // Success
+//console.log("Axios.request success:"+ JSON.stringify(response))
       dispatchAppSuccess(dispatch, name, response) // -> dispatch to appstate
-      success_func(response) //-> call custom external routine
+      success_func(response) //-> call custom external routine 
     }).catch((errResponse) => {
-      apiProcessing(0)
-      // error
-      //dispatch({type: Action.API_ERROR,
-      //  name: name, response: errResponse})
-      if (!params.hideAlert) { // can be turned off by defining params.hideAlert: true
-        dispatch({type: Action.UI_ALERT_SHOW,
-          variant: 'warning', message: buildErrorMessage(errResponse) })
-      }
-      if (!params.noLoading) { // can be turned off
+      if (!params.noLoading) {
         dispatch({type: Action.UI_LOADING_END})
+      }
+      var errMsg = buildErrorMessage(errResponse, lastGrapeError)
+console.log("Axios.request error:"+ errMsg)
+      if (!params.hideAlert) {
+        dispatch({type: Action.UI_ALERT_SHOW,
+          variant: 'warning', message: errMsg })
       }
       dispatchAppError(dispatch, name, errResponse) // -> dispatch to appstate
       error_func(errResponse) // -> call custom external routine
