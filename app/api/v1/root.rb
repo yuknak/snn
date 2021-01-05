@@ -8,23 +8,31 @@ module V1
     format :json
     version 'v1'
 
+    ############################################################################
+    # Catch all server-side exceptions,
+    # and make it as JSON return. Exceptions are also printed out to STDOUT
+
     # All unmatched routes (but except for /)
     # https://stackoverflow.com/questions/23486871/
     # rails-4-grape-api-actioncontrollerroutingerror
     route :any, '*path' do
       error!({ error:"Not Found '#{request.request_method} #{request.path}'" }, 404)
+      puts "Not Found '#{request.request_method} #{request.path}'"
     end
 
     # Grape exception returns 400 
     rescue_from Grape::Exceptions::Base do |e|
       error!(e.message, 400)
+      puts "#{e.message}"
     end
 
     # Other exception 500
     rescue_from :all do |e|
       error!({error: e.message, backtrace: e.backtrace[0]}, 500)
+      puts "#{e.message} #{e.backtrace[0]}"
     end
 
+    ############################################################################
     # Cound not place grape_devise_token_auth stuff here
     # because of add_swagger_documentation error.
     # (this happens only on non-API(normal) rail smode)
