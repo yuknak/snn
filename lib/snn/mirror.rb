@@ -239,10 +239,14 @@ module Snn
         overwrite_board_names
       end
 
-      now = now = Time.now
+      now = Time.now
       Board.all.each do |board|
         exec_flg = false
-        diff = (now - board.mirrored_at).to_i
+        if (board.mirrored_at.nil?) then
+          diff = 1800
+        else
+          diff = (now - board.mirrored_at).to_i
+        end
         #puts "#{exec_flg} #{diff}"
         if ((board.name == 'newsplus') && (diff >= 120)) then
           exec_flg = true
