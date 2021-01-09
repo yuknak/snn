@@ -1,5 +1,7 @@
 # Base code is from peatio by yn
 
+# docker build . -t yuknak/snn
+# docker push yuknak/snn
 # docker build . -t yuknak/snn --build-arg RAILS_ENV=development
 
 FROM ruby:2.7.2 as base
@@ -55,8 +57,9 @@ USER app
 
 # Initialize application configuration & assets.
 RUN bundle exec rake tmp:create \
-  && bundle exec rake yarn:install assets:precompile \
-  && bundle exec rake dev:cache
+  && bundle exec rake yarn:install assets:precompile
+#  && bundle exec rake yarn:install assets:precompile \
+#  && bundle exec rake dev:cache
 
 # Warning) Only in development mode,
 # Set config.webpacker.check_yarn_integrity = false in config/webpacker.yml
