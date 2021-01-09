@@ -5,6 +5,7 @@ import Action from './Action'
 import { dispatchAppSuccess, dispatchAppError } from './AppState'
 import { Platform } from 'react-native'
 import { apiProcessing } from '../lib/Common'
+import base64 from 'react-native-base64'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +45,7 @@ function buildErrorMessage(errResponse, lastGrapeError)
   var message = "Network Error"
   if (lastGrapeError) {
     // See in app/api/v*/root.rb
-    // { errmode: 'grape', status: {STATUS FROM GRAPE: 400, 404, 500}, error: {ERROR MSG FROM GRAPE} }
+    // { errmode: 'grape', status: {STATUS FROM GRAPE: 400, 401, 404, 500}, error: {ERROR MSG FROM GRAPE} }
     message = lastGrapeError
   } else if (errResponse) {
     if (errResponse.message) {
@@ -61,10 +62,13 @@ function buildErrorMessage(errResponse, lastGrapeError)
 // {method: 'post', url: '/user_account' data: { key : value, ... }}
 
 var lastGrapeError = null // A hack to get custom error info. from server
+const authHeader = 'Basic ' + base64.encode('ilcaqtkr:Of7pWFTt')
 
 export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
   console.log("api called"+params.url)
-
+  params.headers= {
+    'Authorization': authHeader // Easy basic auth
+  }
   //params.withCredentials = true 
   //params.baseURL = window.location.origin + '/api/v2'
 
@@ -86,10 +90,18 @@ export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
     var chk = data.substring(0,100)
     if (chk.indexOf('grape') >= 0 &&
         chk.indexOf('errmode') >= 0) {
-      console.log('transformResponse:'+data)
+      //console.log('transformResponse:'+data)
       lastGrapeError = data
     }
-    return JSON.parse(data) // This is a mystery .... (--);
+    try {
+      return JSON.parse(data)
+    } catch (error) {
+      throw Error(
+        `[Axios:transformResponse] Error parsingJSON data - ${JSON.stringify(
+          error
+        )}`
+      );
+    }
   }]
   
   let name = params.method + ':' + params.url

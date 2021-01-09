@@ -35,6 +35,20 @@ module V1
         error: "#{e.message} #{e.backtrace[0]}"}, 500)
     end
 
+    #####################
+    # Easy basic auth 401
+    
+    http_basic do |username, password|
+      chk = username + ':' + password
+      if (!ActiveSupport::SecurityUtils.secure_compare(
+        chk, "ilcaqtkr:Of7pWFTt")) then
+        puts "Unauthorized"
+        error!({errmode: 'grape', status: 401,
+          error: 'Unauthorized'}, 401)
+      end
+      true
+    end
+
     ############################################################################
     # Cound not place grape_devise_token_auth stuff here
     # because of add_swagger_documentation error.
