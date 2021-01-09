@@ -72,7 +72,7 @@ export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
   //params.withCredentials = true 
   //params.baseURL = window.location.origin + '/api/v2'
 
-  params.baseURL = 'https://www.supernn.net/api/v1'
+  params.baseURL = 'https://snn.tetraserve.biz/api/v1'
   //params.baseURL = 'http://test.tetraserve.local/api/v1'
   // NOTICE) Android emulator may not be able to understand
   //         names, IPs seems OK.

@@ -48,8 +48,8 @@ module V1
 					check = {}
           check[:show_msgbox]=false
           # disable cache by uuid
-          check[:hp_url]="https://www.supernn.net/index.html?"+SecureRandom.uuid
-          check[:tutorial_url]="https://www.supernn.net/tutorial.html?"+SecureRandom.uuid
+          check[:hp_url]="https://supernn.net/index.html?"+SecureRandom.uuid
+          check[:tutorial_url]="https://supernn.net/tutorial.html?"+SecureRandom.uuid
           
           if (!check[:show_msgbox]) then
             # no notice
@@ -65,9 +65,9 @@ module V1
               'このアプリの新しいバージョンが公開されています.アップデートを行ってください.'
 					  check[:do_redir]=true
             check[:redir_url_ios]=
-              'https://www.yahoo.co.jp/'
+              "https://supernn.net/index.html?"+SecureRandom.uuid
             check[:redir_url_android]=
-              'https://play.google.com/store/apps/details?id=jp.co.airfront.android.a2chMate'
+              "https://supernn.net/index.html?"+SecureRandom.uuid
           end
           
           pp check
