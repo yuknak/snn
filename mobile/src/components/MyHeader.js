@@ -7,6 +7,7 @@ import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
 import { Spinner, Header, Title, Button, Left, Right, Body, Icon,Subtitle,Text } from 'native-base'
 import AppLoading from './AppLoading'
+import AppAlert from './AppAlert'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,6 +45,7 @@ class MyHeader extends PureComponent {
         <Right />
       </Header>
       <AppLoading color='black'/>
+      <AppAlert/>
       </>
     )
   }

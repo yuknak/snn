@@ -44,7 +44,7 @@ class Home extends PureComponent {
         this.props.navigation.push("Tutorial",
         {uri: tutorial_url()})
       }
-    }, 1500)
+    }, 1000)
 
   }
   componentWillUnmount() {

@@ -119,6 +119,9 @@ console.log("Axios.request called:" + name)
         dispatch({type: Action.UI_LOADING_END})
       }
       // Success
+      if (!params.hideAlert) {
+        dispatch({type: Action.UI_ALERT_HIDE }) // hide if success
+      }
 //console.log("Axios.request success:"+ JSON.stringify(response))
       dispatchAppSuccess(dispatch, name, response) // -> dispatch to appstate
       success_func(response) //-> call custom external routine 
