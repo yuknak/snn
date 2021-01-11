@@ -71,7 +71,9 @@ class Main extends PureComponent {
         }, (e)=> {
           //console.log("Main2:"+JSON.stringify(e))
           //Error
-          Alert.alert('','ネットワークエラー.')
+          Alert.alert(
+            '',
+            'ネットワークにアクセスできません.端末の状態を確認するか,またはあとでやり直してください.')
     
         })
 
