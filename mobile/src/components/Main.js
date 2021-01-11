@@ -16,7 +16,7 @@ import NavDrawerScreens from './NavDrawerScreens'
 import MyWebView from './MyWebView'
 import Tutorial from './Tutorial'
 import { Alert } from 'react-native'
-import { getDeviceInfo, tutorial_url, hp_url } from '../lib/Common';
+import { getDeviceInfo, tutorial_url, hp_url, privacy_url } from '../lib/Common';
 
 const Stack = createStackNavigator()
 
@@ -44,6 +44,8 @@ class Main extends PureComponent {
         }, (res)=>{ 
           hp_url(res.data.hp_url)
           tutorial_url(res.data.tutorial_url)
+          privacy_url(res.data.privacy_url)
+
         // Version check by server => 
         // Showing 'please update' msgbox and jump to url
         if (res.data.show_msgbox) {

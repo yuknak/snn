@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
 import { Alert } from 'react-native';
-import { tutorial_url, hp_url } from '../lib/Common';
+import { tutorial_url, hp_url, privacy_url } from '../lib/Common';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +32,13 @@ class About extends Component {
       <Button onPress={()=>{
                     this.props.navigation.push("MyWebView",
                       {uri: hp_url()})}}
-                    ><Text>SUPERNNホームページを見る</Text></Button>
+                    ><Text>SUPERNNホームページ</Text></Button>
+        ) : null 
+    const button2 = privacy_url() ? (
+      <Button onPress={()=>{
+                    this.props.navigation.push("MyWebView",
+                      {uri: privacy_url()})}}
+                    ><Text>プライバシーポリシー</Text></Button>
         ) : null 
     return (
       <Container>
@@ -50,6 +56,9 @@ class About extends Component {
             </CardItem>
             <CardItem >
               {button}
+            </CardItem>
+            <CardItem>
+              {button2}
             </CardItem>
   
           </Card>
