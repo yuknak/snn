@@ -2,12 +2,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import React, { Component } from 'react';
-import { List, ListItem, Container, Content, Body, Text,Card,CardItem,Button,Icon,Grid,Col,Right } from 'native-base';
+import { List, ListItem, Container, Content, Body, Text,Card,CardItem,Button,Icon,Grid,Col,Right, TabHeading } from 'native-base';
 import { connect } from 'react-redux'
 import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
 import { Alert } from 'react-native';
-import { tutorial_url, hp_url, privacy_url } from '../lib/Common';
+import { getDeviceInfo, tutorial_url, hp_url, privacy_url } from '../lib/Common';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -21,6 +21,7 @@ class About extends Component {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
     });
+    this.info = getDeviceInfo()
   }
   componentWillUnmount() {
     this._unsubscribe()
@@ -39,13 +40,17 @@ class About extends Component {
                     this.props.navigation.push("MyWebView",
                       {uri: privacy_url()})}}
                     ><Text>プライバシーポリシー</Text></Button>
-        ) : null 
+        ) : null
+    var version = ''
+    if (this.info && this.info.readableVersion) {
+      version = '(Ver '+this.info.readableVersion+')'
+    }
     return (
       <Container>
         <Content padder>
           <Card>
             <CardItem header >
-              <Text>SUPERNN 掲示板速報</Text>
+              <Text>SUPERNN 掲示板速報 {version}</Text>
             </CardItem>
             <CardItem bordered>
               <Body>
