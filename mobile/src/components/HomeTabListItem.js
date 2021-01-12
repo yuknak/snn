@@ -27,10 +27,44 @@ class HomeTabListItem extends Component {
     this.state = {
       refreshing: false
     }
+    this.handlePress = this.handlePress.bind(this);
+    this.handleLongPress = this.handleLongPress.bind(this);
   }
   componentDidMount() {
   }
   componentWillUnmount(){
+  }
+  handlePress() {
+    var item = this.props.item
+    this.props.navigation.push("MyWebView", {
+      uri: goChanUrl(
+        item.board.server.name,
+        item.board.name,
+        item.tid,
+        this.props.settingState.settings.goch_view_article_mode
+        )}
+    )
+  }
+  handleLongPress() {
+    var item = this.props.item
+    if (this.props.settingState.settings.report_inproper) {
+      Alert.alert(
+        inproperMsg2,
+        inproperMsg3,
+        [{ text: 'はい',
+            onPress: () => {
+              var ban_id = item.board.name+item.tid
+              this.props.addBanList(ban_id)
+              this.forceUpdate()
+              forceUpdate()
+            } 
+          },
+          { text: 'キャンセル',
+            onPress: () => { } 
+          }
+        ]
+      )
+    }
   }
   render () {
     var item = this.props.item
@@ -41,34 +75,8 @@ class HomeTabListItem extends Component {
     } else {
       e.push(
         <ListItem key={item.tid} style={listItemStyles}
-        onPress={()=>{
-          this.props.navigation.push("MyWebView", {
-            uri: goChanUrl(
-              item.board.server.name,
-              item.board.name,
-              item.tid,
-              this.props.settingState.settings.goch_view_article_mode
-              )})
-          }}
-        onLongPress={()=>{
-          if (this.props.settingState.settings.report_inproper) {
-          Alert.alert(
-            inproperMsg2,
-            inproperMsg3,
-            [{ text: 'はい',
-                onPress: () => {
-                  var ban_id = item.board.name+item.tid
-                  this.props.addBanList(ban_id)
-                  this.forceUpdate()
-                  forceUpdate()
-                } 
-              },
-              { text: 'キャンセル',
-                onPress: () => { } 
-              }
-            ]
-          )
-        }}}
+        onPress={this.handlePress}
+        onLongPress={this.handleLongPress}
         >
         <Text>
           <Text style={listCategoryStyles(item.board.name)}>★</Text>
