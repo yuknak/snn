@@ -105,7 +105,7 @@ export function getDeviceInfo()
 ////////////////////////////////////////////////////////////////////////////////
 export function replaceTitle(str)
 {
-  var result = str.replace(/\[.+★\]/g, '');// remove poster info
+  var result = str.replace(/\[[^/[]+?★\]/g, '');// remove poster info
   return result 
 }
 
