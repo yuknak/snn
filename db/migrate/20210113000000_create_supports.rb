@@ -2,7 +2,7 @@ class CreateSupports < ActiveRecord::Migration[4.2]
     def self.up
       create_table :supports do |t|
         t.string   :unique_id
-        t.string   :type
+        t.string   :sup_type
         t.string   :board_name
         t.string   :tid
         t.text     :extra_info

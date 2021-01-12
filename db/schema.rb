@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_000000) do
 
   create_table "supports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "unique_id"
-    t.string "type"
+    t.string "sup_type"
     t.string "board_name"
     t.string "tid"
     t.text "extra_info"

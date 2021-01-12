@@ -19,7 +19,7 @@ module V1
       post do
         support = FiveCh::Support.create!({
           unique_id: params[:unique_id],
-          type: params[:type],
+          sup_type: params[:sup_type],
           board_name: params[:board_name],
           tid: params[:tid],
           extra_info: params[:extra_info]
