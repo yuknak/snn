@@ -33,25 +33,6 @@ class HomeTabTopListItem extends Component {
   }
   componentWillUnmount(){
   }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!this.props.appState.recs['get:/thread/'+this.props.boardName] ||
-        !this.props.appState.recs['get:/thread/'+this.props.boardName].data) {
-      return true
-    }
-    var d1 = this.props.appState.recs['get:/thread/'+this.props.boardName].data.data
-    var d2 = nextProps.appState.recs['get:/thread/'+this.props.boardName].data.data
-    if (!d1||!d2) {
-      return false
-    }
-    if (JSON.stringify(d1)==JSON.stringify(d2)) {
-      //console.log("hometablist shouldComponentUpdate:render object same")
-      //console.log("hometablist shouldComponentUpdate:refreshing "+this.state.refreshing)
-        return false
-    }
-    return true
-  }
-
   render() {
     var item = this.props.item
     var d = this.props.d
