@@ -17,6 +17,8 @@ import SearchListItem from './SearchListItem'
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
 import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
+import { addForceUpdateObj, forceUpdate } from '../lib/Common'
+
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -36,6 +38,8 @@ class SearchList extends Component {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
     });
+    addForceUpdateObj(this)
+
   }
   componentWillUnmount() {
     this._unsubscribe()

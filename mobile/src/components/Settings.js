@@ -14,6 +14,7 @@ import { Alert } from 'react-native';
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
+import { addForceUpdateObj, forceUpdate } from '../lib/Common'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -154,6 +155,7 @@ class SettingsTab extends PureComponent {
                 [{ text: 'はい',
                       onPress: () => {
                         this.props.clearBanList()
+                        forceUpdate()
                         this.state.settings.report_inproper = false
                         //deep copy
                         this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})

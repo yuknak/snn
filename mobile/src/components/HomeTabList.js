@@ -14,6 +14,8 @@ import PageButtons from './PageButtons'
 import HomeTabListItem from './HomeTabListItem'
 import ArrowUp from './ArrowUp'
 import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
+import { addForceUpdateObj, forceUpdate } from '../lib/Common'
+
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -29,6 +31,8 @@ class HomeTabList extends Component {
     }
   }
   componentDidMount() {
+    addForceUpdateObj(this)
+
   }
   componentWillUnmount(){
   }
