@@ -122,7 +122,7 @@ class SettingsTab extends PureComponent {
       </Button>
       </Left>
       <Body>
-        <Text>広告等を除去(β版)</Text>
+        <Text>広告等を除去</Text>
       </Body>
       <Right>
         <Switch value={this.state.settings.remove_ads} onValueChange={
