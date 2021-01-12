@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
-import { StyleSheet } from 'react-native'
+import { PushNotificationIOS, StyleSheet } from 'react-native'
 import Moment from 'moment-timezone';
 import DeviceInfo from 'react-native-device-info';
 
@@ -56,6 +56,32 @@ export function goChanUrl(server, board, tid, mode)
     "/test/read.cgi/"+board+
     "/"+tid+"/"+suffix
   return uri
+}
+
+////////////////////////////////////////////////////////////////////////////////
+export const inproperMsg1 = '[ユーザによる非表示指定]'
+export const inproperMsg2 = '不適切投稿の報告'
+export const inproperMsg3 = 'この投稿を不適切報告しますか?'+
+  '(当該記事はマークされ,今後このアプリ内で表示されません.また当該記事を投稿したユーザの記事は'+
+  '24時間以内に当社にて精査されサーバから削除される可能性があります.)'
+
+////////////////////////////////////////////////////////////////////////////////
+var updateClasses = []
+export function addForceUpdateObj(obj)
+{
+  if (!updateClasses.includes(obj)) {
+    updateClasses.push(obj)
+  }
+  console.log("addForceUpdateObj updateClasses length="+updateClasses.length)
+}
+export function forceUpdate()
+{
+  console.log("forceUpdate updateClasses length="+updateClasses.length)
+  try {
+      updateClasses.forEach((obj)=>{
+      obj.forceUpdate()
+    })
+  } catch (e) { }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
