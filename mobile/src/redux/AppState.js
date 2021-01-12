@@ -28,8 +28,6 @@ export default function reducer(state=initialState, action) {
   switch (action.type) {
     case Action.APP_INIT_STATE:
       return initialState // authenticated: false
-    case Action.APP_AUTH_SUCCESS: // Login success
-      return { ...state, authenticated: true }
     case Action.APP_REC: // 1 record response
     return { ...state,
         rec: {
@@ -46,6 +44,10 @@ export default function reducer(state=initialState, action) {
       //console.log("AppState reducer: default case called: "+action.type)
       return state;
   }
+}
+
+export function initAppState() {
+  return ({type: Action.APP_INIT_STATE})
 }
 
 ////////////////////////////////////////////////////////////////////////////////
