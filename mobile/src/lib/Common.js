@@ -7,7 +7,7 @@ import DeviceInfo from 'react-native-device-info';
 ////////////////////////////////////////////////////////////////////////////////
 var var_hp_url = null
 var var_tutorial_url = null
-var var_privacy_url = null
+var var_contract_url = null
 
 export function hp_url(url = '') {
   if (url == '')
@@ -23,11 +23,11 @@ export function tutorial_url(url = '') {
   console.log('tutorial_url='+var_tutorial_url)
 }
 
-export function privacy_url(url = '') {
+export function contract_url(url = '') {
   if (url == '')
-    return var_privacy_url
-    var_privacy_url = url
-  console.log('privacy_url='+var_privacy_url)
+    return var_contract_url
+    var_contract_url = url
+  console.log('contract_url='+var_contract_url)
 }
 
 ////////////////////////////////////////////////////////////////////////////////

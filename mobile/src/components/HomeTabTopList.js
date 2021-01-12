@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Fab, Tab, Container, Content, Text,List,ListItem,Left,Right,Button,Icon,Body } from 'native-base';
 import { View,Alert, RefreshControl,ScrollView,StyleSheet } from "react-native";
 import * as apiState from '../redux/ApiState'
+import * as settingState from '../redux/SettingState'
 import { formatDatetime, listCategoryStyles, replaceTitle, brandColors, formatEpoch, listItemStyles, listHeaderStyles } from '../lib/Common';
 
 import { YellowBox } from 'react-native'
@@ -25,7 +26,6 @@ class HomeTabTopList extends Component {
       refreshing: false,
       active: 'true'
     }
-
   }
 
   componentDidMount() {
@@ -53,7 +53,7 @@ class HomeTabTopList extends Component {
   }
 
   render() {
-    //console.log("hometablist render called")
+    console.log("hometablist render called")
     //return null
     var data = null
     if (this.props.appState.recs['get:/thread/'+this.props.boardName] &&
@@ -103,6 +103,11 @@ class HomeTabTopList extends Component {
       </ListItem>
       )
       d.data.forEach((item)=> {
+        if (this.props.settingState.ban_list&&
+            this.props.settingState.ban_list.some(id => id == d.board.name+item.tid)) {
+          ele.push(<ListItem><Text>[ユーザによる非表示指定]</Text></ListItem>)
+            } else {
+
         ele.push(
             <ListItem key={d.board.name+item.tid} style={listItemStyles}
               onPress={()=>{
@@ -114,6 +119,26 @@ class HomeTabTopList extends Component {
                   this.props.settingState.settings.goch_view_article_mode
                   )})
               }}
+              onLongPress={()=>{
+                if (this.props.settingState.settings.report_inproper) {
+                Alert.alert(
+                  '不適切投稿の報告',
+                  'この投稿を不適切報告しますか?'+
+                  '(当該記事はマークされ,今後このアプリ内で表示されません.また当該記事を投稿したユーザの記事は'+
+                  '24時間以内に当社にて精査されサーバから削除される可能性があります.)',
+                  [{ text: 'はい',
+                      onPress: () => {
+                        var ban_id = d.board.name+item.tid
+                        this.props.addBanList(ban_id)
+                        this.forceUpdate()
+                      } 
+                    },
+                    { text: 'キャンセル',
+                      onPress: () => { } 
+                    }
+                  ]
+                )
+              }}}
               >
               <Text>
                 <Text style={listCategoryStyles(d.board.name)}>★</Text>
@@ -124,7 +149,8 @@ class HomeTabTopList extends Component {
                 <Text>{replaceTitle(item.title)}</Text>
               </Text>
             </ListItem>
-        )
+         )
+       }
       })
     })
     return (
@@ -148,6 +174,8 @@ const mapDispatchToProps = dispatch => {
   return {
     api: (params,success,error) =>
       dispatch(apiState.api(params,success,error)),
+    addBanList: (ban_id) =>
+      dispatch(settingState.addBanList(ban_id)),
   }
 }
 ////////////////////////////////////////////////////////////////////////////////

@@ -15,8 +15,9 @@ import HomeHeader from './MyHeader'
 import NavDrawerScreens from './NavDrawerScreens'
 import MyWebView from './MyWebView'
 import Tutorial from './Tutorial'
+import Contract from './Contract'
 import { Alert } from 'react-native'
-import { getDeviceInfo, tutorial_url, hp_url, privacy_url } from '../lib/Common';
+import { getDeviceInfo, tutorial_url, hp_url, contract_url } from '../lib/Common';
 
 const Stack = createStackNavigator()
 
@@ -44,7 +45,7 @@ class Main extends PureComponent {
         }, (res)=>{ 
           hp_url(res.data.hp_url)
           tutorial_url(res.data.tutorial_url)
-          privacy_url(res.data.privacy_url)
+          contract_url(res.data.contract_url)
 
         // Version check by server => 
         // Showing 'please update' msgbox and jump to url
@@ -107,6 +108,12 @@ class Main extends PureComponent {
           options={{
           header: () => <HomeHeader onPress={{}} />
           }}/>
+      <Stack.Screen
+          name="Contract"
+          component={Contract}
+          options={{
+          header: () => <HomeHeader onPress={{}} />
+          }}/>        
       </Stack.Navigator>
     </NavigationContainer>
     </StyleProvider>

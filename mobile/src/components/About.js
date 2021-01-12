@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as uiState from '../redux/UiState'
 import * as apiState from '../redux/ApiState'
 import { Alert } from 'react-native';
-import { getDeviceInfo, tutorial_url, hp_url, privacy_url } from '../lib/Common';
+import { getDeviceInfo, tutorial_url, hp_url, contract_url } from '../lib/Common';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -35,11 +35,11 @@ class About extends Component {
                       {uri: hp_url()})}}
                     ><Text>SUPERNNホームページ</Text></Button>
         ) : null 
-    const button2 = privacy_url() ? (
+    const button2 = contract_url() ? (
       <Button onPress={()=>{
                     this.props.navigation.push("MyWebView",
-                      {uri: privacy_url()})}}
-                    ><Text>プライバシーポリシー</Text></Button>
+                      {uri: contract_url()})}}
+                    ><Text>利用規約(Privacy Policy)</Text></Button>
         ) : null
     var version = ''
     if (this.info && this.info.readableVersion) {

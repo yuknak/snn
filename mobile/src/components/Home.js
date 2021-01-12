@@ -38,13 +38,7 @@ class Home extends PureComponent {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.setNavigation(this.props.navigation,this.props.route.name)
     });
-    setTimeout(()=>{
-      if (this.props.settingState.settings.show_tutorial &&
-        tutorial_url() != null) {
-        this.props.navigation.push("Tutorial",
-        {uri: tutorial_url()})
-      }
-    }, 1000)
+
 
   }
   componentWillUnmount() {

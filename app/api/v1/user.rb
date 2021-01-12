@@ -7,7 +7,7 @@ module V1
         expose :show_msgbox   # REQUIRED) true/false
         expose :hp_url        # REQUIRED) used in app
         expose :tutorial_url  # REQUIRED) used in app
-        expose :privacy_url   # REQUIRED) used in app
+        expose :contract_url   # REQUIRED) used in app
         expose :msg_title     # if show_msgbox is true, 
         expose :msg_body      # msg box popup(everytime, forcibly)
         expose :do_redir      # if msgbox showen, and after user press ok,
@@ -50,8 +50,8 @@ module V1
           check[:show_msgbox]=false
           # disable cache by uuid
           check[:hp_url]="https://supernn.net/index.html?"+SecureRandom.uuid
-          check[:tutorial_url]="https://supernn.net/tutorial.html?"+SecureRandom.uuid
-          check[:privacy_url]="https://supernn.net/privacy.html?"+SecureRandom.uuid
+          check[:tutorial_url]="http://172.17.0.1:3000/tutorial.html?"+SecureRandom.uuid
+          check[:contract_url]="http://172.17.0.1:3000/contract.html?"+SecureRandom.uuid
           
           if (!check[:show_msgbox]) then
             # no notice

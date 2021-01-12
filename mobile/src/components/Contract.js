@@ -20,7 +20,7 @@ YellowBox.ignoreWarnings([
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class Tutorial extends PureComponent {
+class Contract extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,9 +93,14 @@ class Tutorial extends PureComponent {
         <Footer>
           <FooterTab>
           <Button  onPress={()=>{
-            this.props.navigation.replace("Contract", {uri: "http://172.17.0.1:3000/contract.html?"}) 
+            if (this.props.settingState.settings) {
+            var settings = JSON.parse(JSON.stringify(this.props.settingState.settings))
+            settings.show_tutorial = false
+            this.props.updateSettings(JSON.parse(JSON.stringify(settings)))
+            }              
+            this.props.navigation.replace("NavDrawerScreens")
           }}>
-            <Text style={{ fontWeight: 'bold' }}>利用規約(プライバシーポリシー)を見る</Text>
+            <Text style={{ fontWeight: 'bold' }}>利用規約(プライバシーポリシー)に同意</Text>
           </Button>
           </FooterTab>
         </Footer>
@@ -128,6 +133,6 @@ const mapDispatchToProps = dispatch => {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tutorial)
+export default connect(mapStateToProps, mapDispatchToProps)(Contract)
 
 ////////////////////////////////////////////////////////////////////////////////

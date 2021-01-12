@@ -134,6 +134,46 @@ class SettingsTab extends PureComponent {
       </Right>
       </ListItem>
       )
+      itemList.push(
+        <ListItem icon key={'report_inproper'}>
+        <Left>
+        <Button style={{ backgroundColor: "#007AFF" }}>
+        <Icon active name="rocket" />
+        </Button>
+        </Left>
+        <Body>
+          <Text>長押しで不適切報告</Text>
+        </Body>
+        <Right>
+          <Switch value={this.state.settings.report_inproper} onValueChange={
+            (value) => {
+              if (value == false) {
+                Alert.alert("確認",
+                "OFFにすると,いったん非表示(報告)した全記事が次回更新時より再び表示されますが"
+                +"よろしいですか?",
+                [{ text: 'はい',
+                      onPress: () => {
+                        this.props.clearBanList()
+                        this.state.settings.report_inproper = false
+                        //deep copy
+                        this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})
+                      } 
+                    },
+                    { text: 'キャンセル',
+                      onPress: () => { } 
+                    }
+                  ])
+              } else {
+                this.state.settings.report_inproper = true
+                //deep copy
+                this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})              
+              }
+
+            }}/>
+        </Right>
+        </ListItem>
+        )
+  
     itemList.push(
       <ListItem icon key={'show_tutorial'}>
       <Left>
@@ -142,7 +182,7 @@ class SettingsTab extends PureComponent {
       </Button>
       </Left>
       <Body>
-        <Text>起動時チュートリアル表示</Text>
+        <Text>起動初期画面表示</Text>
       </Body>
       <Right>
         <Switch value={this.state.settings.show_tutorial} onValueChange={
@@ -195,6 +235,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(uiState.setNavigation(navigation,routeName)),
     updateSettings: (settings) =>
       dispatch(settingState.updateSettings(settings)),
+    clearBanList: () =>
+      dispatch(settingState.clearBanList()),
   }
 }
 
