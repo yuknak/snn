@@ -12,7 +12,6 @@ import * as settingState from '../redux/SettingState'
 import FlatListDropDown from './FlatListDropDown'
 import { ThemeProvider } from '@react-navigation/native';
 import PageButtons from './PageButtons'
-import SearchListItem from './SearchListItem'
 
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
@@ -24,63 +23,68 @@ YellowBox.ignoreWarnings([
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class SearchList extends Component {
+class SearchListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      queryStr: '',
       refreshing: false
     }
   }
   componentDidMount() {
-    this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      this.props.setNavigation(this.props.navigation,this.props.route.name)
-    });
   }
-  componentWillUnmount() {
-    this._unsubscribe()
-  } 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!this.props.appState.recs['get:/thread/search'] ||
-        !this.props.appState.recs['get:/thread/search'].data) {
-      return true
-    }
-    var d1 = this.props.appState.recs['get:/thread/search'].data.data
-    var d2 = nextProps.appState.recs['get:/thread/search'].data.data
-    if (!d1||!d2) {
-      return false
-    }
-    if (JSON.stringify(d1)==JSON.stringify(d2)) {
-
-        return false
-
-    }
-    return true
+  componentWillUnmount(){
   }
-  render() {
-    var data = null
-    if (this.props.appState.recs['get:/thread/search']) {
-      data = this.props.appState.recs['get:/thread/search'].data.data
+  render () {
+    var item = this.props.item
+    var e = []
+    if (this.props.settingState.ban_list&&
+      this.props.settingState.ban_list.some(id => id == item.board.name+item.tid)) {
+      e.push(<ListItem key={item.tid}><Text>{inproperMsg1}</Text></ListItem>)
+    } else {
+      e.push(
+        <ListItem key={item.tid} style={listItemStyles}
+        onPress={()=>{
+          this.props.navigation.push("MyWebView", {
+            uri: goChanUrl(
+              item.board.server.name,
+              item.board.name,
+              item.tid,
+              this.props.settingState.settings.goch_view_article_mode
+              )})
+          }}          
+          onLongPress={()=>{
+            if (this.props.settingState.settings.report_inproper) {
+            Alert.alert(
+              inproperMsg2,
+              inproperMsg3,
+              [{ text: 'はい',
+                  onPress: () => {
+                    var ban_id = item.board.name+item.tid
+                    this.props.addBanList(ban_id)
+                    this.forceUpdate()
+                  } 
+                },
+                { text: 'キャンセル',
+                  onPress: () => { } 
+                }
+              ]
+            )
+          }}}
+          >
+          <Text>
+            <Text style={listCategoryStyles(item.board.name)}>★</Text>
+            <Text>{formatEpoch(item.tid)}&nbsp;</Text>
+            <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
+            <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed_max*100))/100}res/h&nbsp;</Text>
+            <Text>{replaceTitle(item.title)}</Text>
+          </Text>
+        </ListItem>
+      )
     }
-    if (!data) {
-      return null
-    }
-    var params = {}
-    //params = {per_page: 50}
-    var ele = []
-    data.forEach((item)=> {
-      ele.push(<SearchListItem key={item.tid} item={item} {...this.props} />)
-    })
-    return (
-        <>
-
-        <List>{ele}</List>
-
-        </>
-
-    ) 
+    return (e)
   }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 
 const mapStateToProps = state => {
@@ -106,6 +110,6 @@ const mapDispatchToProps = dispatch => {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchList)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchListItem)
 
 ////////////////////////////////////////////////////////////////////////////////

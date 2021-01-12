@@ -11,6 +11,7 @@ import * as settingState from '../redux/SettingState'
 
 import { YellowBox } from 'react-native'
 import PageButtons from './PageButtons'
+import CategoryTabListItem from './CategoryTabListItem'
 import ArrowUp from './ArrowUp'
 import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
 
@@ -19,69 +20,6 @@ YellowBox.ignoreWarnings([
 ])
 
 ////////////////////////////////////////////////////////////////////////////////
-
-class CategoryTabListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false
-    }
-  }
-  componentDidMount() {
-  }
-  componentWillUnmount(){
-  }
-  render () {
-    var item = this.props.item
-    var e = []
-    if (this.props.settingState.ban_list&&
-      this.props.settingState.ban_list.some(id => id == item.board.name+item.tid)) {
-      e.push(<ListItem key={item.tid}><Text>{inproperMsg1}</Text></ListItem>)
-    } else {
-      e.push(
-        <ListItem key={item.tid} style={listItemStyles}
-        onPress={()=>{
-          this.props.navigation.push("MyWebView", {
-            uri: goChanUrl(
-              this.props.serverName,
-              this.props.boardName,
-              item.tid,
-              this.props.settingState.settings.goch_view_article_mode
-              )})
-          }}
-          onLongPress={()=>{
-            if (this.props.settingState.settings.report_inproper) {
-            Alert.alert(
-              inproperMsg2,
-              inproperMsg3,
-              [{ text: 'はい',
-                  onPress: () => {
-                    var ban_id = item.board.name+item.tid
-                    this.props.addBanList(ban_id)
-                    this.forceUpdate()
-                  } 
-                },
-                { text: 'キャンセル',
-                  onPress: () => { } 
-                }
-              ]
-            )
-          }}}
-          >
-          <Text>
-            <Text style={listCategoryStyles(this.props.boardName)}>★</Text>
-            <Text>{formatEpoch(item.tid)}&nbsp;</Text>
-            <Text style={{color: brandColors.brandSuccess}}>{item.res_cnt}res&nbsp;</Text>
-            <Text style={{color: brandColors.brandDanger}}>{Math.round(parseFloat(item.res_speed*100))/100}res/h&nbsp;</Text>
-            <Text style={{color: brandColors.brandInfo}}>{Math.round(parseFloat(item.res_percent*10000))/100}%&nbsp;</Text>
-            <Text>{replaceTitle(item.title)}</Text>
-          </Text>
-        </ListItem>
-      )
-    }
-    return (e)
-  }
-}
 
 class CategoryTabList extends Component {
   constructor(props) {
@@ -187,6 +125,7 @@ const mapDispatchToProps = dispatch => {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
+connect(mapStateToProps, mapDispatchToProps)(CategoryTabListItem)
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryTabList)
 
 ////////////////////////////////////////////////////////////////////////////////
