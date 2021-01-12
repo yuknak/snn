@@ -105,7 +105,7 @@ class HomeTabTopList extends Component {
       d.data.forEach((item)=> {
         if (this.props.settingState.ban_list&&
             this.props.settingState.ban_list.some(id => id == d.board.name+item.tid)) {
-          ele.push(<ListItem><Text>{inproperMsg1}</Text></ListItem>)
+          ele.push(<ListItem key={d.board.name+item.tid}><Text>{inproperMsg1}</Text></ListItem>)
             } else {
 
         ele.push(
