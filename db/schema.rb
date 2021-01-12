@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_01_000000) do
+ActiveRecord::Schema.define(version: 2021_01_13_000000) do
 
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "server_id"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2021_01_01_000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_servers_1", unique: true
+  end
+
+  create_table "supports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "unique_id"
+    t.string "type"
+    t.string "board_name"
+    t.string "tid"
+    t.text "extra_info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "threads", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

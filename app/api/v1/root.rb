@@ -63,6 +63,7 @@ module V1
     mount V1::Server
     mount V1::Board
     mount V1::Thread
+    mount V1::Support
 
     #add_swagger_documentation(
     #  doc_version: '1.0.0',
