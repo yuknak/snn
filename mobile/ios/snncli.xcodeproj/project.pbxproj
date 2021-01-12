@@ -702,7 +702,7 @@
 			baseConfigurationReference = 51316173AD58910A4031EF4F /* Pods-snncli.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 150;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SBK2ZVAN9T;
 				INFOPLIST_FILE = snncli/Info.plist;
@@ -725,7 +725,7 @@
 			baseConfigurationReference = 6C0B3EA6AEA241DA1E18DAC2 /* Pods-snncli.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 150;
 				DEVELOPMENT_TEAM = SBK2ZVAN9T;
 				INFOPLIST_FILE = snncli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
