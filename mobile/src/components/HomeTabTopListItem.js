@@ -30,7 +30,6 @@ class HomeTabTopListItem extends Component {
   }
 
   componentDidMount() {
-    addForceUpdateObj(this)
   }
   componentWillUnmount(){
   }
