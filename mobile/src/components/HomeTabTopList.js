@@ -11,7 +11,7 @@ import { formatDatetime, listCategoryStyles, replaceTitle, brandColors, formatEp
 
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
-import { goChanUrl } from '../lib/Common'
+import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -105,7 +105,7 @@ class HomeTabTopList extends Component {
       d.data.forEach((item)=> {
         if (this.props.settingState.ban_list&&
             this.props.settingState.ban_list.some(id => id == d.board.name+item.tid)) {
-          ele.push(<ListItem><Text>[ユーザによる非表示指定]</Text></ListItem>)
+          ele.push(<ListItem><Text>{inproperMsg1}</Text></ListItem>)
             } else {
 
         ele.push(
@@ -122,10 +122,8 @@ class HomeTabTopList extends Component {
               onLongPress={()=>{
                 if (this.props.settingState.settings.report_inproper) {
                 Alert.alert(
-                  '不適切投稿の報告',
-                  'この投稿を不適切報告しますか?'+
-                  '(当該記事はマークされ,今後このアプリ内で表示されません.また当該記事を投稿したユーザの記事は'+
-                  '24時間以内に当社にて精査されサーバから削除される可能性があります.)',
+                  inproperMsg2,
+                  inproperMsg3,
                   [{ text: 'はい',
                       onPress: () => {
                         var ban_id = d.board.name+item.tid
