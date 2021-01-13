@@ -6,7 +6,7 @@ import Action from './Action'
 
 const initialState = {
   settings: {
-    webview_desktop: true,
+    webview_desktop: false,
     remove_ads: true,
     show_tutorial: true,
     goch_view_article_mode: "bottom50",

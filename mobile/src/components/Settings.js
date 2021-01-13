@@ -150,7 +150,7 @@ class SettingsTab extends PureComponent {
             (value) => {
               if (value == false) {
                 Alert.alert("確認",
-                "OFFにすると,いったん非表示(報告)した全記事が次回更新時より再び表示されますが"
+                "OFFにすると,いったん非表示(報告)した全記事が再び表示されますが"
                 +"よろしいですか?",
                 [{ text: 'はい',
                       onPress: () => {

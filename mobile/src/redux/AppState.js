@@ -55,40 +55,23 @@ export function initAppState() {
 
 export const dispatchAppSuccess = (dispatch, name, response) => {
   
-  //////// Login sessions request handler
-  /*
-  if (
-    name === 'post:/barong/identity/sessions') {// Login OK
-    dispatch({type: Action.APP_AUTH_SUCCESS, response: response})
-  } else if (name === 'get:/barong/resource/users/me') {// Login Check OK
-    dispatch({type: Action.APP_AUTH_SUCCESS, response: response})
-  } else if (name === 'delete:/barong/identity/sessions') {// Logoff OK -> Session Clear
-    dispatch({type: Action.APP_INIT_STATE })
-  }
-  */
-
-  //////// REC: Returns one record.
-  if (
-    name.startsWith('get:/barong/resource/users/me') ||
-    name.startsWith('get:/peatio/account/deposit_address/') ||
-    name.startsWith('get:/peatio/public/markets/tickers') ||
-    (name.startsWith('get:/peatio/public/markets/') && name.endsWith('/order-book'))
-    ) {
-    dispatch({type: Action.APP_REC, response: response, name: name})
-
   // RECS: Returns multiple records(table) with paging info.
-  } else if (
+  if (
     name.match(/thread\/([^\/]+)\?/)
     ) {
     m = name.match(/thread\/([^\/]+)\?/)
-    // when "/thread/search?q=search_workd" -> "/thread/search"
+    // when "/thread/search?q=search_word" -> "/thread/search"
     dispatch({type: Action.APP_RECS, response: response, name: "get:/thread/"+m[1]})
   } else if (
     name.startsWith('get:/thread')
     ) {
     dispatch({type: Action.APP_RECS, response: response, name: name})
   
-  } else if (name.startsWith('post:/user/check')) {
+  //////// REC: Returns one record.
+  } else if (
+    name.startsWith('post:/user/check')||
+    name.startsWith('post:/support')
+    ) {
     dispatch({type: Action.APP_REC, response: response, name: name})
 
   }

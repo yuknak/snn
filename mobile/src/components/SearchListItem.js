@@ -17,6 +17,7 @@ import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
 import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
 import { addForceUpdateObj, forceUpdate } from '../lib/Common'
+import { getDeviceInfo } from '../lib/Common';
 
 YellowBox.ignoreWarnings([
 	'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -55,10 +56,22 @@ class SearchListItem extends Component {
         inproperMsg3,
         [{ text: 'はい',
             onPress: () => {
-              var ban_id = item.board.name+item.tid
-              this.props.addBanList(ban_id)
-              this.forceUpdate()
-              forceUpdate()
+              this.props.api({
+                method: 'post',
+                url: '/support',
+                params: {
+                  "unique_id": getDeviceInfo().uniqueId,
+                  "sup_type": "ban",
+                  "board_name": item.board.name,
+                  "tid": item.tid,
+                },
+              },()=>{
+                var ban_id = item.board.name+item.tid
+                this.props.addBanList(ban_id)
+                this.forceUpdate()
+                forceUpdate()
+              })
+
             } 
           },
           { text: 'キャンセル',
@@ -73,7 +86,11 @@ class SearchListItem extends Component {
     var e = []
     if (this.props.settingState.ban_list&&
       this.props.settingState.ban_list.some(id => id == item.board.name+item.tid)) {
-      e.push(<ListItem key={item.tid}><Text>{inproperMsg1}</Text></ListItem>)
+        e.push(
+          <ListItem style={listItemStyles} key={item.tid}>
+            <Icon style={{color: '#d9534f'}} name="close-circle"></Icon>
+            <Text>{inproperMsg1}</Text></ListItem>
+        )
     } else {
       e.push(
         <ListItem key={item.tid} style={listItemStyles}
