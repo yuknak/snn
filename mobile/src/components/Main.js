@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import * as apiState from '../redux/ApiState'
+import * as settingState from '../redux/SettingState'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Linking, Platform } from 'react-native'
@@ -29,6 +30,20 @@ class Main extends PureComponent {
     }
   }
   componentDidMount() {
+    if (typeof this.props.settingState.settings.report_inproper
+      === 'undefined') { // 1.0.1->1.0.2 data upgrade
+        this.props.clearBanList() //create ban_list for 1.0.2
+console.log("create ban_list for 1.0.2")
+        if (this.props.settingState.settings)// to be secure
+        {
+          var settings = 
+            JSON.parse(JSON.stringify(this.props.settingState.settings))
+          settings.report_inproper = true // new report_inproper default value for 1.0.2
+console.log("new report_inproper default value for 1.0.2")
+          this.props.updateSettings(JSON.parse(JSON.stringify(settings)))
+        }
+    }
+    //Alert.alert(JSON.stringify(this.props.settingState))
     //this.id = setInterval(()=>
     //{
       var state = this.props.appInfoState.appStateReducer.state
@@ -128,6 +143,7 @@ const mapStateToProps = state => {
       appInfoState: state.appInfoState,
       apiState: state.apiState,
       appState: state.appState,
+      settingState: state.settingState,
     }
   }
   
@@ -135,6 +151,10 @@ const mapStateToProps = state => {
     return {
       api: (params,success,error) =>
         dispatch(apiState.api(params,success,error)),
+      updateSettings: (settings) =>
+        dispatch(settingState.updateSettings(settings)),
+      clearBanList: () =>
+        dispatch(settingState.clearBanList()),
     }
   }
 ////////////////////////////////////////////////////////////////////////////////
