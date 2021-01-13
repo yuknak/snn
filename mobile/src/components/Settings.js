@@ -139,7 +139,7 @@ class SettingsTab extends PureComponent {
         <ListItem icon key={'report_inproper'}>
         <Left>
         <Button style={{ backgroundColor: "#007AFF" }}>
-        <Icon active name="rocket" />
+        <Icon active name="close-circle" />
         </Button>
         </Left>
         <Body>

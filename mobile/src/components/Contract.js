@@ -100,7 +100,7 @@ class Contract extends PureComponent {
             }              
             this.props.navigation.replace("NavDrawerScreens")
           }}>
-            <Text style={{ fontWeight: 'bold' }}>利用規約(プライバシーポリシー)に同意</Text>
+            <Text style={{ fontWeight: 'bold' }}>利用規約とプライバシーポリシーに同意</Text>
           </Button>
           </FooterTab>
         </Footer>

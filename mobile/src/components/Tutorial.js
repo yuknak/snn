@@ -6,6 +6,7 @@ import * as uiState from '../redux/UiState'
 import * as appState from '../redux/AppState'
 import * as settingState from '../redux/SettingState'
 import ArrowUp from './ArrowUp'
+import { getDeviceInfo, tutorial_url, hp_url, contract_url } from '../lib/Common';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -93,9 +94,9 @@ class Tutorial extends PureComponent {
         <Footer>
           <FooterTab>
           <Button  onPress={()=>{
-            this.props.navigation.replace("Contract", {uri: "http://172.17.0.1:3000/contract.html?"}) 
+            this.props.navigation.replace("Contract", {uri: contract_url() }) 
           }}>
-            <Text style={{ fontWeight: 'bold' }}>利用規約(プライバシーポリシー)を見る</Text>
+            <Text style={{ fontWeight: 'bold' }}>利用規約とプライバシーポリシーを見る</Text>
           </Button>
           </FooterTab>
         </Footer>
