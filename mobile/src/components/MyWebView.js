@@ -140,7 +140,11 @@ class MyWebView extends PureComponent {
     }
     var userAgent = undefined
     if (this.props.settingState.settings.webview_desktop) {
-      userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
+      if (Platform.OS === 'android') {
+        userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+      } else {
+        userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/87 Version/11.1.1 Safari/605.1.15"
+      }
     }
     var webview
     if (this.props.settingState.settings.remove_ads) {
