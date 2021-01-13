@@ -122,6 +122,10 @@ class MyWebView extends PureComponent {
         if (elems && elems[0]) {
           elems[0].remove();
         }
+        elems = document.getElementsByClassName('float-nav-go-bottom');
+        if (elems && elems[0]) {
+          elems[0].remove();
+        }
       }
       var timer = setInterval(clean, 1000);
       true;
