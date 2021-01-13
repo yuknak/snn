@@ -51,7 +51,8 @@ module V1
           # disable cache by uuid
           check[:hp_url]="https://snn1.tetraserve.biz/index.html?"+SecureRandom.uuid
           check[:tutorial_url]="https://snn1.tetraserve.biz/tutorial.html?"+SecureRandom.uuid
-          check[:contract_url]="https://snn1.tetraserve.biz/contract.html?"+SecureRandom.uuid
+          check[:privacy_url]="https://snn1.tetraserve.biz/tutorial.html?"+SecureRandom.uuid # -1.0.1
+          check[:contract_url]="https://snn1.tetraserve.biz/contract.html?"+SecureRandom.uuid # 1.0.2-
           
           if (!check[:show_msgbox]) then
             # no notice
