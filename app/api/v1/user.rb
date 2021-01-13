@@ -7,7 +7,8 @@ module V1
         expose :show_msgbox   # REQUIRED) true/false
         expose :hp_url        # REQUIRED) used in app
         expose :tutorial_url  # REQUIRED) used in app
-        expose :contract_url   # REQUIRED) used in app
+        expose :privacy_url   # REQUIRED) used in app
+        expose :contract_url  # REQUIRED) used in app
         expose :msg_title     # if show_msgbox is true, 
         expose :msg_body      # msg box popup(everytime, forcibly)
         expose :do_redir      # if msgbox showen, and after user press ok,
@@ -51,7 +52,7 @@ module V1
           # disable cache by uuid
           check[:hp_url]="https://snn1.tetraserve.biz/index.html?"+SecureRandom.uuid
           check[:tutorial_url]="https://snn1.tetraserve.biz/tutorial.html?"+SecureRandom.uuid
-          check[:privacy_url]="https://snn1.tetraserve.biz/tutorial.html?"+SecureRandom.uuid # -1.0.1
+          check[:privacy_url]="https://snn1.tetraserve.biz/contract.html?"+SecureRandom.uuid # -1.0.1 contact.html
           check[:contract_url]="https://snn1.tetraserve.biz/contract.html?"+SecureRandom.uuid # 1.0.2-
           
           if (!check[:show_msgbox]) then
