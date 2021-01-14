@@ -4,7 +4,7 @@ Rails.application.configure do
   config.hosts << ".supernn.net"
   config.hosts << ".tetraserve.biz"
   config.hosts << ".tetraserve.local"
-  config.hosts.clear
+  #config.hosts.clear
 
   # Code is not reloaded between requests.
   config.cache_classes = true
