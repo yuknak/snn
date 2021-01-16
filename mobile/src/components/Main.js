@@ -31,15 +31,15 @@ class Main extends PureComponent {
   }
   componentDidMount() {
     if (typeof this.props.settingState.settings.report_inproper
-      === 'undefined') { // 1.0.1->1.0.2 data upgrade
-        this.props.clearBanList() //create ban_list for 1.0.2
-console.log("create ban_list for 1.0.2")
+      === 'undefined') { // 1.0.1->1.0.3 data upgrade
+        this.props.clearBanList() //create ban_list for 1.0.3
+console.log("create ban_list for 1.0.3")
         if (this.props.settingState.settings)// to be secure
         {
           var settings = 
             JSON.parse(JSON.stringify(this.props.settingState.settings))
-          settings.report_inproper = true // new report_inproper default value for 1.0.2
-console.log("new report_inproper default value for 1.0.2")
+          settings.report_inproper = true // new report_inproper default value for 1.0.3
+console.log("new report_inproper default value for 1.0.3")
           this.props.updateSettings(JSON.parse(JSON.stringify(settings)))
         }
     }

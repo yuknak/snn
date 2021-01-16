@@ -10,9 +10,9 @@ const initialState = {
     remove_ads: true,
     show_tutorial: true,
     goch_view_article_mode: "bottom50",
-    report_inproper: true, // 1.0.2-
+    report_inproper: true, // 1.0.3-
   },
-  ban_list: [] // 1.0.2-
+  ban_list: [] // 1.0.3-
 }
 
 ////////////////////////////////////////////////////////////////////////////////

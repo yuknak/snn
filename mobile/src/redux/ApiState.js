@@ -72,8 +72,8 @@ export const api = (params, success_func=()=>{}, error_func=()=>{}) => {
   //params.withCredentials = true 
   //params.baseURL = window.location.origin + '/api/v2'
 
-  //params.baseURL = 'https://snn.tetraserve.biz/api/v1'
-  params.baseURL = 'https://snn1.tetraserve.biz/api/v1'
+  params.baseURL = 'https://snn.tetraserve.biz/api/v1'
+  //params.baseURL = 'https://snn1.tetraserve.biz/api/v1'
   // NOTICE) Android emulator may not be able to understand
   //         names, IPs seems OK.
   //params.baseURL = 'http://172.17.0.1:3000/api/v1'
