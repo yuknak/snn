@@ -39,7 +39,8 @@ console.log("create ban_list for 1.0.3")
           var settings = 
             JSON.parse(JSON.stringify(this.props.settingState.settings))
           settings.report_inproper = true // new report_inproper default value for 1.0.3
-console.log("new report_inproper default value for 1.0.3")
+          settings.block_inproper = true // new block_inproper default value for 1.0.3
+console.log("new settings default value for 1.0.3")
           this.props.updateSettings(JSON.parse(JSON.stringify(settings)))
         }
     }

@@ -175,7 +175,27 @@ class SettingsTab extends PureComponent {
         </Right>
         </ListItem>
         )
-  
+        itemList.push(
+          <ListItem icon key={'block_inproper'}>
+          <Left>
+          <Button style={{ backgroundColor: "#007AFF" }}>
+          <Icon active name="close-circle" />
+          </Button>
+          </Left>
+          <Body>
+            <Text>不適切投稿の表示確認</Text>
+          </Body>
+          <Right>
+          <Switch value={this.state.settings.block_inproper} onValueChange={
+          (value) => {
+            this.state.settings.block_inproper = value
+            //deep copy
+            this.setState({settings: JSON.parse(JSON.stringify(this.state.settings))})
+          }}/>
+          </Right>
+          </ListItem>
+          )
+
     itemList.push(
       <ListItem icon key={'show_tutorial'}>
       <Left>

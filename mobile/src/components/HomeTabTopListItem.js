@@ -11,7 +11,9 @@ import { formatDatetime, listCategoryStyles, replaceTitle, brandColors, formatEp
 
 import { YellowBox } from 'react-native'
 import ArrowUp from './ArrowUp'
-import { goChanUrl,inproperMsg1,inproperMsg2,inproperMsg3 } from '../lib/Common'
+import { goChanUrl,
+  inproperMsg1,inproperMsg2,inproperMsg3,
+  inproperBrowseMsg1,inproperBrowseMsg2 } from '../lib/Common'
 import { addForceUpdateObj, forceUpdate } from '../lib/Common'
 import { getDeviceInfo } from '../lib/Common';
 
@@ -39,13 +41,49 @@ class HomeTabTopListItem extends Component {
   handlePress() {
     var item = this.props.item
     var d = this.props.d
-    this.props.uiState.navigation.push("MyWebView", {
-    uri: goChanUrl(
-      d.board.server.name,
-      d.board.name,
-      item.tid,
-      this.props.settingState.settings.goch_view_article_mode
-    )})
+    var block = this.props.settingState.settings.block_inproper
+    if (!block) {
+      this.props.uiState.navigation.push("MyWebView", {
+        uri: goChanUrl(
+          d.board.server.name,
+          d.board.name,
+          item.tid,
+          this.props.settingState.settings.goch_view_article_mode
+        )})
+    } else {
+      Alert.alert(
+        inproperBrowseMsg1,
+        inproperBrowseMsg2,
+        [
+          { text: '同意する',
+            onPress: () => {
+              this.props.uiState.navigation.push("MyWebView", {
+                uri: goChanUrl(
+                  d.board.server.name,
+                  d.board.name,
+                  item.tid,
+                  this.props.settingState.settings.goch_view_article_mode
+                )})
+            } 
+          },
+          { text: '全て同意する',
+            onPress: () => {
+              this.props.uiState.navigation.push("MyWebView", {
+                uri: goChanUrl(
+                  d.board.server.name,
+                  d.board.name,
+                  item.tid,
+                  this.props.settingState.settings.goch_view_article_mode
+                )})
+                this.props.setBlockInproper(false)
+            } 
+          },
+          { text: '同意しない',
+            onPress: () => { } 
+          }
+        ]
+      )
+    }
   }
   handleLongPress() {
     var item = this.props.item
@@ -131,6 +169,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(apiState.api(params,success,error)),
     addBanList: (ban_id) =>
       dispatch(settingState.addBanList(ban_id)),
+    setBlockInproper: (enable) =>
+      dispatch(settingState.setBlockInproper(enable)),
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
