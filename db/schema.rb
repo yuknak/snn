@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_000000) do
+ActiveRecord::Schema.define(version: 2021_01_18_071405) do
 
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "server_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_000000) do
     t.float "res_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inproper", default: 0, null: false
     t.index ["board_id", "mirror_ver", "res_speed"], name: "index_threads_2"
     t.index ["board_id", "tid"], name: "index_threads_1", unique: true
     t.index ["tid", "res_speed_max"], name: "index_threads_3"

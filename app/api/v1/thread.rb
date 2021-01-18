@@ -133,7 +133,7 @@ module V1
       def get_latest
         # get from a week ago
         threads = FiveCh::Thread.where(
-          'tid >= ?', epoch_aweekago).includes([board: :server])
+          'inproper != 1 AND tid >= ?', epoch_aweekago).includes([board: :server])
             .order(tid: 'DESC')
         proc_threads(threads)
         #present threads, with: ThreadsWithPagingEntity
@@ -149,7 +149,7 @@ module V1
 
       def get_today
         threads = FiveCh::Thread.where(
-          'tid >= ?', epoch_today).includes([board: :server])
+          'inproper != 1 AND tid >= ?', epoch_today).includes([board: :server])
             .order(res_speed_max: 'DESC', tid: 'ASC')
         proc_threads(threads)
         #present threads, with: ThreadsWithPagingEntity  
@@ -165,7 +165,7 @@ module V1
 
       def get_yesterday
         threads = FiveCh::Thread.where(
-          'tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
+          'inproper != 1 AND tid >= ? AND tid < ?', epoch_yesterday, epoch_today).includes([board: :server])
             .order(res_speed_max: 'DESC', tid: 'ASC')
         proc_threads(threads)
         #present threads, with: ThreadsWithPagingEntity  
@@ -181,7 +181,7 @@ module V1
 
       def get_week
         threads = FiveCh::Thread.where(
-          'tid >= ?', epoch_aweekago).includes([board: :server])
+          'inproper != 1 AND tid >= ?', epoch_aweekago).includes([board: :server])
             .order(res_speed_max: 'DESC', tid: 'ASC')
         proc_threads(threads)
         #present threads, with: ThreadsWithPagingEntity  
@@ -198,7 +198,8 @@ module V1
       def get_category(board_name)
         board = FiveCh::Board.find_by(name: board_name)
         threads = FiveCh::Thread.where(
-          board_id: board.id, mirror_ver: board.mirror_ver)
+          'inproper != 1 AND board_id = ? AND mirror_ver = ?',
+          board.id, board.mirror_ver)
             .order(res_percent: 'DESC', mirror_order: 'ASC')
           .includes([board: :server])
         threads = proc_threads(threads)
@@ -234,7 +235,8 @@ module V1
           server = FiveCh::Server.find(board.server_id)
           params[:per_page] = top_board[:count]
           threads = FiveCh::Thread.where(
-            board_id: board.id, mirror_ver: board.mirror_ver)
+            'inproper != 1 AND board_id = ? AND mirror_ver = ?',
+            board.id, board.mirror_ver)
               .includes([board: :server])
               .order(res_percent: 'DESC', mirror_order: 'ASC')
           threads = ransack_index(threads)
@@ -261,7 +263,7 @@ module V1
       def get_search
         q_str = "%#{params[:q]}%"
         threads = FiveCh::Thread.where(
-          'title like ?',q_str).includes([board: :server])
+          'inproper != 1 AND title like ?',q_str).includes([board: :server])
             .order(tid: 'DESC')
         threads = ransack_index(threads)
         present threads, with: ThreadsWithPagingEntity  
