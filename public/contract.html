@@ -43,7 +43,7 @@
 
 
         <!--  -->
-        <div class="full-width-text-container section-container">
+        <div style="display: none" id="inproper" class="full-width-text-container section-container">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-sm-12 full-width-text section-description wow fadeIn">
@@ -325,14 +325,25 @@
 
         <!-- Javascript -->
         <script src="assets2/js/jquery-1.11.1.min.js"></script>
-        <script src="assets2/bootstrap/js/bootstrap.min.js"></script>
+		
+		<script>
+			$(function () {
+				var ua = window.navigator.userAgent.toLowerCase()
+				if (ua.indexOf('iphone') != -1 ||
+					ua.indexOf('ipad') != -1) {
+					$('#inproper').show()
+				}
+			});
+		</script>
+	
+		<script src="assets2/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets2/js/bootstrap-hover-dropdown.min.js"></script>
         <script src="assets2/js/jquery.backstretch.min.js"></script>
         <script src="assets2/js/wow.min.js"></script>
         <script src="assets2/js/retina-1.1.0.min.js"></script>
         <script src="assets2/js/jquery.magnific-popup.min.js"></script>
         <script src="assets2/twitter/jquery.tweet.min.js"></script>
-        <script src="assets2/js/scripts.js"></script>
+		<script src="assets2/js/scripts.js"></script>
         
         <!--[if lt IE 10]>
             <script src="assets2/js/placeholder.js"></script>
