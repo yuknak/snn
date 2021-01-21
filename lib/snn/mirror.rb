@@ -87,11 +87,11 @@ module Snn
     end
 
     def self.is_inproper(title)
-      @@inproper_words.each do |word|
-        if (title.include?(word)) then
-          return true
-        end
-      end
+      #@@inproper_words.each do |word|
+      #  if (title.include?(word)) then
+      #    return true
+      #  end
+      #end
       false 
     end
 
