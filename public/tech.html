@@ -65,9 +65,6 @@
 									<div class="row">
 											<div class="col-sm-10 col-sm-offset-1 text wow fadeInLeft">
 													<h1>SUPERNN - 掲示板速報アプリ</h1>
-													<div style="color: orange" class="description">
-														<strong>※このページは作成中です</strong>
-													</div>
 
 											</div>
 									</div>
@@ -88,14 +85,47 @@
 	            <div class="row">
 	            	<div class="col-sm-12 full-width-text-content wow fadeInLeft">
 
-									<p>
-									※ご不明な点があれば、お気軽にお問い合わせください。
-									</p>
+	<p>簡単に技術要素を記載します.</p>
+	<p>当アプリは,Facebook社の開発プラットフォームである
+		<a target="_blank" href="https://reactnative.dev/">ReactNative</a>で全面的に作成しています.
+		そのため, <b>iOSとAndroidアプリでほぼ完全に単一のソースコード</b>となっています.</p>
+	<p>1人で全てを開発していますので,デザイン要素の工程をなくすため, 全面的に
+		<a target="_blank" href="https://nativebase.io/">NativeBase</a>
+		を採用しています. NativeBaseではiOSとAndroidのLook&Feelが随分異なるのですが,
+		当アプリでは, 極力iOS側のデザインとなるように揃えています.また一部,
+		<a target="_blank" href="https://reactnativepaper.com/">React Native Paper</a>
+		も利用しています.</p>
+	<p>ReactNativeはReact(Webベース)と多くのものが完全に共通のものです.
+		今回は非同期通信に,redux, redux-thunxを利用しています. 画面ルーティングは
+		react-navigation 5.xを利用しています.</p>
+	<p>バックエンドのAPIサーバはRuby on Railsによるものです. Grapeを用いてAPIを構成しています
+	Rubyには多数の有志による便利なフリーのライブラリ(gem)があり,多くのサーバ側工数が削減できます.</p>
+	<p>バックエンドサイトですが,<a target="_blank" href="https://cloud.google.com/?hl=ja">Google Cloud Platform</a>を利用しています. 
+		Ruby APIサーバ, proxy(Traefik), db(MySql), phpmyadminなど,必要なものをバンドルしたdocker群を,
+		自前の環境スクリプトで, 動的にcomposeし, マルチサーバ,マルチドメインなど,多様な形態下で即時展開
+		できるようになっています.
+		また,サーバ構築は<a target="_blank" href="https://www.terraform.io/">Hashicorp Terraform</a>
+		による自動展開を実施しています.
+	</p>
+	<p>諸々のWebページについては,海外の有償React系サイト用のテンプレートを用いており, 
+		デザイン工程を無くしています</p>
+	<p>開発環境は, Mac mini(2018) BigSur, ThinkCenter M910q Tiny(Windows10/Ubuntu20.04),
+		ThinkPad X280(Windows10/Ubuntu18.04)です。</p>
+	
+	<p>連絡先: <i class="fa fa-envelope"></i><span>Email: &#121;&#117;&#107;&#110;&#097;&#107;&#052;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;</span></p>
+	<p>会社HP: <a target="_blank" href="https://www.tetraserve.biz/">Tetraserve Co.,Ltd.</a></p>
+	<p>
+	※ご不明な点や,当関連技術に基づいたシステムの制作依頼などあれば,お気軽にお問い合わせください.
+	</p>
+	<p>
+	※特にご関心のおありの方にはソースコード(github)は公開させていただくことも可能です.
+	</p>
 	                </div>
 	            </div>
 	        </div>
         </div>
-        
+		
+
         <!-- Footer -->
         <footer>
 	        <div class="container">
