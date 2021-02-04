@@ -15,8 +15,10 @@
 #
 # Crono.perform(AggregateJob).every 1.minutes
 # Crono.perform(AggregateJob).every 10.second # for test
+# Crono.perform(AggregateJob).every 2.minutes
 
-Crono.perform(AggregateJob).every 2.minutes
-
+# Have to set truncate_log!
+# without this, Crono may stop someday because of big log in DB.
+Crono.perform(AggregateJob).with_options(truncate_log: 1000).every 2.minutes
 
 #bundle exec crono start
