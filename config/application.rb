@@ -34,5 +34,18 @@ module Snn
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+=begin
+    # for rspec
+    config.generators do |generator|
+      generator.test_framework :rspec,
+                       fixtures: true,
+               controller_specs: true,
+                   helper_specs: false,
+                  routing_specs: false
+      generator.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
+=end
+
   end
 end
