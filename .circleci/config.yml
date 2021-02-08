@@ -1,0 +1,5 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: yuknak/snn:1.0.4
