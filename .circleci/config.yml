@@ -3,3 +3,5 @@ jobs:
   build:
     docker:
       - image: yuknak/snn:1.0.4
+    steps:
+      - run: bundle exec rake -T
