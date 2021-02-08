@@ -1,3 +1,4 @@
+---
 kind: pipeline
 type: docker
 name: default
@@ -15,6 +16,6 @@ steps:
 
 trigger:
   event:
-    - push
+  - push
   branch:
-    - master
+  - master
