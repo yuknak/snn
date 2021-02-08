@@ -1,4 +1,3 @@
-#merge_test
 ---
 kind: pipeline
 type: docker
