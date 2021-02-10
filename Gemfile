@@ -62,7 +62,9 @@ gem 'crono'
 gem 'daemons'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.6'
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'rubocop-rspec','~> 1.32', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
 end
