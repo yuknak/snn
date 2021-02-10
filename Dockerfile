@@ -55,6 +55,9 @@ RUN chown -R app:app $APP_HOME
 # Switch to application user.
 USER app
 
+# TODO: fix (but no data stored in credentials.yml.enc)
+ENV RAILS_MASTER_KEY dd42acbac573c0f9e39998465992532b
+
 # Initialize application configuration & assets.
 RUN bundle exec rake tmp:create \
   && bundle exec rake yarn:install assets:precompile

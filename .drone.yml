@@ -1,0 +1,111 @@
+---
+kind: pipeline
+type: docker
+name: test
+
+services:
+- name: database
+  image: mysql:5.7.32
+  ports:
+    - 3306
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+steps:
+- name: wait-for-services
+  image: jwilder/dockerize
+  commands:
+  - dockerize -wait tcp://database:3306 -timeout 1m
+
+# Copy bundler cache from the host machine to your build environment.
+# Plugin description: http://plugins.drone.io/drillster/drone-volume-cache
+- name: restore-bundle-cache
+  pull: if-not-exists
+  image: drillster/drone-volume-cache
+  settings:
+    restore: true
+    mount:
+    - vendor/bundle
+  volumes:
+  - name: bundle-cache
+    path: /cache
+
+- name: run-rspec
+  image: ruby:2.7.2
+  environment:
+    DATABASE_HOST: database
+  commands:
+  - gem install bundler:2.2.4
+  - bundle install --path vendor/bundle
+  - bundle exec rake db:create db:migrate
+  - LOG_LEVEL=warn bundle exec rspec
+
+- name: rebuild-bundle-cache
+  pull: if-not-exists
+  image: drillster/drone-volume-cache
+  settings:
+    rebuild: true
+    mount:
+    - vendor/bundle
+  volumes:
+  - name: bundle-cache
+    path: /cache
+
+#If you want to use slack-blame,
+#https://blog.kerkerj.in/2020/11/how-to-setup-slack-and-drone-slack-blame/
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook_url
+    channel: tetraserve
+  when:
+    status:
+    - failure
+
+volumes:
+- name: bundle-cache
+  host:
+    path: /tmp/bundle
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+  - main
+
+---
+kind: pipeline
+type: docker
+name: build
+
+steps:
+- name: docker-build-and-push
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: yuknak/snn
+    tags: 1.0.4
+
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook_url
+    channel: tetraserve
+  when:
+    status: [ success, failure ]
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+  - main
+
+depends_on:
+- test
