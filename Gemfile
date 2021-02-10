@@ -49,6 +49,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # added later
 
+group :development do
+  gem 'annotate',   '~> 3.1.0'
+end
+
 #gem 'whenever', require: false
 gem 'grape'
 gem 'grape-entity'
@@ -59,4 +63,6 @@ gem 'daemons'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
+  gem 'factory_bot_rails'
+  gem 'rubocop-rspec','~> 1.32', require: false
 end
